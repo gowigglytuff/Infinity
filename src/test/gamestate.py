@@ -73,6 +73,9 @@ class GameContoller(object):
     PROPOSITION = 7
     INVENTORY = 8
     GIFT_RECEIVED = 9
+    BAR = 10
+    INFORMATION = 11
+    SEEDER = 12
 
     def __init__(self, game_data):
         self.screen = pygame.display.set_mode(game_data.settings["resolution"])

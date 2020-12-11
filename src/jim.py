@@ -59,17 +59,17 @@ def init_game():
     gd.add_cursor("start_cursor", Cursor(gc.screen, gd.menu["start_menu"], False, 1))
 
 
-    gd.add_item("empty_cup", Item("Cup", 0))
-    gd.add_item("water", Item("Water", 0))
-    gd.add_item("soda", Item("Soda", 0))
-    gd.add_item("butter", Item("Butter", 0))
-    gd.add_item("gum", Item("Gum", 2))
-    gd.add_item("space_coke", Item("Sp. Coke", 0))
-    gd.add_item("muffin", Item("Muffin", 6))
-    gd.add_item("cookie", Item("Cookie", 0))
-    gd.add_item("cheese", Item("Cheese", 0))
-    gd.add_item("donut", Item("Donut", 1))
-    gd.add_item("sticker", Item("Sticker", 1))
+    gd.add_item("Cup", Item("Cup", 0))
+    gd.add_item("Water", Item("Water", 0))
+    gd.add_item("Soda", Item("Soda", 0))
+    gd.add_item("Butter", Item("Butter", 1))
+    gd.add_item("Gum", Item("Gum", 2))
+    gd.add_item("Sp. Coke", Item("Sp. Coke", 0))
+    gd.add_item("Muffin", Item("Muffin", 6))
+    gd.add_item("Cookie", Item("Cookie", 0))
+    gd.add_item("Cheese", Item("Cheese", 0))
+    gd.add_item("Donut", Item("Donut", 1))
+    gd.add_item("Sticker", Item("Sticker", 1))
 
     gd.add_item_list("inventory", ItemList(gc.screen, 1, True, [gd.item][0], gd.get_all_items()))
     gd.add_cursor("item_cursor", ItemCursor(gc.screen, gd.item_list["inventory"], False, 1))
@@ -84,6 +84,10 @@ def run_game_loop():
             tiles_list_2d[int(o.x)][int(o.y)].full = name
         for name, o in gd.prop.items():
             tiles_list_2d[int(o.x)][int(o.y)].full = "full"
+        for name in gd.characters:
+            if gd.characters[name].points < 0:
+                gd.characters[name].points = 0
+
 
     def big_draw():
         # fix drawing hierarchy
@@ -131,11 +135,10 @@ def run_game_loop():
     def gift_draw():
         gd.item_list["inventory"].print_item_list()
         gd.cursor["item_cursor"].print_cursor()
-        # for name in gd.characters:
-        #     if gd.characters[name].emote != "none":
-        #         gd.characters[name].print_name(gc.screen)
-        #         gd.characters[name].display(gc.screen, "sad")
-        #         gd.characters[name].print_phrase(gc.screen, gd.characters[name].emote)
+        for name in gd.characters:
+            if gd.characters[name].emote != "none":
+                gd.characters[name].print_name(gc.screen)
+                gd.characters[name].display(gc.screen, "happy")
 
     def start_draw():
         gd.menu["start_menu"].print_menu()
@@ -349,6 +352,7 @@ def run_game_loop():
                 pygame.display.update()
                 gc.tick()
 
+
             update_files()
             dance()
             big_draw()
@@ -366,8 +370,14 @@ def run_game_loop():
 
                     if event.key == pygame.K_RETURN:
                         if gd.cursor["cursor1"].get_cursor_position() == gd.menu["menu1"].y:
-                            gd.characters[facing_tile.interact()].emote = random.choice(["small_talk1", "small_talk2", "small_talk3"])
-                            gc.game_state = gc.TALKING
+                            if gd.characters[facing_tile.interact()].points <= 9:
+                                print(gd.characters[facing_tile.interact()].points)
+                                gd.characters[facing_tile.interact()].emote = "small_talk" + str(gd.characters[facing_tile.interact()].points)
+                                gd.characters[facing_tile.interact()].points += 1
+                                gc.game_state = gc.TALKING
+                            elif gd.characters[facing_tile.interact()].points <= 10:
+                                gd.characters[facing_tile.interact()].emote = "small_talk10"
+                                gc.game_state = gc.TALKING
 
                         if gd.cursor["cursor1"].get_cursor_position() == gd.menu["menu1"].y+25:
                             print("You gave a gift!")
@@ -381,7 +391,7 @@ def run_game_loop():
                                 gd.characters[facing_tile.interact()].emote = ["mad"][0]
                                 gc.game_state = gc.PROPOSITION
                             else:
-                                gd.characters[facing_tile.interact()].emote = ["happy"][0]
+                                gd.characters[facing_tile.interact()].emote = ["dtf"][0]
                                 gc.game_state = gc.PROPOSITION
 
                         if gd.cursor["cursor1"].get_cursor_position() == gd.menu["menu1"].y+75:
@@ -437,17 +447,13 @@ def run_game_loop():
                 if event.type == pygame.KEYDOWN:
 
                     if event.key == pygame.K_RETURN:
-                        # for x in gd.characters[facing_tile.interact()].likes:
-                        #     if gd.cursor["item_cursor"].get_item() == x:
-                        #         print("hooray!")
-                        #         gc.game_state = gc.GIFT_RECEIVED
-                        #     if gd.cursor["item_cursor"].get_item() != x:
-                        #         print("boo")
-
+                        gd.item[gd.cursor["item_cursor"].get_item()].quantity -= 1
                         if gd.characters[facing_tile.interact()].likes.count(gd.cursor["item_cursor"].get_item()) > 0:
+                            gd.characters[facing_tile.interact()].points += 1
                             gd.characters[facing_tile.interact()].emote = "good_gift"
                             gc.game_state = gc.GIFT_RECEIVED
                         else:
+                            gd.characters[facing_tile.interact()].points -= 1
                             gd.characters[facing_tile.interact()].emote = "bad_gift"
                             gc.game_state = gc.GIFT_RECEIVED
 
@@ -534,6 +540,8 @@ def run_game_loop():
             gc.tick()
 
         if gc.game_state == gc.INVENTORY:
+
+
             for event in pygame.event.get():
 
                 if event.type == pygame.QUIT:
