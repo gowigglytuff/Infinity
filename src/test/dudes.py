@@ -5,8 +5,8 @@ from test.gamestate import Character
 
 
 class Galaxar(Character):
-    def __init__(self, x, y, img_file_name_list, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -18,13 +18,21 @@ class Galaxar(Character):
             "small_talk3": ["If you don't know anyone,", "you can dance with us. I", "want everyone to have fun."],
             "good_gift": ["I didn't expect this...", "you really are the nicest!", ""],
             "bad_gift": ["Do I look like someone", "who'd want something like", "this!!??"]}
-        self.emotions = {"happy": ["assets/galaxar_happy.png"]}
+        self.emotions = {"happy": ["assets/galaxar_happy.png"],
+                         "mad": ["assets/mad/galaxar_mad.png"],
+                         "sad": ["assets/sad/galaxar_sad.png"]}
         self.likes = [""]
 
+    def goal_met(self):
+        if self.points >= 10:
+            achieve = True
+        else:
+            achieve = False
+        return achieve
 
 class Ishine(Character):
-    def __init__(self, x, y, img_file_name_list, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -37,49 +45,74 @@ class Ishine(Character):
             "small_talk3": ["I'm just a really casual", "person, it doesn't bother", "me that it smells in here."],
             "good_gift": ["Literally, at last," "someone's' treating my fine", "ass the way i deserve"],
             "bad_gift": ["This is gross, ew", "you're lucky i don't care", ""]}
-        self.emotions = {"happy": ["assets/ishine_happy.png"]}
+        self.emotions = {"happy": ["assets/ishine_happy.png"],
+                         "mad": ["assets/mad/ishine_mad.png"],
+                         "sad": ["assets/sad/ishine_sad.png"]}
         self.likes = ["Vodka_soda"]
 
+    def goal_met(self):
+        if self.points >= 10:
+            achieve = True
+        else:
+            achieve = False
+        return achieve
 
 class Seeder(Character):
-    def __init__(self, x, y, img_file_name_list, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
-            "happy": ["", "", ""],
-            "sad": ["", "", ""],
-            "mad": ["", "", ""],
+            "happy": ["Awww,", "ain't you just", "the sweetest thing!"],
+            "sad": ["Well now I've", "gone and made", "myself sad."],
+            "mad": ["I'm sorry, but that", "makes me a little", "uncomfortable."],
             "small_talk1": ["I love this job!", "It gives me the opportunity", "to meet lots of cool folks!"],
             "small_talk2": ["You're probably not supposed", "to be back here, just make ", "sure, my boss doesn't see!"],
             "small_talk3": ["I bartend nights to get", "by while I work on my career", "as a singer!"],
-            "good_gift": ["", "", ""],
-            "bad_gift": ["", "", ""]}
-        self.emotions = {"happy": ["assets/seeder_happy.png"]}
+            "good_gift": ["Oh my goodness!", "This is the best tip", "I've ever received!"],
+            "bad_gift": ["Uh, I can't accept something", "like this from a customer.", "Thanks anyway."]}
+        self.emotions = {"happy": ["assets/seeder_happy.png"],
+                         "mad": ["assets/mad/seedro_mad.png"],
+                         "sad": ["assets/sad/" + "seedro" + "_sad.png"]}
         self.likes = [""]
 
+    def goal_met(self):
+        if self.points >= 10:
+            achieve = True
+        else:
+            achieve = False
+        return achieve
+
 class Eveirg(Character):
-    def __init__(self, x, y, img_file_name_list, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
             "happy": ["OMG", "BABE", "<3 <3 <3"],
             "sad": ["...", "...", "..."],
-            "mad": ["I...", "I just...", "You're on my shitlist now bud."],
+            "mad": ["I...", "I just... You're ", "on my shitlist now bud."],
             "small_talk1": ["I wish they had food here", "maybe a snack platter... I'm ", "craving butter on a stick!"],
             "small_talk2": ["You ever just make a baking ", "soda volcano??? They're not ", "just for kids! BOOM!!!"],
             "small_talk3": ["I don't hold grudges,", "I just get even right away,", "BAM, GLITTER BOMB!"],
             "good_gift": ["Sweet syrupy nectar", "of ambrosia!", "You're an angel!!!"],
             "bad_gift": ["well, it's not butter", "", ""]}
         self.emotions = {
-            "happy": ["assets/eveirg_happy.png"]}
+            "happy": ["assets/eveirg_happy.png"],
+            "mad": ["assets/mad/eveirg_mad.png"],
+                    "sad": ["assets/sad/" + self.name + "_sad.png"]}
         self.likes = ["butter"]
 
+    def goal_met(self):
+        if self.points >= 10:
+            achieve = True
+        else:
+            achieve = False
+        return achieve
 
 class Anton(Character):
-    def __init__(self, x, y, img_file_name_list, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -91,13 +124,21 @@ class Anton(Character):
             "small_talk3": ["Man,", "I could use a drink.", ""],
             "good_gift": ["Uh, hey,", "that's nice,", "I guess..."],
             "bad_gift": ["Look buddy,", "I don't want this.", ""]}
-        self.emotions = {"happy": ["assets/anton_happy.png"]}
+        self.emotions = {"happy": ["assets/anton_happy.png"],
+                         "mad": ["assets/mad/anton_mad.png"],
+                         "sad": ["assets/sad/" + self.name + "_sad.png"]}
         self.likes = ["Water"]
 
+    def goal_met(self):
+        if self.points >= 10:
+            achieve = True
+        else:
+            achieve = False
+        return achieve
 
 class Zoop(Character):
-    def __init__(self, x, y, img_file_name_list, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -109,13 +150,21 @@ class Zoop(Character):
             "small_talk3": ["I'm kinda thirsty", "I mean, for a drink that is,", "no wait, that's not it..."],
             "good_gift": ["This is such a", "wondeful gift to receive", "indubitably!"],
             "bad_gift": ["ew, um, like, well, uh,", "This really isn't my thing,", "thanks any way"]}
-        self.emotions = {"happy": ["assets/zoop_happy.png"]}
+        self.emotions = {"happy": ["assets/zoop_happy.png"],
+                         "mad": ["assets/mad/zoop_mad.png"],
+                         "sad": ["assets/sad/" + self.name + "_sad.png"]}
         self.likes = [""]
 
+    def goal_met(self):
+        if self.points >= 10:
+            achieve = True
+        else:
+            achieve = False
+        return achieve
 
 class Zirel(Character):
-    def __init__(self, x, y, img_file_name_list, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -127,13 +176,21 @@ class Zirel(Character):
             "small_talk3": ["?!.", "?!.", "?!."],
             "good_gift": ["...", "...", "..!"],
             "bad_gift": ["...", "", ""]}
-        self.emotions = {"happy": ["assets/zirel_happy.png"]}
+        self.emotions = {"happy": ["assets/zirel_happy.png"],
+                         "mad": ["assets/mad/zirel_mad.png"],
+                         "sad": ["assets/sad/" + self.name + "_sad.png"]}
         self.likes = [""]
 
+    def goal_met(self):
+        if self.points >= 10:
+            achieve = True
+        else:
+            achieve = False
+        return achieve
 
 class Seedro(Character):
-    def __init__(self, x, y, img_file_name_list, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -145,13 +202,21 @@ class Seedro(Character):
             "small_talk3": ["What did the tricycle", "say when it say it's rival?", "Wheel, wheel, wheel..."],
             "good_gift": ["", "", ""],
             "bad_gift": ["", "", ""]}
-        self.emotions = {"happy": ["assets/seedro_happy.png"]}
+        self.emotions = {"happy": ["assets/seedro_happy.png"],
+                         "mad": ["assets/mad/seedro_mad.png"],
+                         "sad": ["assets/sad/" + self.name + "_sad.png"]}
         self.likes = [""]
 
+    def goal_met(self):
+        if self.points >= 10:
+            achieve = True
+        else:
+            achieve = False
+        return achieve
 
 class Thickkaelious(Character):
-    def __init__(self, x, y, img_file_name_list, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -163,13 +228,21 @@ class Thickkaelious(Character):
             "small_talk3": ["", "", ""],
             "good_gift": ["", "", ""],
             "bad_gift": ["", "", ""]}
-        self.emotions = {"happy": ["assets/thickkaelious_happy.png"]}
+        self.emotions = {"happy": ["assets/thickkaelious_happy.png"],
+                         "mad": ["assets/mad/thickkaelious_mad.png"],
+                         "sad": ["assets/sad/" + self.name + "_sad.png"]}
         self.likes = [""]
 
+    def goal_met(self):
+        if self.points >= 10:
+            achieve = True
+        else:
+            achieve = False
+        return achieve
 
 class King(Character):
-    def __init__(self, x, y, img_file_name_list, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -181,13 +254,21 @@ class King(Character):
             "small_talk3": ["/*-*-/*/-*/*-", "*//-", "-/*-/-//-*/"],
             "good_gift": ["", "", ""],
             "bad_gift": ["", "", ""]}
-        self.emotions = {"happy": ["assets/king_happy.png"]}
+        self.emotions = {"happy": ["assets/king_happy.png"],
+                         "mad": ["assets/mad/king_mad.png"],
+                         "sad": ["assets/sad/" + self.name + "_sad.png"]}
         self.likes = [""]
 
+    def goal_met(self):
+        if self.points >= 10:
+            achieve = True
+        else:
+            achieve = False
+        return achieve
 
 class Japeto(Character):
-    def __init__(self, x, y, img_file_name_list, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -199,13 +280,21 @@ class Japeto(Character):
             "small_talk3": ["Why don't you try", "reading my mind? I'll give", "you a hint, I'm tired."],
             "good_gift": ["", "", ""],
             "bad_gift": ["", "", ""]}
-        self.emotions = {"happy": ["assets/japeto_happy.png"]}
-        self.likes = [""]
+        self.emotions = {"happy": ["assets/japeto_happy.png"],
+                         "mad": ["assets/mad/japeto_mad.png"],
+                         "sad": ["assets/sad/" + self.name + "_sad.png"]}
+        self.likes = ["Muffin"]
 
+    def goal_met(self):
+        if self.points >= 10:
+            achieve = True
+        else:
+            achieve = False
+        return achieve
 
 class Merkle(Character):
-    def __init__(self, x, y, img_file_name_list, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -217,12 +306,21 @@ class Merkle(Character):
             "small_talk3": ["", "", ""],
             "good_gift": ["", "", ""],
             "bad_gift": ["", "", ""]}
-        self.emotions = {"happy": ["assets/merkle_happy.png"]}
+        self.emotions = {"happy": ["assets/merkle_happy.png"],
+                         "mad": ["assets/mad/merkle_mad.png"],
+                         "sad": ["assets/sad/" + self.name + "_sad.png"]}
         self.likes = [""]
 
+    def goal_met(self):
+        if self.points >= 10:
+            achieve = True
+        else:
+            achieve = False
+        return achieve
+
 class Emilius(Character):
-    def __init__(self, x, y, img_file_name_list, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -234,7 +332,16 @@ class Emilius(Character):
             "small_talk3": ["", "", ""],
             "good_gift": ["", "", ""],
             "bad_gift": ["", "", ""]}
-        self.emotions = {"happy": ["assets/emilius_happy.png"]}
+        self.emotions = {"happy": ["assets/emilius_happy.png"],
+                         "mad": ["assets/mad/emilius_mad.png"],
+                         "sad": ["assets/sad/" + self.name + "_sad.png"]}
         self.likes = [""]
+
+    def goal_met(self):
+        if self.points >= 10:
+            achieve = True
+        else:
+            achieve = False
+        return achieve
 
 # print(self.name.__class__)

@@ -26,6 +26,8 @@ class GameData(object):
         self.prop = {}
         self.menu = {}
         self.cursor = {}
+        self.item = {}
+        self.item_list = {}
 
     def add_character(self, character_name, character_object):
         self.characters[character_name] = character_object
@@ -47,8 +49,17 @@ class GameData(object):
     def add_cursor(self, cursor_name, cursor_object):
         self.cursor[cursor_name] = cursor_object
 
+    def add_item(self, item_name, item_object):
+        self.item[item_name] = item_object
+
+    def add_item_list(self, item_list_name, item_list_object):
+        self.item_list[item_list_name] = item_list_object
+
     def get_all_drawables(self):
         return list(self.characters.values()) + list(self.player.values()) + list(self.prop.values())
+
+    def get_all_items(self):
+        return list(self.item.keys())
 
 class GameContoller(object):
 
@@ -58,6 +69,10 @@ class GameContoller(object):
     CUTSCENE = 3
     TALKING = 4
     START_MENU = 5
+    GIFT = 6
+    PROPOSITION = 7
+    INVENTORY = 8
+    GIFT_RECEIVED = 9
 
     def __init__(self, game_data):
         self.screen = pygame.display.set_mode(game_data.settings["resolution"])
@@ -91,6 +106,7 @@ class Image(object):
         screen.blit(Spritesheet(self.img).image_at((0, 0, self.width, self.height)), [self.x, self.y])
 
 
+
 class Thing(Image):
     def __init__(self, x, y, img_file_name_list, width=32, height=40):
         super().__init__(x, y, img_file_name_list)
@@ -107,18 +123,20 @@ class Thing(Image):
 
 
 class Character(Thing):
-    def __init__(self, x, y, img_file_name_list, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
+        super().__init__(x, y, img_file_name_list,  width=32, height=40)
         self.offset = offset
         self.emote = emote
         self.name = name
         self.printing_priority = 2
         self.phrases = {}
         self.emotions = {}
+        self.points = points
         pass
 
     def draw(self, screen):
         screen.blit((Spritesheet(self.img).image_at((0, 0, 32, 40))), [self.x * 32 + self.offset, self.y * 32 - 16])
+
 
     def print_phrase(self, screen, line):
         my_font = pygame.font.Font("assets/PokemonGB-RAeo.ttf", 10)
@@ -207,15 +225,6 @@ class Menu(object):
         self.menu_go = menu_go
 
     def print_menu(self):
-        # my_font = pygame.font.Font("assets/PokemonGB-RAeo.ttf", 10)
-        # item1 = my_font.render(self.opt1, 1, (255, 255, 255))
-        # item2 = my_font.render(self.opt2, 1, (255, 255, 255))
-        # item3 = my_font.render(self.opt3, 1, (255, 255, 255))
-        # item4 = my_font.render(self.opt4, 1, (255, 255, 255))
-        # self.screen.blit(item1, (self.x, self.y))
-        # self.screen.blit(item2, (205, 300))
-        # self.screen.blit(item3, (205, 325))
-        # self.screen.blit(item4, (205, 350))
         for x in self.size:
             my_font = pygame.font.Font("assets/PokemonGB-RAeo.ttf", 10)
             item = my_font.render(self.opt1[x], 1, (255, 255, 255))
@@ -253,4 +262,65 @@ class Cursor(object):
         cursor_position = self.y
         return cursor_position
 
+class ItemCursor(Cursor):
+    def __init__(self, screen, menu, cursor_go, option):
+        super(). __init__(screen, menu, cursor_go, option)
+
+    def cursor_down(self):
+        if self.y == self.menu.y + (self.menu.total_items-1)*25:
+            self.y = self.menu.y
+        else:
+            self.y += 25
+    def cursor_up(self):
+        if self.y == self.menu.y:
+            self.y = self.menu.y + (self.menu.total_items-1)*25
+        else:
+            self.y -= 25
+
+    def get_item(self):
+        return self.menu.item_order[int(((self.y-100)/25))].name
+
+
+
+class ItemList(object):
+    def __init__(self, screen, opt1, item_list_go, source, key):
+        self.screen = screen
+        self.x = 280
+        self.y = 100
+        self.size = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        self.opt1 = opt1
+        self.item_list_go = item_list_go
+        self.source = source
+        self.key = key
+        self.successes = 0
+        self.total_items = 0
+        self.item_order = []
+
+    def print_item_list(self):
+        self.item_order.clear()
+        for v in self.size:
+            if self.source[self.key[v]].quantity > 0:
+                my_font = pygame.font.Font("assets/PokemonGB-RAeo.ttf", 10)
+                item = my_font.render(self.source[self.key[v]].name, 1, (255, 255, 255))
+                item2 = my_font.render(str(self.source[self.key[v]].quantity), 1, (255, 255, 255))
+                self.screen.blit(item, (self.x, self.y + self.successes * 25))
+                self.screen.blit(item2, (self.x + 85, self.y + self.successes * 25))
+                self.successes += 1
+                self.item_order.append(self.source[self.key[v]])
+        self.total_items = self.successes
+        self.successes = 0
+
+
+    def item_list_len(self):
+        total = len(self.size)
+        return total
+
+
+
+class Item(object):
+    def __init__(self, name, quantity):
+        self.name = name
+        self.quantity = quantity
+
         # gd.menu["menu1"].menu_len():
+

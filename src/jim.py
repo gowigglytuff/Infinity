@@ -30,19 +30,19 @@ def init_game():
                                           "assets/alien1_left.png",
                                           "assets/alien1_right.png"], 0, "down"))
 
-    gd.add_character("Zirel", Zirel(4, 3, ["assets/alien2.png"], "none", 0, "Zirel"))
-    gd.add_character("IShine", Ishine(5, 6, ["assets/alien3.png"], "none", 0, "IShine"))
-    gd.add_character("Zoop", Zoop(3, 7, ["assets/alien4.png"], "none", 0, "Zoop"))
-    gd.add_character("Anton", Anton(0, 1, ["assets/alien5.png"], "none", 0, "Anton"))
-    gd.add_character("King", King(0, 6, ["assets/alien6.png"], "none", 0, "King"))
-    gd.add_character("Galaxar", Galaxar(3, 3, ["assets/alien7.png"], "none", 0, "Galaxar"))
-    gd.add_character("Seeder", Seeder(7, 7, ["assets/alien8.png"], "none", 0, "Seeder"))
-    gd.add_character("Thickkaelious", Thickkaelious(7, 2, ["assets/alien9.png"], "none", 0, "Thickkaelious"))
-    gd.add_character("Seedro", Seedro(4, 1, ["assets/alien10.png"], "none", 0, "Seedro"))
-    gd.add_character("Merkle", Merkle(6, 4, ["assets/alien11.png"], "none", 0, "Merkle"))
-    gd.add_character("Eveirg", Eveirg(3, 5, ["assets/alien12.png"], "none", 0, "Eveirg"))
-    gd.add_character("Japeto", Japeto(1, 4, ["assets/alien14.png"], "none", 0, "Japeto"))
-    gd.add_character("Emilius", Emilius(2, 7, ["assets/alien13b.png"], "none", 0, "Emilius"))
+    gd.add_character("Zirel", Zirel(4, 3, ["assets/alien2.png"], 0, "none", 0, "Zirel"))
+    gd.add_character("IShine", Ishine(5, 6, ["assets/alien3.png"], 0, "none", 0, "IShine"))
+    gd.add_character("Zoop", Zoop(3, 7, ["assets/alien4.png"], 0, "none", 0, "Zoop"))
+    gd.add_character("Anton", Anton(0, 1, ["assets/alien5.png"], 0, "none", 0, "Anton"))
+    gd.add_character("King", King(0, 6, ["assets/alien6.png"], 0, "none", 0, "King"))
+    gd.add_character("Galaxar", Galaxar(3, 3, ["assets/alien7.png"], 0, "none", 0, "Galaxar"))
+    gd.add_character("Seeder", Seeder(7, 7, ["assets/alien8.png"], 0, "none", 0, "Seeder"))
+    gd.add_character("Thickkaelious", Thickkaelious(7, 2, ["assets/alien9.png"], 0, "none", 0, "Thickky"))
+    gd.add_character("Seedro", Seedro(4, 1, ["assets/alien10.png"], 0, "none", 0, "Seedro"))
+    gd.add_character("Merkle", Merkle(6, 4, ["assets/alien11.png"], 0, "none", 0, "Merkle"))
+    gd.add_character("Eveirg", Eveirg(3, 5, ["assets/alien12.png"], 0, "none", 0, "Eveirg"))
+    gd.add_character("Japeto", Japeto(1, 4, ["assets/alien14.png"], 0, "none", 0, "Japeto"))
+    gd.add_character("Emilius", Emilius(2, 7, ["assets/alien13b.png"], 0, "none", 0, "Emilius"))
 
     gd.add_bg("bg1", BG(0, 0, ["assets/BG1.png", "assets/BG2.png"]))
 
@@ -53,15 +53,31 @@ def init_game():
     gd.add_prop("bar_bottom", Prop(6, 7, ["assets/bar2.png"]))
 
     gd.add_menu("menu1", Menu(gc.screen, [0, 1, 2, 3], 205, 275, ["Talk", "Give Gift", "Proposition", "Exit"], False))
-    gd.add_menu("start_menu", Menu(gc.screen, [0, 1, 2, 3, 4, 5], 290, 100, ["Items", "Setings", "Records", "Phone", "Save", "Exit"], False))
+    gd.add_menu("start_menu", Menu(gc.screen, [0, 1, 2, 3, 4, 5], 280, 100, ["Items", "Setings", "Records", "Phone", "Save", "Exit"], False))
 
     gd.add_cursor("cursor1", Cursor(gc.screen, gd.menu["menu1"], False, 1))
     gd.add_cursor("start_cursor", Cursor(gc.screen, gd.menu["start_menu"], False, 1))
 
+
+    gd.add_item("empty_cup", Item("Cup", 0))
+    gd.add_item("water", Item("Water", 0))
+    gd.add_item("soda", Item("Soda", 0))
+    gd.add_item("butter", Item("Butter", 0))
+    gd.add_item("gum", Item("Gum", 2))
+    gd.add_item("space_coke", Item("Sp. Coke", 0))
+    gd.add_item("muffin", Item("Muffin", 6))
+    gd.add_item("cookie", Item("Cookie", 0))
+    gd.add_item("cheese", Item("Cheese", 0))
+    gd.add_item("donut", Item("Donut", 1))
+    gd.add_item("sticker", Item("Sticker", 1))
+
+    gd.add_item_list("inventory", ItemList(gc.screen, 1, True, [gd.item][0], gd.get_all_items()))
+    gd.add_cursor("item_cursor", ItemCursor(gc.screen, gd.item_list["inventory"], False, 1))
+
+
 def run_game_loop():
 
     animating = False
-    menu_state = "talking"
 
     def update_files():
         for name, o in gd.characters.items():
@@ -80,6 +96,7 @@ def run_game_loop():
         drawables_list = sorted(drawables_list, key=lambda x: (x.y, x.printing_priority))
         for drawable in drawables_list:
             drawable.draw(gc.screen)
+
 
 
     def menu_draw():
@@ -101,10 +118,44 @@ def run_game_loop():
                 gd.characters[name].display(gc.screen, "happy")
                 gd.characters[name].print_phrase(gc.screen, gd.characters[name].emote)
 
+    def proposition_draw():
+        for name in gd.characters:
+            if gd.characters[name].emote != "none":
+                gd.characters[name].print_name(gc.screen)
+                if gd.characters[name].goal_met():
+                    gd.characters[name].display(gc.screen, "happy")
+                if not gd.characters[name].goal_met():
+                    gd.characters[name].display(gc.screen, "mad")
+                gd.characters[name].print_phrase(gc.screen, gd.characters[name].emote)
+
+    def gift_draw():
+        gd.item_list["inventory"].print_item_list()
+        gd.cursor["item_cursor"].print_cursor()
+        # for name in gd.characters:
+        #     if gd.characters[name].emote != "none":
+        #         gd.characters[name].print_name(gc.screen)
+        #         gd.characters[name].display(gc.screen, "sad")
+        #         gd.characters[name].print_phrase(gc.screen, gd.characters[name].emote)
+
     def start_draw():
         gd.menu["start_menu"].print_menu()
         gd.cursor["start_cursor"].print_cursor()
 
+    def inventory_draw():
+        gd.item_list["inventory"].print_item_list()
+        gd.cursor["item_cursor"].print_cursor()
+
+    def gift_received_draw():
+
+        for name in gd.characters:
+            if gd.characters[name].emote == "good_gift":
+                gd.characters[name].print_name(gc.screen)
+                gd.characters[name].display(gc.screen, "happy")
+                gd.characters[name].print_phrase(gc.screen, gd.characters[name].emote)
+            if gd.characters[name].emote == "bad_gift":
+                gd.characters[name].print_name(gc.screen)
+                gd.characters[name].display(gc.screen, "sad")
+                gd.characters[name].print_phrase(gc.screen, gd.characters[name].emote)
     def dance():
         if playing.tock == 10:
             gd.characters["Zirel"].offset += 3.2
@@ -149,7 +200,6 @@ def run_game_loop():
 
     # game loop
     running = True
-    times = 0
 
     while running:
         if gc.game_state == gc.IN_GAME:
@@ -223,9 +273,7 @@ def run_game_loop():
                             if facing_tile.full != "full":
                                 # gd.characters[facing_tile.interact()].print_phrase(gc.screen, "small_talk1")
                                 print(facing_tile.interact())
-                                gd.characters[facing_tile.interact()].emote = random.choice(["small_talk1",
-                                                                                        "small_talk2",
-                                                                                        "small_talk3"])
+                                gd.characters[facing_tile.interact()].emote = "on"
                                 gc.game_state = gc.IN_MENU
 
                             else:
@@ -234,6 +282,9 @@ def run_game_loop():
                             print("hi")
                     if event.key == pygame.K_1:
                         gc.game_state = gc.START_MENU
+                    if event.key == pygame.K_2:
+                        gd.item_list["inventory"].print_item_list()
+
 
                 if event.type == pygame.KEYUP:
                     pass
@@ -315,21 +366,23 @@ def run_game_loop():
 
                     if event.key == pygame.K_RETURN:
                         if gd.cursor["cursor1"].get_cursor_position() == gd.menu["menu1"].y:
+                            gd.characters[facing_tile.interact()].emote = random.choice(["small_talk1", "small_talk2", "small_talk3"])
                             gc.game_state = gc.TALKING
 
                         if gd.cursor["cursor1"].get_cursor_position() == gd.menu["menu1"].y+25:
                             print("You gave a gift!")
                             gd.cursor["cursor1"].y = gd.menu["menu1"].y
-                            for name in gd.characters:
-                                gd.characters[name].emote = "none"
-                            gc.game_state = gc.IN_GAME
+                            gd.characters[facing_tile.interact()].emote = ["bad_gift"][0]
+                            gc.game_state = gc.GIFT
 
                         if gd.cursor["cursor1"].get_cursor_position() == gd.menu["menu1"].y+50:
                             gd.cursor["cursor1"].y = gd.menu["menu1"].y
-                            print("They slap you in the face!")
-                            for name in gd.characters:
-                                gd.characters[name].emote = "none"
-                            gc.game_state = gc.IN_GAME
+                            if not gd.characters[facing_tile.interact()].goal_met():
+                                gd.characters[facing_tile.interact()].emote = ["mad"][0]
+                                gc.game_state = gc.PROPOSITION
+                            else:
+                                gd.characters[facing_tile.interact()].emote = ["happy"][0]
+                                gc.game_state = gc.PROPOSITION
 
                         if gd.cursor["cursor1"].get_cursor_position() == gd.menu["menu1"].y+75:
                             gd.cursor["cursor1"].y = gd.menu["menu1"].y
@@ -375,7 +428,44 @@ def run_game_loop():
             talking_draw()
             pygame.display.update()
             gc.tick()
-        if gc.game_state == gc.START_MENU:
+
+        if gc.game_state == gc.GIFT:
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                if event.type == pygame.KEYDOWN:
+
+                    if event.key == pygame.K_RETURN:
+                        # for x in gd.characters[facing_tile.interact()].likes:
+                        #     if gd.cursor["item_cursor"].get_item() == x:
+                        #         print("hooray!")
+                        #         gc.game_state = gc.GIFT_RECEIVED
+                        #     if gd.cursor["item_cursor"].get_item() != x:
+                        #         print("boo")
+
+                        if gd.characters[facing_tile.interact()].likes.count(gd.cursor["item_cursor"].get_item()) > 0:
+                            gd.characters[facing_tile.interact()].emote = "good_gift"
+                            gc.game_state = gc.GIFT_RECEIVED
+                        else:
+                            gd.characters[facing_tile.interact()].emote = "bad_gift"
+                            gc.game_state = gc.GIFT_RECEIVED
+
+
+                    if event.key == pygame.K_DOWN:
+                        gd.cursor["item_cursor"].cursor_down()
+                    if event.key == pygame.K_UP:
+                        gd.cursor["item_cursor"].cursor_up()
+
+
+            update_files()
+            dance()
+            big_draw()
+            gift_draw()
+            pygame.display.update()
+            gc.tick()
+
+        if gc.game_state == gc.GIFT_RECEIVED:
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -386,6 +476,47 @@ def run_game_loop():
                         for name in gd.characters:
                             gd.characters[name].emote = "none"
                         gc.game_state = gc.IN_GAME
+
+            update_files()
+            dance()
+            big_draw()
+            gift_received_draw()
+            pygame.display.update()
+            gc.tick()
+
+        if gc.game_state == gc.PROPOSITION:
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                if event.type == pygame.KEYDOWN:
+
+                    if event.key == pygame.K_RETURN:
+                        for name in gd.characters:
+                            gd.characters[name].emote = "none"
+                        gc.game_state = gc.IN_GAME
+
+            update_files()
+            dance()
+            big_draw()
+            proposition_draw()
+            pygame.display.update()
+            gc.tick()
+
+        if gc.game_state == gc.START_MENU:
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                if event.type == pygame.KEYDOWN:
+
+                    if event.key == pygame.K_RETURN:
+                        if gd.cursor["start_cursor"].get_cursor_position() == gd.menu["start_menu"].y:
+                            gc.game_state = gc.INVENTORY
+                        else:
+                            for name in gd.characters:
+                                gd.characters[name].emote = "none"
+                            gc.game_state = gc.IN_GAME
 
                     if event.key == pygame.K_DOWN:
                         gd.cursor["start_cursor"].cursor_down()
@@ -399,6 +530,32 @@ def run_game_loop():
             dance()
             big_draw()
             start_draw()
+            pygame.display.update()
+            gc.tick()
+
+        if gc.game_state == gc.INVENTORY:
+            for event in pygame.event.get():
+
+                if event.type == pygame.QUIT:
+                    running = False
+
+                if event.type == pygame.KEYDOWN:
+
+                    if event.key == pygame.K_RETURN:
+                        print(gd.cursor["item_cursor"].get_item())
+                        for name in gd.characters:
+                            gd.characters[name].emote = "none"
+                        gc.game_state = gc.IN_GAME
+
+                    if event.key == pygame.K_DOWN:
+                        gd.cursor["item_cursor"].cursor_down()
+                    if event.key == pygame.K_UP:
+                        gd.cursor["item_cursor"].cursor_up()
+
+            update_files()
+            dance()
+            big_draw()
+            inventory_draw()
             pygame.display.update()
             gc.tick()
 def kiss():
