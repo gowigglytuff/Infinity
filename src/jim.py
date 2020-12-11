@@ -25,7 +25,7 @@ def init_game():
 
     pygame.display.set_caption('Infinity')
 
-    gd.add_player("alien1", Player(2, 2, ["assets/alien1_front.png",
+    gd.add_player("alien1", Player(6, 1, ["assets/alien1_front.png",
                                           "assets/alien1_back.png",
                                           "assets/alien1_left.png",
                                           "assets/alien1_right.png"], 0, "down"))
@@ -147,7 +147,7 @@ def run_game_loop():
             if gd.characters[name].emote != "none":
                 gd.characters[name].print_name(gc.screen)
                 if gd.characters[name].goal_met():
-                    gd.characters[name].display(gc.screen, "happy")
+                    gd.characters[name].display(gc.screen, "horny")
                 if not gd.characters[name].goal_met():
                     gd.characters[name].display(gc.screen, "mad")
                 gd.characters[name].print_phrase(gc.screen, gd.characters[name].emote)
@@ -173,7 +173,7 @@ def run_game_loop():
         for name in gd.characters:
             if gd.characters[name].emote == "good_gift":
                 gd.characters[name].print_name(gc.screen)
-                gd.characters[name].display(gc.screen, "happy")
+                gd.characters[name].display(gc.screen, "thankful")
                 gd.characters[name].print_phrase(gc.screen, gd.characters[name].emote)
                 print(gd.characters[name].emote)
             if gd.characters[name].emote == "bad_gift":

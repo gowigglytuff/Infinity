@@ -10,7 +10,7 @@ class Anton(Character):
         self.offset = offset
         self.name = name
         self.phrases = {
-            "dtf": ["Ahahaha", "You're alright, I guess.", ""],
+            "dtf": ["oh, uh, well you'd be ", "surprised, I don't get asked", "that a lot. Uh, yes please. "],
             "sad": ["Dude...", "...", "bummer..."],
             "mad": ["Dude...", "What's wrong with you..?", ""],
             "small_talk0": ["Hey buddy,", "you can't be back here.", ""],
@@ -31,11 +31,13 @@ class Anton(Character):
             "result": ["This one's an Anton", "original! I've got demos", "for sale, spread the word!"]}
         self.emotions = {"happy": ["assets/anton_happy.png"],
                          "mad": ["assets/mad/anton_mad.png"],
-                         "sad": ["assets/sad/" + self.name + "_sad.png"]}
-        self.likes = ["Water"]
+                         "sad": ["assets/sad/" + self.name + "_sad.png"],
+                         "horny": ["assets/horny/" + self.name + "_horny.png"],
+                         "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
+        self.likes = ["Muffin"]
 
     def goal_met(self):  # Bring him a glass of water every ten minutes
-        if self.points >= 10:
+        if self.points >= 0:
             achieve = True
         else:
             achieve = False
@@ -65,7 +67,9 @@ class Galaxar(Character):
             "bad_gift": ["Do I look like someone", "who'd want something like", "this!!??"]}
         self.emotions = {"happy": ["assets/galaxar_happy.png"],
                          "mad": ["assets/mad/galaxar_mad.png"],
-                         "sad": ["assets/sad/galaxar_sad.png"]}
+                         "sad": ["assets/sad/galaxar_sad.png"],
+                         "horny": ["assets/horny/" + self.name + "_horny.png"],
+                         "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
         self.likes = ["Muffin"]
 
     def goal_met(self):  # achieve goal by feeding him muffins
@@ -97,12 +101,14 @@ class Ishine(Character):
             "small_talk8": ["", "", ""],
             "small_talk9": ["", "", ""],
             "small_talk10": ["", "", ""],
-            "good_gift": ["Literally, at last," "someone's' treating my fine", "ass the way i deserve"],
+            "good_gift": ["Literally, at last,", "someone's' treating my fine", "ass the way i deserve"],
             "bad_gift": ["This is gross, ew", "you're lucky i don't care", ""]}
         self.emotions = {"happy": ["assets/mad/ishine_mad.png"],
                          "mad": ["assets/mad/ishine_mad.png"],
-                         "sad": ["assets/sad/ishine_sad.png"]}
-        self.likes = ["Vodka_soda"]
+                         "sad": ["assets/sad/ishine_sad.png"],
+                         "horny": ["assets/horny/" + self.name + "_horny.png"],
+                         "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
+        self.likes = ["Muffin"]
 
     def goal_met(self):  # achieve goal by ignoring him for x amount of time
         if self.points >= 0:
@@ -149,8 +155,10 @@ class Seeder(Character):
             "Emilius": ["", "", ""]}
         self.emotions = {"happy": ["assets/seeder_happy.png"],
                          "mad": ["assets/mad/seedro_mad.png"],
-                         "sad": ["assets/sad/" + "seedro" + "_sad.png"]}
-        self.likes = [""]
+                         "sad": ["assets/sad/" + "seedro" + "_sad.png"],
+                         "horny": ["assets/horny/" + "seedro" + "_horny.png"],
+                         "thankful": ["assets/thankful/" + "seedro" + "_thankful.png"]}
+        self.likes = ["Muffin"]
 
     def goal_met(self):  # achieve goal by sleeping with 7 other characters
         if self.points >= 0:
@@ -184,7 +192,9 @@ class Eveirg(Character):
         self.emotions = {
             "happy": ["assets/eveirg_happy.png"],
             "mad": ["assets/mad/eveirg_mad.png"],
-                    "sad": ["assets/sad/" + self.name + "_sad.png"]}
+                    "sad": ["assets/sad/" + self.name + "_sad.png"],
+                         "horny": ["assets/horny/" + self.name + "_horny.png"],
+                         "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
         self.likes = ["Butter"]
 
     def goal_met(self):  # give them butter!!!
@@ -219,8 +229,10 @@ class Zoop(Character):
             "bad_gift": ["ew, um, like, well, uh,", "This really isn't my thing,", "thanks any way"]}
         self.emotions = {"happy": ["assets/zoop_happy.png"],
                          "mad": ["assets/mad/zoop_mad.png"],
-                         "sad": ["assets/sad/" + self.name + "_sad.png"]}
-        self.likes = [""]
+                         "sad": ["assets/sad/" + self.name + "_sad.png"],
+                         "horny": ["assets/horny/" + self.name + "_horny.png"],
+                         "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
+        self.likes = ["Muffin"]
 
     def goal_met(self):  # will sleep with you right away and as many times as you want
         if self.points >= 0:
@@ -253,8 +265,10 @@ class Zirel(Character):
             "bad_gift": ["...", "", ""]}
         self.emotions = {"happy": ["assets/zirel_happy.png"],
                          "mad": ["assets/mad/zirel_mad.png"],
-                         "sad": ["assets/sad/" + self.name + "_sad.png"]}
-        self.likes = [""]
+                         "sad": ["assets/sad/" + self.name + "_sad.png"],
+                         "horny": ["assets/horny/" + self.name + "_horny.png"],
+                         "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
+        self.likes = ["Muffin"]
 
     def goal_met(self):
         if self.points >= 10:
@@ -287,8 +301,10 @@ class Seedro(Character):
             "bad_gift": ["", "", ""]}
         self.emotions = {"happy": ["assets/seedro_happy.png"],
                          "mad": ["assets/mad/seedro_mad.png"],
-                         "sad": ["assets/sad/" + self.name + "_sad.png"]}
-        self.likes = [""]
+                         "sad": ["assets/sad/" + self.name + "_sad.png"],
+                         "horny": ["assets/horny/" + self.name + "_horny.png"],
+                         "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
+        self.likes = ["Muffin"]
 
     def goal_met(self):  #
         if self.points >= 10:
@@ -321,8 +337,10 @@ class Thickkaelious(Character):
             "bad_gift": ["", "", ""]}
         self.emotions = {"happy": ["assets/thickkaelious_happy.png"],
                          "mad": ["assets/mad/thickkaelious_mad.png"],
-                         "sad": ["assets/sad/" + self.name + "_sad.png"]}
-        self.likes = [""]
+                         "sad": ["assets/sad/" + self.name + "_sad.png"],
+                         "horny": ["assets/horny/" + self.name + "_horny.png"],
+                         "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
+        self.likes = ["Muffin"]
 
     def goal_met(self):  # have atleast 2 points with every character
         if self.points >= 10:
@@ -355,8 +373,10 @@ class King(Character):
             "bad_gift": ["", "", ""]}
         self.emotions = {"happy": ["assets/king_happy.png"],
                          "mad": ["assets/mad/king_mad.png"],
-                         "sad": ["assets/sad/" + self.name + "_sad.png"]}
-        self.likes = [""]
+                         "sad": ["assets/sad/" + self.name + "_sad.png"],
+                         "horny": ["assets/horny/" + self.name + "_horny.png"],
+                         "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
+        self.likes = ["Muffin"]
 
     def goal_met(self):  # give him the specific gifts he requests by translating his words
         if self.points >= 10:
@@ -389,7 +409,9 @@ class Japeto(Character):
             "bad_gift": ["", "", ""]}
         self.emotions = {"happy": ["assets/japeto_happy.png"],
                          "mad": ["assets/mad/japeto_mad.png"],
-                         "sad": ["assets/sad/" + self.name + "_sad.png"]}
+                         "sad": ["assets/sad/" + self.name + "_sad.png"],
+                         "horny": ["assets/horny/" + self.name + "_horny.png"],
+                         "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
         self.likes = ["Muffin"]
 
     def goal_met(self):  #
@@ -423,8 +445,10 @@ class Merkle(Character):
             "bad_gift": ["", "", ""]}
         self.emotions = {"happy": ["assets/merkle_happy.png"],
                          "mad": ["assets/mad/merkle_mad.png"],
-                         "sad": ["assets/sad/" + self.name + "_sad.png"]}
-        self.likes = [""]
+                         "sad": ["assets/sad/" + self.name + "_sad.png"],
+                         "horny": ["assets/horny/" + self.name + "_horny.png"],
+                         "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
+        self.likes = ["Muffin"]
 
     def goal_met(self): # atleast 5 points and have volume all the way up
         if self.points >= 10:
@@ -457,8 +481,10 @@ class Emilius(Character):
             "bad_gift": ["", "", ""]}
         self.emotions = {"happy": ["assets/emilius_happy.png"],
                          "mad": ["assets/mad/emilius_mad.png"],
-                         "sad": ["assets/sad/" + self.name + "_sad.png"]}
-        self.likes = [""]
+                         "sad": ["assets/sad/" + self.name + "_sad.png"],
+                         "horny": ["assets/horny/" + self.name + "_horny.png"],
+                         "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
+        self.likes = ["Muffin"]
 
     def goal_met(self):  # give various drugs
         if self.points >= 10:
