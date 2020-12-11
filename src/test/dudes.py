@@ -4,6 +4,43 @@ from test.spritesheet import Spritesheet
 from test.gamestate import Character
 
 
+class Anton(Character):
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
+        self.offset = offset
+        self.name = name
+        self.phrases = {
+            "dtf": ["Ahahaha", "You're alright, I guess.", ""],
+            "sad": ["Dude...", "...", "bummer..."],
+            "mad": ["Dude...", "What's wrong with you..?", ""],
+            "small_talk0": ["Hey buddy,", "you can't be back here.", ""],
+            "small_talk1": ["Yo, you want to buy some", "Anton brand sneakers?", "Limited edition!"],
+            "small_talk2": ["Man,", "I could use a drink.", ""],
+            "small_talk3": ["", "", ""],
+            "small_talk4": ["", "", ""],
+            "small_talk5": ["", "", ""],
+            "small_talk6": ["", "", ""],
+            "small_talk7": ["", "", ""],
+            "small_talk8": ["", "", ""],
+            "small_talk9": ["", "", ""],
+            "small_talk10": ["", "", ""],
+            "good_gift": ["Uh, hey,", "that's nice,", "I guess..."],
+            "bad_gift": ["Look buddy,", "I don't want this.", ""],
+            "request": ["What you feeling", "tonight? Daddy Anton's", "got a lil of everything."],
+
+            "result": ["This one's an Anton", "original! I've got demos", "for sale, spread the word!"]}
+        self.emotions = {"happy": ["assets/anton_happy.png"],
+                         "mad": ["assets/mad/anton_mad.png"],
+                         "sad": ["assets/sad/" + self.name + "_sad.png"]}
+        self.likes = ["Water"]
+
+    def goal_met(self):  # Bring him a glass of water every ten minutes
+        if self.points >= 10:
+            achieve = True
+        else:
+            achieve = False
+        return achieve
+
 class Galaxar(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
         super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
@@ -16,7 +53,7 @@ class Galaxar(Character):
             "small_talk0": ["I should have worn other", "shoes. These ones are tight", "and now my feet are sweating."],
             "small_talk1": ["This club is always crowded,", "I don't mind people, but I ", "prefer an intimate setting."],
             "small_talk2": ["If you don't know anyone,", "you can dance with us. I", "want everyone to have fun."],
-            "small_talk3": ["", "", ""],
+            "small_talk3": ["", "", ""],  # information about butter
             "small_talk4": ["", "", ""],
             "small_talk5": ["", "", ""],
             "small_talk6": ["", "", ""],
@@ -31,12 +68,13 @@ class Galaxar(Character):
                          "sad": ["assets/sad/galaxar_sad.png"]}
         self.likes = ["Muffin"]
 
-    def goal_met(self):
-        if self.points >= 3:
+    def goal_met(self):  # achieve goal by feeding him muffins
+        if self.points >= 10:
             achieve = True
         else:
             achieve = False
         return achieve
+
 
 class Ishine(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
@@ -66,7 +104,7 @@ class Ishine(Character):
                          "sad": ["assets/sad/ishine_sad.png"]}
         self.likes = ["Vodka_soda"]
 
-    def goal_met(self):
+    def goal_met(self):  # achieve goal by ignoring him for x amount of time
         if self.points >= 0:
             achieve = True
         else:
@@ -79,7 +117,7 @@ class Seeder(Character):
         self.offset = offset
         self.name = name
         self.phrases = {
-            "dtf": ["Awww,", "ain't you just", "the sweetest thing!"],
+            "dtf": ["Well I guess,", "I should probably do a", "bathroom check anyway."],
             "sad": ["Well now I've", "gone and made", "myself sad."],
             "mad": ["I'm sorry, but that", "makes me a little", "uncomfortable."],
             "small_talk0": ["I love this job!", "It gives me the opportunity", "to meet lots of cool folks!"],
@@ -95,14 +133,27 @@ class Seeder(Character):
             "small_talk10": ["", "", ""],
             "good_gift": ["Oh my goodness!", "This is the best tip", "I've ever received!"],
             "bad_gift": ["Uh, I can't accept something", "like this from a customer.", "Thanks anyway."],
-            "information": ["what can I get you?", "", ""]}
+            "information": ["who would you", "like to hear", "about?"],
+            "Zirel": ["king", "", ""],
+            "IShine": ["king", "", ""],
+            "Zoop": ["", "", ""],
+            "Anton": ["", "", ""],
+            "King": ["", "", ""],
+            "Galaxar": ["", "", ""],
+            "Seeder": ["", "", ""],
+            "Thickky": ["", "", ""],
+            "Seedro": ["", "", ""],
+            "Merkle": ["", "", ""],
+            "Eveirg": ["", "", ""],
+            "Japeto": ["", "", ""],
+            "Emilius": ["", "", ""]}
         self.emotions = {"happy": ["assets/seeder_happy.png"],
                          "mad": ["assets/mad/seedro_mad.png"],
                          "sad": ["assets/sad/" + "seedro" + "_sad.png"]}
         self.likes = [""]
 
-    def goal_met(self):
-        if self.points >= 10:
+    def goal_met(self):  # achieve goal by sleeping with 7 other characters
+        if self.points >= 0:
             achieve = True
         else:
             achieve = False
@@ -136,42 +187,8 @@ class Eveirg(Character):
                     "sad": ["assets/sad/" + self.name + "_sad.png"]}
         self.likes = ["Butter"]
 
-    def goal_met(self):
-        if self.points >= 10:
-            achieve = True
-        else:
-            achieve = False
-        return achieve
-
-class Anton(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
-        self.offset = offset
-        self.name = name
-        self.phrases = {
-            "dtf": ["Ahahaha", "You're alright, I guess.", ""],
-            "sad": ["Dude...", "...", "bummer..."],
-            "mad": ["Dude...", "What's wrong with you..?", ""],
-            "small_talk0": ["Hey buddy,", "you can't be back here.", ""],
-            "small_talk1": ["Yo, you want to buy some", "Anton brand sneakers?", "Limited edition!"],
-            "small_talk2": ["Man,", "I could use a drink.", ""],
-            "small_talk3": ["", "", ""],
-            "small_talk4": ["", "", ""],
-            "small_talk5": ["", "", ""],
-            "small_talk6": ["", "", ""],
-            "small_talk7": ["", "", ""],
-            "small_talk8": ["", "", ""],
-            "small_talk9": ["", "", ""],
-            "small_talk10": ["", "", ""],
-            "good_gift": ["Uh, hey,", "that's nice,", "I guess..."],
-            "bad_gift": ["Look buddy,", "I don't want this.", ""]}
-        self.emotions = {"happy": ["assets/anton_happy.png"],
-                         "mad": ["assets/mad/anton_mad.png"],
-                         "sad": ["assets/sad/" + self.name + "_sad.png"]}
-        self.likes = ["Water"]
-
-    def goal_met(self):
-        if self.points >= 10:
+    def goal_met(self):  # give them butter!!!
+        if self.points >= 1:
             achieve = True
         else:
             achieve = False
@@ -205,8 +222,8 @@ class Zoop(Character):
                          "sad": ["assets/sad/" + self.name + "_sad.png"]}
         self.likes = [""]
 
-    def goal_met(self):
-        if self.points >= 10:
+    def goal_met(self):  # will sleep with you right away and as many times as you want
+        if self.points >= 0:
             achieve = True
         else:
             achieve = False
@@ -273,7 +290,7 @@ class Seedro(Character):
                          "sad": ["assets/sad/" + self.name + "_sad.png"]}
         self.likes = [""]
 
-    def goal_met(self):
+    def goal_met(self):  #
         if self.points >= 10:
             achieve = True
         else:
@@ -307,7 +324,7 @@ class Thickkaelious(Character):
                          "sad": ["assets/sad/" + self.name + "_sad.png"]}
         self.likes = [""]
 
-    def goal_met(self):
+    def goal_met(self):  # have atleast 2 points with every character
         if self.points >= 10:
             achieve = True
         else:
@@ -341,7 +358,7 @@ class King(Character):
                          "sad": ["assets/sad/" + self.name + "_sad.png"]}
         self.likes = [""]
 
-    def goal_met(self):
+    def goal_met(self):  # give him the specific gifts he requests by translating his words
         if self.points >= 10:
             achieve = True
         else:
@@ -375,7 +392,7 @@ class Japeto(Character):
                          "sad": ["assets/sad/" + self.name + "_sad.png"]}
         self.likes = ["Muffin"]
 
-    def goal_met(self):
+    def goal_met(self):  #
         if self.points >= 5:
             achieve = True
         else:
@@ -409,7 +426,7 @@ class Merkle(Character):
                          "sad": ["assets/sad/" + self.name + "_sad.png"]}
         self.likes = [""]
 
-    def goal_met(self):
+    def goal_met(self): # atleast 5 points and have volume all the way up
         if self.points >= 10:
             achieve = True
         else:
@@ -443,7 +460,7 @@ class Emilius(Character):
                          "sad": ["assets/sad/" + self.name + "_sad.png"]}
         self.likes = [""]
 
-    def goal_met(self):
+    def goal_met(self):  # give various drugs
         if self.points >= 10:
             achieve = True
         else:

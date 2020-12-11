@@ -76,6 +76,8 @@ class GameContoller(object):
     BAR = 10
     INFORMATION = 11
     SEEDER = 12
+    ANTON = 13
+    REQUEST = 14
 
     def __init__(self, game_data):
         self.screen = pygame.display.set_mode(game_data.settings["resolution"])
@@ -152,7 +154,7 @@ class Character(Thing):
 
     def print_name(self, screen):
         my_font = pygame.font.Font("assets/PokemonGB-RAeo.ttf", 10)
-        title = my_font.render(self.name, 1, (255, 255, 255))
+        title = my_font.render(self.name + "[" + str(self.points) + "]", 1, (255, 255, 255))
         screen.blit(title, (105, 275))
 
     def display(self, screen, line):
@@ -264,6 +266,9 @@ class Cursor(object):
     def get_cursor_position(self):
         cursor_position = self.y
         return cursor_position
+
+    def get_item(self):
+        return self.menu.opt1[int(((self.y - 50) / 25))]
 
 class ItemCursor(Cursor):
     def __init__(self, screen, menu, cursor_go, option):
