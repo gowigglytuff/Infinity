@@ -78,6 +78,8 @@ class GameContoller(object):
     SEEDER = 12
     ANTON = 13
     REQUEST = 14
+    FOLLOW = 15
+    SASS = 16
 
     def __init__(self, game_data):
         self.screen = pygame.display.set_mode(game_data.settings["resolution"])
@@ -113,12 +115,15 @@ class Image(object):
 
 
 class Thing(Image):
-    def __init__(self, x, y, img_file_name_list, width=32, height=40):
+    def __init__(self, x, y, img_file_name_list, name, classification, width=32, height=40):
         super().__init__(x, y, img_file_name_list)
+        self.name = name
+        self.classification = classification
 
     def set_image(self, img_number):
         self.cur_img = img_number
         self.img = self.img_list[self.cur_img]
+
 
     def draw(self, screen):
         screen.blit(Spritesheet(self.img).image_at((0, 0, self.width, self.height)), [self.x, self.y])
@@ -128,8 +133,9 @@ class Thing(Image):
 
 
 class Character(Thing):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list,  width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, name, classification, width=32, height=40)
+        self.feeling = feeling
         self.offset = offset
         self.emote = emote
         self.name = name
@@ -153,7 +159,7 @@ class Character(Thing):
         screen.blit(label3, (110, 340))
 
     def print_name(self, screen):
-        my_font = pygame.font.Font("assets/PokemonGB-RAeo.ttf", 10)
+        my_font = pygame.font.Font("assets/PressStart2P-Regular.ttf", 10)
         title = my_font.render(self.name + "[" + str(self.points) + "]", 1, (255, 255, 255))
         screen.blit(title, (105, 275))
 
@@ -161,19 +167,22 @@ class Character(Thing):
         screen.blit((Spritesheet(self.emotions[line][0]).image_at((0, 0, 96, 120))), [10, 256])
 
 class Player(Image):
-    def __init__(self, x, y, img_file_name_list, offset, facing, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, offset, facing, follow, name, classification, width=32, height=40):
+        super().__init__(x, y, img_file_name_list)
+        self.classification = classification
+        self.name = name
         self.offset = offset
         self.facing = facing
         self.printing_priority = 2
+        self.follow = follow
 
     def draw(self, screen):
         screen.blit((Spritesheet(self.img).image_at((0, 0, 32, 40))), [self.x * 32 + self.offset, self.y * 32 - 16])
 
 
 class Prop(Thing):
-    def __init__(self, x, y, img_file_name_list, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, name,  classification, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, name,  classification, width=32, height=40)
         self.printing_priority = 1
 
     def draw(self, screen):
@@ -199,7 +208,7 @@ class Phrase(object):
         self.size = size
 
     def write(self, screen):
-        my_font = pygame.font.Font("assets/PokemonGB-RAeo.ttf", self.size)
+        my_font = pygame.font.Font("assets/PressStart2P-Regular.ttf", self.size)
         label = my_font.render(self.text, 1, self.colour)
         text = screen.blit(label, (self.X, self.Y))
         return text
@@ -211,7 +220,7 @@ class Talk(Phrase):
 
 
     def write(self, screen):
-        my_font = pygame.font.Font("assets/PokemonGB-RAeo.ttf", self.size)
+        my_font = pygame.font.Font("assets/PressStart2P-Regular.ttf", self.size)
         label1 = my_font.render(self.text[0], 1, self.colour)
         label2 = my_font.render(self.text[1], 1, self.colour)
         label3 = my_font.render(self.text[2], 1, self.colour)
@@ -231,7 +240,7 @@ class Menu(object):
 
     def print_menu(self):
         for x in self.size:
-            my_font = pygame.font.Font("assets/PokemonGB-RAeo.ttf", 10)
+            my_font = pygame.font.Font("assets/PressStart2P-Regular.ttf", 10)
             item = my_font.render(self.opt1[x], 1, (255, 255, 255))
             self.screen.blit(item, (self.x, self.y + (x*25)))
 
@@ -249,7 +258,7 @@ class Cursor(object):
         self.option = option
 
     def print_cursor(self):
-        my_font = pygame.font.Font("assets/PokemonGB-RAeo.ttf", 10)
+        my_font = pygame.font.Font("assets/PressStart2P-Regular.ttf", 10)
         cursor1 = my_font.render("-", 1, (255, 255, 255))
         self.screen.blit(cursor1, (self.x-15, self.y))
 
@@ -269,6 +278,9 @@ class Cursor(object):
 
     def get_item(self):
         return self.menu.opt1[int(((self.y - 50) / 25))]
+
+    def cursor_reset(self):
+        self.y = self.menu.y
 
 class ItemCursor(Cursor):
     def __init__(self, screen, menu, cursor_go, option):
@@ -308,7 +320,7 @@ class ItemList(object):
         self.item_order.clear()
         for v in self.size:
             if self.source[self.key[v]].quantity > 0:
-                my_font = pygame.font.Font("assets/PokemonGB-RAeo.ttf", 10)
+                my_font = pygame.font.Font("assets/PressStart2P-Regular.ttf", 10)
                 item = my_font.render(self.source[self.key[v]].name, 1, (255, 255, 255))
                 item2 = my_font.render(str(self.source[self.key[v]].quantity), 1, (255, 255, 255))
                 self.screen.blit(item, (self.x, self.y + self.successes * 25))

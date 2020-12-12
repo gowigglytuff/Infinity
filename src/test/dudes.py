@@ -5,8 +5,8 @@ from test.gamestate import Character
 
 
 class Anton(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -26,6 +26,7 @@ class Anton(Character):
             "small_talk10": ["", "", ""],
             "good_gift": ["Uh, hey,", "that's nice,", "I guess..."],
             "bad_gift": ["Look buddy,", "I don't want this.", ""],
+            "follow:": ["Oooooooo,", "you two have fun!", ""],
             "request": ["What you feeling", "tonight? Daddy Anton's", "got a lil of everything."],
 
             "result": ["This one's an Anton", "original! I've got demos", "for sale, spread the word!"]}
@@ -44,8 +45,8 @@ class Anton(Character):
         return achieve
 
 class Galaxar(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -73,7 +74,7 @@ class Galaxar(Character):
         self.likes = ["Muffin"]
 
     def goal_met(self):  # achieve goal by feeding him muffins
-        if self.points >= 10:
+        if self.points >= 0:
             achieve = True
         else:
             achieve = False
@@ -81,8 +82,8 @@ class Galaxar(Character):
 
 
 class Ishine(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -118,8 +119,8 @@ class Ishine(Character):
         return achieve
 
 class Seeder(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -144,11 +145,11 @@ class Seeder(Character):
             "IShine": ["king", "", ""],
             "Zoop": ["", "", ""],
             "Anton": ["", "", ""],
-            "King": ["", "", ""],
+            "King": ["I speek a lil Fongalese,", " I think @$@) @)$  @)($@_@", " means muffin"],
             "Galaxar": ["", "", ""],
             "Seeder": ["", "", ""],
             "Thickky": ["", "", ""],
-            "Seedro": ["", "", ""],
+            "Seedro": ["He's my cousin,", "really sweet dude!", ""],
             "Merkle": ["", "", ""],
             "Eveirg": ["", "", ""],
             "Japeto": ["", "", ""],
@@ -168,8 +169,8 @@ class Seeder(Character):
         return achieve
 
 class Eveirg(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -205,8 +206,8 @@ class Eveirg(Character):
         return achieve
 
 class Zoop(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -242,8 +243,8 @@ class Zoop(Character):
         return achieve
 
 class Zirel(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -278,8 +279,8 @@ class Zirel(Character):
         return achieve
 
 class Seedro(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -314,8 +315,8 @@ class Seedro(Character):
         return achieve
 
 class Thickkaelious(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -350,8 +351,8 @@ class Thickkaelious(Character):
         return achieve
 
 class King(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -386,8 +387,8 @@ class King(Character):
         return achieve
 
 class Japeto(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -422,8 +423,8 @@ class Japeto(Character):
         return achieve
 
 class Merkle(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -458,8 +459,8 @@ class Merkle(Character):
         return achieve
 
 class Emilius(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
