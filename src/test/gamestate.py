@@ -1,4 +1,5 @@
 import pygame
+from pygame import mixer
 
 from test.spritesheet import Spritesheet
 
@@ -28,6 +29,7 @@ class GameData(object):
         self.cursor = {}
         self.item = {}
         self.item_list = {}
+        self.audio = {}
 
     def add_character(self, character_name, character_object):
         self.characters[character_name] = character_object
@@ -51,6 +53,9 @@ class GameData(object):
 
     def add_item(self, item_name, item_object):
         self.item[item_name] = item_object
+
+    def add_audio(self, audio_name, audio_object):
+        self.audio[audio_name] = audio_object
 
     def add_item_list(self, item_list_name, item_list_object):
         self.item_list[item_list_name] = item_list_object
@@ -86,6 +91,7 @@ class GameContoller(object):
         self.clock = pygame.time.Clock()
         self._FPS = game_data.settings["FPS"]
         self.game_state = GameContoller.IN_GAME
+        self.tock = 0
 
     def tick(self):
         self.clock.tick(self._FPS)
@@ -229,6 +235,7 @@ class Talk(Phrase):
         text = screen.blit(label3, (self.X, self.Y+40))
         return text
 
+
 class Menu(object):
     def __init__(self, screen, size, x, y, opt1, menu_go):
         self.screen = screen
@@ -247,6 +254,7 @@ class Menu(object):
     def menu_len(self):
         total = len(self.size)
         return total
+
 
 class Cursor(object):
     def __init__(self, screen, menu, cursor_go, option):
@@ -282,6 +290,7 @@ class Cursor(object):
     def cursor_reset(self):
         self.y = self.menu.y
 
+
 class ItemCursor(Cursor):
     def __init__(self, screen, menu, cursor_go, option):
         super(). __init__(screen, menu, cursor_go, option)
@@ -299,7 +308,6 @@ class ItemCursor(Cursor):
 
     def get_item(self):
         return self.menu.item_order[int(((self.y-100)/25))].name
-
 
 
 class ItemList(object):
@@ -336,11 +344,22 @@ class ItemList(object):
         return total
 
 
-
 class Item(object):
     def __init__(self, name, quantity):
         self.name = name
         self.quantity = quantity
 
         # gd.menu["menu1"].menu_len():
+
+
+class Audio(object):
+    def __init__(self, name, file):
+        self.name = name
+        self.file = file
+
+    def sing(self):
+        mixer.music.load(self.file)
+        mixer.music.set_volume(0.7)
+        mixer.music.play(-1)
+
 

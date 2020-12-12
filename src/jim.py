@@ -6,6 +6,7 @@ from test.tiles import *
 from test.spritesheet import Spritesheet
 from test.gamestate import *
 from test.dudes import *
+from pygame import mixer
 
 
 gd = GameData()
@@ -23,6 +24,7 @@ def main():
 def init_game():
     # initialize pygame
     pygame.init()
+    mixer.init()
 
     pygame.display.set_caption('Infinity')
 
@@ -36,7 +38,10 @@ def init_game():
     gd.add_character("Zoop", Zoop(3, 7, ["assets/alien4.png"], 0, False, 0, "Zoop", "character", "none"))
     gd.add_character("Anton", Anton(0, 1, ["assets/alien5.png"], 0, False, 0, "Anton", "character", "none"))
     gd.add_character("King", King(0, 6, ["assets/alien6.png"], 0, False, 0, "King", "character", "none"))
-    gd.add_character("Galaxar", Galaxar(3, 3, ["assets/alien7.png"], 0, False, 0, "Galaxar", "character", "none"))
+    gd.add_character("Galaxar", Galaxar(3, 3, ["assets/alien7.png",
+                                               "assets/galaxar/galaxar_back.png",
+                                               "assets/galaxar/galaxar_left.png",
+                                               "assets/galaxar/galaxar_right.png"], 0, False, 0, "Galaxar", "character", "none"))
     gd.add_character("Seeder", Seeder(7, 7, ["assets/alien8.png"], 0, False, 0, "Seeder", "character", "none"))
     gd.add_character("Thickky", Thickkaelious(7, 2, ["assets/alien9.png"], 0, False, 0, "Thickky", "character", "none"))
     gd.add_character("Seedro", Seedro(4, 1, ["assets/alien10.png"], 0, False, 0, "Seedro", "character", "none"))
@@ -88,8 +93,14 @@ def init_game():
     gd.add_cursor("info_cursor", Cursor(gc.screen, gd.menu["info_menu"], False, 1))
 
     gd.add_menu("request_menu", Menu(gc.screen, [0, 1, 2, 3, 4], 275, 50, ["A.A. Bop", "A.A Jam",
-                                                                        "A.A. Banger", "DJ A.A.", "A.A. Ska"], False))
+                                                                           "A.A. Banger", "DJ A.A.",
+                                                                           "A.A. Ska"], False))
     gd.add_cursor("request_cursor", Cursor(gc.screen, gd.menu["request_menu"], False, 1))
+
+    gd.add_audio("A.A.Banger", Audio("A.A. Banger", "assets/audio/A.A.Banger.mp3"))
+    gd.add_audio("A.A.Jam", Audio("A.A. Jam", "assets/audio/A.A.Jam.mp3"))
+
+    gd.audio["A.A.Banger"].sing()
 
 def run_game_loop():
 
@@ -109,6 +120,10 @@ def run_game_loop():
                 gd.characters[name].points = 0
             if gd.characters[name].points > 10:
                 gd.characters[name].points = 10
+
+        gc.tock += 1
+        if gc.tock == 21:
+            gc.tock = 0
 
 
     def big_draw():
@@ -195,7 +210,6 @@ def run_game_loop():
         gd.characters["Seeder"].print_phrase(gc.screen, "information")
         gd.menu["info_menu"].print_menu()
         gd.cursor["info_cursor"].print_cursor()
-        # gd.characters["Seeder"].print_phrase(gc.screen, gd.characters[Seeder].emote)
 
     def information_draw():
         gd.characters["Seeder"].print_name(gc.screen)
@@ -220,45 +234,24 @@ def run_game_loop():
         # gd.characters["Seeder"].print_phrase(gc.screen, gd.characters[Seeder].emote)
 
     def dance():
-        if playing.tock == 10:
-            gd.characters["Zirel"].offset += 3.2
-            gd.characters["IShine"].offset += 3.2
-            gd.characters["Zoop"].offset += 3.2
-            gd.characters["Anton"].offset -= 3.2
-            gd.characters["King"].offset += 3.2
-            gd.characters["Galaxar"].offset -= 3.2
-            gd.characters["Seeder"].offset -= 3.2
-            gd.characters["Thickky"].offset -= 3.2
-            gd.characters["Seedro"].offset -= 3.2
-            gd.characters["Merkle"].offset += 3.2
-            gd.characters["Eveirg"].offset -= 3.2
-            gd.characters["Emilius"].offset -= 3.2
-            gd.characters["Japeto"].offset += 3.2
+        gd.characters["Galaxar"].dance(gc.tock)
+        gd.characters["Anton"].dance(gc.tock)
+        gd.characters["Seeder"].dance(gc.tock)
+        gd.characters["Thickky"].dance(gc.tock)
+        gd.characters["Seedro"].dance(gc.tock)
+        gd.characters["Eveirg"].dance(gc.tock)
+        gd.characters["Emilius"].dance(gc.tock)
+        gd.characters["Zirel"].dance(gc.tock)
+        gd.characters["IShine"].dance(gc.tock)
+        gd.characters["Zoop"].dance(gc.tock)
+        gd.characters["King"].dance(gc.tock)
+        gd.characters["Merkle"].dance(gc.tock)
+        gd.characters["Japeto"].dance(gc.tock)
 
-            gd.BG["bg1"].set_image(1)
-        if playing.tock == 16:
-            pass
-
-        if playing.tock == 20:
-            gd.characters["Zirel"].offset -= 3.2
-            gd.characters["IShine"].offset -= 3.2
-            gd.characters["Zoop"].offset -= 3.2
-            gd.characters["Anton"].offset += 3.2
-            gd.characters["King"].offset -= 3.2
-            gd.characters["Galaxar"].offset += 3.2
-            gd.characters["Seeder"].offset += 3.2
-            gd.characters["Thickky"].offset += 3.2
-            gd.characters["Seedro"].offset += 3.2
-            gd.characters["Merkle"].offset -= 3.2
-            gd.characters["Eveirg"].offset += 3.2
-            gd.characters["Emilius"].offset += 3.2
-            gd.characters["Japeto"].offset -= 3.2
-
+        if gc.tock == 10:
             gd.BG["bg1"].set_image(0)
-            playing.tock = 0
-
-        playing.tock += 1
-
+        if gc.tock == 20:
+            gd.BG["bg1"].set_image(1)
 
     alien1 = gd.player["alien1"]
 
@@ -277,6 +270,22 @@ def run_game_loop():
                     for name in gd.characters:
                         gd.characters[name].emote = "none"
 
+                    if event.key == pygame.K_a:
+                        alien1.set_image(0)
+                        gd.player["alien1"].facing = "down"
+
+                    if event.key == pygame.K_s:
+                        alien1.set_image(1)
+                        gd.player["alien1"].facing = "up"
+
+                    if event.key == pygame.K_d:
+                        alien1.set_image(3)
+                        gd.player["alien1"].facing = "right"
+
+                    if event.key == pygame.K_f:
+                        alien1.set_image(2)
+                        gd.player["alien1"].facing = "left"
+
                     if event.key == pygame.K_LEFT:
                         gd.player["alien1"].facing = "left"
                         alien1.set_image(2)
@@ -292,10 +301,6 @@ def run_game_loop():
                             if not tiles_list_2d[int(alien1.x)+1][int(alien1.y)].full:
                                 playing.state = "right"
                                 animating = True
-
-                    if event.key == pygame.K_SPACE:
-                        alien1.set_image(0)
-                        gd.player["alien1"].facing = "down"
 
                     if event.key == pygame.K_UP:
                         alien1.set_image(1)
@@ -334,16 +339,19 @@ def run_game_loop():
 
                         facing_tile = tiles_list_2d[facing_tile_x][facing_tile_y]
 
+                        print(facing_tile.full)
+                        print(facing_tile.object_filling)
+
                         if facing_tile.full:
                             if facing_tile.filling_type == "character":
-                                print(facing_tile.full)
-                                print(facing_tile.object_filling)
+                                # gd.characters[facing_tile.interact()].set_image(2)
                                 if facing_tile.object_filling == gd.characters[facing_tile.interact()].name:
                                     gc.game_state = gc.IN_MENU
+
                             elif facing_tile.filling_type == "prop":
                                 if facing_tile.object_filling == "desk_left":
                                     gc.game_state = gc.ANTON
-                                elif facing_tile.full == "bar_bottom":
+                                elif facing_tile.object_filling == "bar_bottom":
                                     gc.game_state = gc.SEEDER
 
                     if event.key == pygame.K_1:
@@ -410,6 +418,7 @@ def run_game_loop():
                 if animating:
                     playing.tick += 1
 
+                update_files()
                 dance()
                 big_draw()
                 pygame.display.update()
@@ -650,13 +659,14 @@ def run_game_loop():
                     running = False
                 if event.type == pygame.KEYDOWN:
 
+                    # select a character to ask Seeder information about
                     if event.key == pygame.K_RETURN:
-                        print(gd.cursor["info_cursor"].get_item())
                         gd.characters["Seeder"].emote = gd.cursor["info_cursor"].get_item()
                         gc.game_state = gc.INFORMATION
 
                     if event.key == pygame.K_DOWN:
                         gd.cursor["info_cursor"].cursor_down()
+
                     if event.key == pygame.K_UP:
                         gd.cursor["info_cursor"].cursor_up()
 
@@ -696,6 +706,16 @@ def run_game_loop():
                     if event.key == pygame.K_RETURN:
                         print(gd.cursor["request_cursor"].get_item())
                         gc.game_state = gc.REQUEST
+                        if gd.cursor["request_cursor"].y == gd.cursor["request_cursor"].menu.y:
+                            gd.audio["A.A.Jam"].sing()
+                        if gd.cursor["request_cursor"].y == gd.cursor["request_cursor"].menu.y + 25:
+                            gd.audio["A.A.Jam"].sing()
+                        if gd.cursor["request_cursor"].y == gd.cursor["request_cursor"].menu.y + 50:
+                            gd.audio["A.A.Banger"].sing()
+                        if gd.cursor["request_cursor"].y == gd.cursor["request_cursor"].menu.y + 75:
+                            gd.audio["A.A.Jam"].sing()
+                        if gd.cursor["request_cursor"].y == gd.cursor["request_cursor"].menu.y + 100:
+                            gd.audio["A.A.Jam"].sing()
 
                     if event.key == pygame.K_DOWN:
                         gd.cursor["request_cursor"].cursor_down()
@@ -897,6 +917,7 @@ def run_game_loop():
                 if animating:
                     playing.tick += 1
 
+                update_files()
                 dance()
                 big_draw()
                 pygame.display.update()

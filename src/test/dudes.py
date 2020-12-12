@@ -1,8 +1,71 @@
 import pygame
-
+from test.gamestate import GameContoller
+from test.gamestate import GameData
 from test.spritesheet import Spritesheet
 from test.gamestate import Character
 
+gd = GameData()
+gc = GameContoller(gd)
+
+class Seeder(Character):
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
+        self.offset = offset
+        self.name = name
+        self.phrases = {
+            "dtf": ["Well I guess,", "I should probably do a", "bathroom check anyway."],
+            "sad": ["Well now I've", "gone and made", "myself sad."],
+            "mad": ["I'm sorry, but that", "makes me a little", "uncomfortable."],
+            "small_talk0": ["I love this job!", "It gives me the opportunity", "to meet lots of cool folks!"],
+            "small_talk1": ["You're probably not supposed", "to be back here, just make ", "sure, my boss doesn't see!"],
+            "small_talk2": ["I bartend nights to get", "by while I work on my career", "as a singer!"],
+            "small_talk3": ["", "", ""],
+            "small_talk4": ["", "", ""],
+            "small_talk5": ["", "", ""],
+            "small_talk6": ["", "", ""],
+            "small_talk7": ["", "", ""],
+            "small_talk8": ["", "", ""],
+            "small_talk9": ["", "", ""],
+            "small_talk10": ["", "", ""],
+            "good_gift": ["Oh my goodness!", "This is the best tip", "I've ever received!"],
+            "bad_gift": ["Uh, I can't accept something", "like this from a customer.", "Thanks anyway."],
+            "information": ["who would you", "like to hear", "about?"],
+            "Zirel": ["king", "", ""],
+            "IShine": ["king", "", ""],
+            "Zoop": ["", "", ""],
+            "Anton": ["", "", ""],
+            "King": ["I speek a lil Fongalese,", " I think @$@) @)$  @)($@_@", " means muffin!"],
+            "Galaxar": ["", "", ""],
+            "Seeder": ["", "", ""],
+            "Thickky": ["", "", ""],
+            "Seedro": ["He's my cousin,", "really sweet dude!", ""],
+            "Merkle": ["", "", ""],
+            "Eveirg": ["", "", ""],
+            "Japeto": ["", "", ""],
+            "Emilius": ["", "", ""]}
+        self.emotions = {"happy": ["assets/seeder_happy.png"],
+                         "mad": ["assets/mad/seedro_mad.png"],
+                         "sad": ["assets/sad/" + "seedro" + "_sad.png"],
+                         "horny": ["assets/horny/" + "seedro" + "_horny.png"],
+                         "thankful": ["assets/thankful/" + "seedro" + "_thankful.png"]}
+        self.likes = ["Muffin"]
+
+    def goal_met(self):  # achieve goal by sleeping with 7 other characters
+        if self.points >= 0:
+            achieve = True
+        else:
+            achieve = False
+        return achieve
+
+    def dance(self, cue):
+        if cue == 10:
+            self.offset -= 3.2
+        if cue == 20:
+            self.offset += 3.2
+        # if cue == 30:
+        #     self.offset += 3.2
+        # if cue == 40:
+        #     self.offset -= 3.2
 
 class Anton(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
@@ -44,6 +107,16 @@ class Anton(Character):
             achieve = False
         return achieve
 
+    def dance(self, cue):
+        if cue == 10:
+            self.offset -= 3.2
+        if cue == 20:
+            self.offset += 3.2
+        # if cue == 30:
+        #     self.offset += 3.2
+        # if cue == 40:
+        #     self.offset -= 3.2
+
 class Galaxar(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
         super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
@@ -72,6 +145,16 @@ class Galaxar(Character):
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
         self.likes = ["Muffin"]
+
+    def dance(self, cue):
+        if cue == 10:
+            self.offset -= 3.2
+        if cue == 20:
+            self.offset += 3.2
+        # if cue == 30:
+        #     self.offset += 3.2
+        # if cue == 40:
+        #     self.offset -= 3.2
 
     def goal_met(self):  # achieve goal by feeding him muffins
         if self.points >= 0:
@@ -118,55 +201,15 @@ class Ishine(Character):
             achieve = False
         return achieve
 
-class Seeder(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
-        self.offset = offset
-        self.name = name
-        self.phrases = {
-            "dtf": ["Well I guess,", "I should probably do a", "bathroom check anyway."],
-            "sad": ["Well now I've", "gone and made", "myself sad."],
-            "mad": ["I'm sorry, but that", "makes me a little", "uncomfortable."],
-            "small_talk0": ["I love this job!", "It gives me the opportunity", "to meet lots of cool folks!"],
-            "small_talk1": ["You're probably not supposed", "to be back here, just make ", "sure, my boss doesn't see!"],
-            "small_talk2": ["I bartend nights to get", "by while I work on my career", "as a singer!"],
-            "small_talk3": ["", "", ""],
-            "small_talk4": ["", "", ""],
-            "small_talk5": ["", "", ""],
-            "small_talk6": ["", "", ""],
-            "small_talk7": ["", "", ""],
-            "small_talk8": ["", "", ""],
-            "small_talk9": ["", "", ""],
-            "small_talk10": ["", "", ""],
-            "good_gift": ["Oh my goodness!", "This is the best tip", "I've ever received!"],
-            "bad_gift": ["Uh, I can't accept something", "like this from a customer.", "Thanks anyway."],
-            "information": ["who would you", "like to hear", "about?"],
-            "Zirel": ["king", "", ""],
-            "IShine": ["king", "", ""],
-            "Zoop": ["", "", ""],
-            "Anton": ["", "", ""],
-            "King": ["I speek a lil Fongalese,", " I think @$@) @)$  @)($@_@", " means muffin"],
-            "Galaxar": ["", "", ""],
-            "Seeder": ["", "", ""],
-            "Thickky": ["", "", ""],
-            "Seedro": ["He's my cousin,", "really sweet dude!", ""],
-            "Merkle": ["", "", ""],
-            "Eveirg": ["", "", ""],
-            "Japeto": ["", "", ""],
-            "Emilius": ["", "", ""]}
-        self.emotions = {"happy": ["assets/seeder_happy.png"],
-                         "mad": ["assets/mad/seedro_mad.png"],
-                         "sad": ["assets/sad/" + "seedro" + "_sad.png"],
-                         "horny": ["assets/horny/" + "seedro" + "_horny.png"],
-                         "thankful": ["assets/thankful/" + "seedro" + "_thankful.png"]}
-        self.likes = ["Muffin"]
-
-    def goal_met(self):  # achieve goal by sleeping with 7 other characters
-        if self.points >= 0:
-            achieve = True
-        else:
-            achieve = False
-        return achieve
+    def dance(self, cue):
+        if cue == 10:
+            self.offset += 3.2
+        if cue == 20:
+            self.offset -= 3.2
+        # if cue == 30:
+        #     self.offset -= 3.2
+        # if cue == 40:
+        #     self.offset += 3.2
 
 class Eveirg(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
@@ -205,13 +248,24 @@ class Eveirg(Character):
             achieve = False
         return achieve
 
+    def dance(self, cue):
+        if cue == 10:
+            self.offset -= 3.2
+        if cue == 20:
+            self.offset += 3.2
+        # if cue == 30:
+        #     self.offset += 3.2
+        # if cue == 40:
+        #     self.offset -= 3.2
+
+
 class Zoop(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
         super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
-        self.phrases = {
-            "dtf": ["", "", ""],
+        self.phrases = {  #only speeks in haiku
+            "dtf": ["uhn, oh yes master,", "please rearrange my inside,", "I've been very bad."],
             "sad": ["", "", ""],
             "mad": ["", "", ""],
             "small_talk0": ["Is my eye twitching?", "always does when I'm horny,", "oop, there it goes !twitch!"],
@@ -227,7 +281,7 @@ class Zoop(Character):
             "small_talk10": ["", "", ""],
 
             "good_gift": ["This is such a", "wondeful gift to receive", "indubitably!"],
-            "bad_gift": ["ew, um, like, well, uh,", "This really isn't my thing,", "thanks any way"]}
+            "bad_gift": ["ew, um, like, well, uh,", "This really isn't my thing,", "but thanks any way"]}
         self.emotions = {"happy": ["assets/zoop_happy.png"],
                          "mad": ["assets/mad/zoop_mad.png"],
                          "sad": ["assets/sad/" + self.name + "_sad.png"],
@@ -236,11 +290,22 @@ class Zoop(Character):
         self.likes = ["Muffin"]
 
     def goal_met(self):  # will sleep with you right away and as many times as you want
+        # each of his small talks will hint at the way to successfully proposition another character
         if self.points >= 0:
             achieve = True
         else:
             achieve = False
         return achieve
+
+    def dance(self, cue):
+        if cue == 10:
+            self.offset += 3.2
+        if cue == 20:
+            self.offset -= 3.2
+        # if cue == 30:
+        #     self.offset -= 3.2
+        # if cue == 40:
+        #     self.offset += 3.2
 
 class Zirel(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
@@ -278,6 +343,16 @@ class Zirel(Character):
             achieve = False
         return achieve
 
+    def dance(self, cue):
+        if cue == 10:
+            self.offset += 3.2
+        if cue == 20:
+            self.offset -= 3.2
+        # if cue == 30:
+        #     self.offset -= 3.2
+        # if cue == 40:
+        #     self.offset += 3.2
+
 class Seedro(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
         super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
@@ -313,6 +388,16 @@ class Seedro(Character):
         else:
             achieve = False
         return achieve
+
+    def dance(self, cue):
+        if cue == 10:
+            self.offset -= 3.2
+        if cue == 20:
+            self.offset += 3.2
+        # if cue == 30:
+        #     self.offset += 3.2
+        # if cue == 40:
+        #     self.offset -= 3.2
 
 class Thickkaelious(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
@@ -350,6 +435,16 @@ class Thickkaelious(Character):
             achieve = False
         return achieve
 
+    def dance(self, cue):
+        if cue == 10:
+            self.offset -= 3.2
+        if cue == 20:
+            self.offset += 3.2
+        # if cue == 30:
+        #     self.offset += 3.2
+        # if cue == 40:
+        #     self.offset -= 3.2
+
 class King(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
         super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
@@ -385,6 +480,16 @@ class King(Character):
         else:
             achieve = False
         return achieve
+
+    def dance(self, cue):
+        if cue == 10:
+            self.offset += 3.2
+        if cue == 20:
+            self.offset -= 3.2
+        # if cue == 30:
+        #     self.offset -= 3.2
+        # if cue == 40:
+        #     self.offset += 3.2
 
 class Japeto(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
@@ -422,6 +527,16 @@ class Japeto(Character):
             achieve = False
         return achieve
 
+    def dance(self, cue):
+        if cue == 10:
+            self.offset += 3.2
+        if cue == 20:
+            self.offset -= 3.2
+        # if cue == 30:
+        #     self.offset -= 3.2
+        # if cue == 40:
+        #     self.offset += 3.2
+
 class Merkle(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
         super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
@@ -458,6 +573,16 @@ class Merkle(Character):
             achieve = False
         return achieve
 
+    def dance(self, cue):
+        if cue == 10:
+            self.offset += 3.2
+        if cue == 20:
+            self.offset -= 3.2
+        # if cue == 30:
+        #     self.offset -= 3.2
+        # if cue == 40:
+        #     self.offset += 3.2
+
 class Emilius(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
         super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
@@ -493,5 +618,15 @@ class Emilius(Character):
         else:
             achieve = False
         return achieve
+
+    def dance(self, cue):
+        if cue == 10:
+            self.offset -= 3.2
+        if cue == 20:
+            self.offset += 3.2
+        # if cue == 30:
+        #     self.offset += 3.2
+        # if cue == 40:
+        #     self.offset -= 3.2
 
 # print(self.name.__class__)
