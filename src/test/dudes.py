@@ -8,8 +8,8 @@ gd = GameData()
 gc = GameContoller(gd)
 
 class Seeder(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling,  origin_x, origin_y, on_stage,width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrase_counter = 0
@@ -77,8 +77,8 @@ class Seeder(Character):
         #     self.offset -= 3.2
 
 class Anton(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
         self.offset = offset
         self.phrase_counter = 0
         self.name = name
@@ -136,8 +136,8 @@ class Anton(Character):
         #     self.offset -= 3.2
 
 class Galaxar(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
         self.offset = offset
         self.phrase_counter = 0
         self.name = name
@@ -192,8 +192,8 @@ class Galaxar(Character):
 
 
 class Ishine(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -247,8 +247,8 @@ class Ishine(Character):
         #     self.offset += 3.2
 
 class Eveirg(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
         self.offset = offset
         self.phrase_counter = 0
         self.name = name
@@ -304,8 +304,8 @@ class Eveirg(Character):
 
 
 class Zoop(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrase_counter = 0
@@ -361,8 +361,8 @@ class Zoop(Character):
         #     self.offset += 3.2
 
 class Zirel(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrase_counter = 0
@@ -416,8 +416,8 @@ class Zirel(Character):
         #     self.offset += 3.2
 
 class Seedro(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrase_counter = 0
@@ -471,8 +471,8 @@ class Seedro(Character):
         #     self.offset -= 3.2
 
 class Thickkaelious(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrase_counter = 0
@@ -526,8 +526,8 @@ class Thickkaelious(Character):
         #     self.offset -= 3.2
 
 class King(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrase_counter = 0
@@ -581,8 +581,8 @@ class King(Character):
         #     self.offset += 3.2
 
 class Japeto(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrase_counter = 0
@@ -636,8 +636,8 @@ class Japeto(Character):
         #     self.offset += 3.2
 
 class Merkle(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrase_counter = 0
@@ -691,8 +691,8 @@ class Merkle(Character):
         #     self.offset += 3.2
 
 class Emilius(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrase_counter = 0
@@ -746,8 +746,8 @@ class Emilius(Character):
         #     self.offset -= 3.2
 
 class Queen(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
         self.offset = offset
         self.phrase_counter = 0
         self.name = name
@@ -795,6 +795,9 @@ class Queen(Character):
         #     self.offset += 3.2
         # if cue == 40:
         #     self.offset -= 3.2
+
+    def draw(self, screen):
+        screen.blit((Spritesheet(self.img).image_at((0, 0, 32, 40))), [self.x * 32 + self.offset, (self.y * 32 - 16) - 16])
 
 
 # print(self.name.__class__)

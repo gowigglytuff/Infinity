@@ -23,10 +23,11 @@ class Tile(object):
     def get_object_filling(self, source):
         for tile in tiles_list:
             for drawable in source:
-                if drawable.x == tile.X and drawable.y == tile.Y:
-                    tile.full = True
-                    tile.object_filling = drawable.name
-                    tile.filling_type = drawable.classification
+                if drawable.on_stage:
+                    if drawable.x == tile.X and drawable.y == tile.Y:
+                        tile.full = True
+                        tile.object_filling = drawable.name
+                        tile.filling_type = drawable.classification
 
     def reset_object_filling(self):
         for tile in tiles_list:

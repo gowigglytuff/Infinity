@@ -87,6 +87,7 @@ class GameContoller(object):
     REQUEST = 14
     FOLLOW = 15
     SASS = 16
+    CUTSCENE1 = 17
 
     def __init__(self, game_data):
         self.screen = pygame.display.set_mode(game_data.settings["resolution"])
@@ -140,7 +141,7 @@ class Thing(Image):
 
 
 class Character(Thing):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
         super().__init__(x, y, img_file_name_list, name, classification, width=32, height=40)
         self.feeling = feeling
         self.offset = offset
@@ -151,6 +152,9 @@ class Character(Thing):
         self.emotions = {}
         self.points = points
         self.phrase_counter = 0
+        self.origin_x = origin_x
+        self.origin_y = origin_y
+        self.on_stage = on_stage
         pass
 
     def draw(self, screen):
@@ -184,7 +188,7 @@ class Character(Thing):
 
 
 class Player(Image):
-    def __init__(self, x, y, img_file_name_list, offset, facing, follow, name, classification, width=32, height=40):
+    def __init__(self, x, y, img_file_name_list, offset, facing, follow, name, classification, on_stage, width=32, height=40):
         super().__init__(x, y, img_file_name_list)
         self.classification = classification
         self.name = name
@@ -192,19 +196,26 @@ class Player(Image):
         self.facing = facing
         self.printing_priority = 2
         self.follow = follow
-
+        self.on_stage = on_stage
     def draw(self, screen):
         screen.blit((Spritesheet(self.img).image_at((0, 0, 32, 40))), [self.x * 32 + self.offset, self.y * 32 - 16])
 
 
 class Prop(Thing):
-    def __init__(self, x, y, img_file_name_list, name,  classification, width=32, height=40):
+    def __init__(self, x, y, img_file_name_list, name,  classification, on_stage, width=32, height=40):
         super().__init__(x, y, img_file_name_list, name,  classification, width=32, height=40)
         self.printing_priority = 1
+        self.on_stage = on_stage
 
     def draw(self, screen):
         screen.blit((Spritesheet(self.img).image_at((0, 0, 32, 40))), [self.x * 32, self.y * 32-16])
 
+class StageProp(Prop):
+    def __init__(self, x, y, img_file_name_list, name,  classification, on_stage, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, name,  classification, on_stage, width=32, height=40)
+
+    def draw(self, screen):
+        screen.blit((Spritesheet(self.img).image_at((0, 0, 32, 40))), [self.x * 32, self.y * 32 - 8])
 
 class BG(Image):
     def __init__(self, x, y, img_file_name_list):
@@ -327,7 +338,7 @@ class ItemList(object):
         self.screen = screen
         self.x = 280
         self.y = 100
-        self.size = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        self.size = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
         self.opt1 = opt1
         self.item_list_go = item_list_go
         self.source = source
