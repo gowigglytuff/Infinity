@@ -12,6 +12,7 @@ class Seeder(Character):
         super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
+        self.phrase_counter = 0
         self.phrases = {
             "dtf": ["Well I guess,", "I should probably do a", "bathroom check anyway."],
             "sad": ["Well now I've", "gone and made", "myself sad."],
@@ -49,6 +50,14 @@ class Seeder(Character):
                          "horny": ["assets/horny/" + "seedro" + "_horny.png"],
                          "thankful": ["assets/thankful/" + "seedro" + "_thankful.png"]}
         self.likes = ["Muffin"]
+        self.img_list = [file_name for file_name in
+                         img_file_name_list]
+        self.cur_img = 0
+        self.img = self.img_list[self.cur_img]
+
+    def set_image(self, img_number):
+        self.cur_img = img_number
+        self.img = self.img_list[self.cur_img]
 
     def goal_met(self):  # achieve goal by sleeping with 7 other characters
         if self.points >= 0:
@@ -71,6 +80,7 @@ class Anton(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
         super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
+        self.phrase_counter = 0
         self.name = name
         self.phrases = {
             "dtf": ["oh, uh, well you'd be ", "surprised, I don't get asked", "that a lot. Uh, yes please. "],
@@ -99,6 +109,14 @@ class Anton(Character):
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
         self.likes = ["Muffin"]
+        self.img_list = [file_name for file_name in
+                         img_file_name_list]
+        self.cur_img = 0
+        self.img = self.img_list[self.cur_img]
+
+    def set_image(self, img_number):
+        self.cur_img = img_number
+        self.img = self.img_list[self.cur_img]
 
     def goal_met(self):  # Bring him a glass of water every ten minutes
         if self.points >= 0:
@@ -121,22 +139,23 @@ class Galaxar(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
         super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
+        self.phrase_counter = 0
         self.name = name
         self.phrases = {
             "dtf": ["aw...", "That's uh- that's sweet.", "Why not, lets fuck!"],
             "sad": ["Of course,", "this is what happens when", "I try to be nice."],
             "mad": ["Ugh,", "can you just like", "leave me alone, maybe?"],
-            "small_talk0": ["I should have worn other", "shoes. These ones are tight", "and now my feet are sweating."],
+            "small_talk0": ["Sometimes I get grumpy, but", "then I think about muffins ", "and everything is okay."],
             "small_talk1": ["This club is always crowded,", "I don't mind people, but I ", "prefer an intimate setting."],
             "small_talk2": ["If you don't know anyone,", "you can dance with us. I", "want everyone to have fun."],
-            "small_talk3": ["", "", ""],  # information about butter
-            "small_talk4": ["", "", ""],
-            "small_talk5": ["", "", ""],
-            "small_talk6": ["", "", ""],
-            "small_talk7": ["", "", ""],
-            "small_talk8": ["", "", ""],
-            "small_talk9": ["", "", ""],
-            "small_talk10": ["", "", ""],
+            "small_talk3": ["I should have worn other", "shoes. These ones are tight", "and now my feet are sweating."],
+            "small_talk4": ["4", "", ""],
+            "small_talk5": ["5", "", ""],
+            "small_talk6": ["6", "", ""],
+            "small_talk7": ["7", "", ""],  # information about butter
+            "small_talk8": ["8", "", ""],
+            "small_talk9": ["9", "", ""],
+            "small_talk10": ["10", "", ""],
             "good_gift": ["I didn't expect this...", "you really are the nicest!", ""],
             "bad_gift": ["Do I look like someone", "who'd want something like", "this!!??"]}
         self.emotions = {"happy": ["assets/galaxar_happy.png"],
@@ -145,6 +164,14 @@ class Galaxar(Character):
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
         self.likes = ["Muffin"]
+        self.img_list = [file_name for file_name in
+                         img_file_name_list]
+        self.cur_img = 0
+        self.img = self.img_list[self.cur_img]
+
+    def set_image(self, img_number):
+        self.cur_img = img_number
+        self.img = self.img_list[self.cur_img]
 
     def dance(self, cue):
         if cue == 10:
@@ -193,6 +220,14 @@ class Ishine(Character):
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
         self.likes = ["Muffin"]
+        self.img_list = [file_name for file_name in
+                         img_file_name_list]
+        self.cur_img = 0
+        self.img = self.img_list[self.cur_img]
+
+    def set_image(self, img_number):
+        self.cur_img = img_number
+        self.img = self.img_list[self.cur_img]
 
     def goal_met(self):  # achieve goal by ignoring him for x amount of time
         if self.points >= 0:
@@ -215,6 +250,7 @@ class Eveirg(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
         super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
+        self.phrase_counter = 0
         self.name = name
         self.phrases = {
             "dtf": ["OMG", "BABE", "<3 <3 <3"],
@@ -225,7 +261,7 @@ class Eveirg(Character):
             "small_talk2": ["I don't hold grudges,", "I just get even right away,", "BAM, GLITTER BOMB!"],
             "small_talk3": ["", "", ""],
             "small_talk4": ["", "", ""],
-            "small_talk5": ["", "", ""],
+            "small_talk5": ["", "", ""],  # all about butter
             "small_talk6": ["", "", ""],
             "small_talk7": ["", "", ""],
             "small_talk8": ["", "", ""],
@@ -240,6 +276,14 @@ class Eveirg(Character):
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
         self.likes = ["Butter"]
+        self.img_list = [file_name for file_name in
+                         img_file_name_list]
+        self.cur_img = 0
+        self.img = self.img_list[self.cur_img]
+
+    def set_image(self, img_number):
+        self.cur_img = img_number
+        self.img = self.img_list[self.cur_img]
 
     def goal_met(self):  # give them butter!!!
         if self.points >= 1:
@@ -264,6 +308,7 @@ class Zoop(Character):
         super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
+        self.phrase_counter = 0
         self.phrases = {  #only speeks in haiku
             "dtf": ["uhn, oh yes master,", "please rearrange my inside,", "I've been very bad."],
             "sad": ["", "", ""],
@@ -288,6 +333,14 @@ class Zoop(Character):
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
         self.likes = ["Muffin"]
+        self.img_list = [file_name for file_name in
+                         img_file_name_list]
+        self.cur_img = 0
+        self.img = self.img_list[self.cur_img]
+
+    def set_image(self, img_number):
+        self.cur_img = img_number
+        self.img = self.img_list[self.cur_img]
 
     def goal_met(self):  # will sleep with you right away and as many times as you want
         # each of his small talks will hint at the way to successfully proposition another character
@@ -312,6 +365,7 @@ class Zirel(Character):
         super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
+        self.phrase_counter = 0
         self.phrases = {
             "dtf": ["...", "...", "..."],
             "sad": ["???", "???", "???"],
@@ -335,6 +389,14 @@ class Zirel(Character):
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
         self.likes = ["Muffin"]
+        self.img_list = [file_name for file_name in
+                         img_file_name_list]
+        self.cur_img = 0
+        self.img = self.img_list[self.cur_img]
+
+    def set_image(self, img_number):
+        self.cur_img = img_number
+        self.img = self.img_list[self.cur_img]
 
     def goal_met(self):
         if self.points >= 10:
@@ -358,6 +420,7 @@ class Seedro(Character):
         super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
+        self.phrase_counter = 0
         self.phrases = {
             "dtf": ["", "", ""],
             "sad": ["", "", ""],
@@ -381,6 +444,14 @@ class Seedro(Character):
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
         self.likes = ["Muffin"]
+        self.img_list = [file_name for file_name in
+                         img_file_name_list]
+        self.cur_img = 0
+        self.img = self.img_list[self.cur_img]
+
+    def set_image(self, img_number):
+        self.cur_img = img_number
+        self.img = self.img_list[self.cur_img]
 
     def goal_met(self):  #
         if self.points >= 10:
@@ -404,6 +475,7 @@ class Thickkaelious(Character):
         super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
+        self.phrase_counter = 0
         self.phrases = {
             "dtf": ["", "", ""],
             "sad": ["", "", ""],
@@ -427,6 +499,14 @@ class Thickkaelious(Character):
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
         self.likes = ["Muffin"]
+        self.img_list = [file_name for file_name in
+                         img_file_name_list]
+        self.cur_img = 0
+        self.img = self.img_list[self.cur_img]
+
+    def set_image(self, img_number):
+        self.cur_img = img_number
+        self.img = self.img_list[self.cur_img]
 
     def goal_met(self):  # have atleast 2 points with every character
         if self.points >= 10:
@@ -450,6 +530,7 @@ class King(Character):
         super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
+        self.phrase_counter = 0
         self.phrases = {
             "dtf": ["", "", ""],
             "sad": ["", "", ""],
@@ -473,6 +554,14 @@ class King(Character):
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
         self.likes = ["Muffin"]
+        self.img_list = [file_name for file_name in
+                         img_file_name_list]
+        self.cur_img = 0
+        self.img = self.img_list[self.cur_img]
+
+    def set_image(self, img_number):
+        self.cur_img = img_number
+        self.img = self.img_list[self.cur_img]
 
     def goal_met(self):  # give him the specific gifts he requests by translating his words
         if self.points >= 10:
@@ -496,6 +585,7 @@ class Japeto(Character):
         super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
+        self.phrase_counter = 0
         self.phrases = {
             "dtf": ["", "", ""],
             "sad": ["", "", ""],
@@ -519,6 +609,14 @@ class Japeto(Character):
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
         self.likes = ["Muffin"]
+        self.img_list = [file_name for file_name in
+                         img_file_name_list]
+        self.cur_img = 0
+        self.img = self.img_list[self.cur_img]
+
+    def set_image(self, img_number):
+        self.cur_img = img_number
+        self.img = self.img_list[self.cur_img]
 
     def goal_met(self):  #
         if self.points >= 5:
@@ -542,6 +640,7 @@ class Merkle(Character):
         super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
+        self.phrase_counter = 0
         self.phrases = {
             "dtf": ["", "", ""],
             "sad": ["", "", ""],
@@ -565,6 +664,14 @@ class Merkle(Character):
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
         self.likes = ["Muffin"]
+        self.img_list = [file_name for file_name in
+                         img_file_name_list]
+        self.cur_img = 0
+        self.img = self.img_list[self.cur_img]
+
+    def set_image(self, img_number):
+        self.cur_img = img_number
+        self.img = self.img_list[self.cur_img]
 
     def goal_met(self): # atleast 5 points and have volume all the way up
         if self.points >= 10:
@@ -588,6 +695,7 @@ class Emilius(Character):
         super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
         self.offset = offset
         self.name = name
+        self.phrase_counter = 0
         self.phrases = {
             "dtf": ["", "", ""],
             "sad": ["", "", ""],
@@ -611,6 +719,14 @@ class Emilius(Character):
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
         self.likes = ["Muffin"]
+        self.img_list = [file_name for file_name in
+                         img_file_name_list]
+        self.cur_img = 0
+        self.img = self.img_list[self.cur_img]
+
+    def set_image(self, img_number):
+        self.cur_img = img_number
+        self.img = self.img_list[self.cur_img]
 
     def goal_met(self):  # give various drugs
         if self.points >= 10:
@@ -628,5 +744,57 @@ class Emilius(Character):
         #     self.offset += 3.2
         # if cue == 40:
         #     self.offset -= 3.2
+
+class Queen(Character):
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, width=32, height=40)
+        self.offset = offset
+        self.phrase_counter = 0
+        self.name = name
+        self.phrases = {
+            "dtf": ["", "", ""],
+            "sad": ["", "", ""],
+            "mad": ["", "", ""],
+            "small_talk0": ["", "", ""],
+            "small_talk1": ["", "", ""],
+            "small_talk2": ["", "", ""],
+            "small_talk3": ["", "", ""],
+            "small_talk4": ["", "", ""],
+            "small_talk5": ["", "", ""],  # all about butter
+            "small_talk6": ["", "", ""],
+            "small_talk7": ["", "", ""],
+            "small_talk8": ["", "", ""],
+            "small_talk9": ["", "", ""],
+            "small_talk10": ["", "", ""],
+            "good_gift": ["", "", ""],
+            "bad_gift": ["", "", ""]}
+        self.emotions = {}
+        self.likes = ["Butter"]
+        self.img_list = [file_name for file_name in
+                         img_file_name_list]
+        self.cur_img = 0
+        self.img = self.img_list[self.cur_img]
+
+    def set_image(self, img_number):
+        self.cur_img = img_number
+        self.img = self.img_list[self.cur_img]
+
+    def goal_met(self):  # give them butter!!!
+        if self.points >= 1:
+            achieve = True
+        else:
+            achieve = False
+        return achieve
+
+    def dance(self, cue):
+        if cue == 10:
+            self.offset += 3.2
+        if cue == 20:
+            self.offset -= 3.2
+        # if cue == 30:
+        #     self.offset += 3.2
+        # if cue == 40:
+        #     self.offset -= 3.2
+
 
 # print(self.name.__class__)

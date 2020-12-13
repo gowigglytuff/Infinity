@@ -6,6 +6,7 @@ from test.spritesheet import Spritesheet
 from test.tiles import *
 
 
+
 class Game(object):
     def __init__(self, state, tick, tock):
         self.state = state
@@ -66,6 +67,7 @@ class GameData(object):
     def get_all_items(self):
         return list(self.item.keys())
 
+
 class GameContoller(object):
 
     IN_MENU = 0
@@ -119,7 +121,6 @@ class Image(object):
         screen.blit(Spritesheet(self.img).image_at((0, 0, self.width, self.height)), [self.x, self.y])
 
 
-
 class Thing(Image):
     def __init__(self, x, y, img_file_name_list, name, classification, width=32, height=40):
         super().__init__(x, y, img_file_name_list)
@@ -149,6 +150,7 @@ class Character(Thing):
         self.phrases = {}
         self.emotions = {}
         self.points = points
+        self.phrase_counter = 0
         pass
 
     def draw(self, screen):
@@ -171,6 +173,15 @@ class Character(Thing):
 
     def display(self, screen, line):
         screen.blit((Spritesheet(self.emotions[line][0]).image_at((0, 0, 96, 120))), [10, 256])
+
+    def reset_phrase_counter(self):
+        if self.phrase_counter > self.points:
+            self.phrase_counter = 0
+
+    def add_point(self):
+        self.points += 1
+        self.phrase_counter = self.points
+
 
 class Player(Image):
     def __init__(self, x, y, img_file_name_list, offset, facing, follow, name, classification, width=32, height=40):
@@ -275,6 +286,7 @@ class Cursor(object):
             self.y = self.menu.y
         else:
             self.y += 25
+
     def cursor_up(self):
         if self.y == self.menu.y:
             self.y = self.menu.y + self.menu.size[-1]*25
@@ -296,13 +308,13 @@ class ItemCursor(Cursor):
         super(). __init__(screen, menu, cursor_go, option)
 
     def cursor_down(self):
-        if self.y == self.menu.y + (self.menu.total_items-1)*25:
+        if self.y == self.menu.y + (self.menu.total_items)*25:
             self.y = self.menu.y
         else:
             self.y += 25
     def cursor_up(self):
         if self.y == self.menu.y:
-            self.y = self.menu.y + (self.menu.total_items-1)*25
+            self.y = self.menu.y + (self.menu.total_items)*25
         else:
             self.y -= 25
 
@@ -337,6 +349,8 @@ class ItemList(object):
                 self.item_order.append(self.source[self.key[v]])
         self.total_items = self.successes
         self.successes = 0
+        exit_menu = my_font.render("Exit", 1, (255, 255, 255))
+        self.screen.blit(exit_menu, (self.x, self.y + self.total_items * 25))
 
 
     def item_list_len(self):

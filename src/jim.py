@@ -33,22 +33,61 @@ def init_game():
                                           "assets/alien1_left.png",
                                           "assets/alien1_right.png"], 0, "down", "None", "alien1", "player"))
 
-    gd.add_character("Zirel", Zirel(4, 3, ["assets/alien2.png"], 0, False, 0, "Zirel", "character", "none"))
-    gd.add_character("IShine", Ishine(5, 6, ["assets/alien3.png"], 0, False, 0, "IShine", "character", "none"))
-    gd.add_character("Zoop", Zoop(3, 7, ["assets/alien4.png"], 0, False, 0, "Zoop", "character", "none"))
-    gd.add_character("Anton", Anton(0, 1, ["assets/alien5.png"], 0, False, 0, "Anton", "character", "none"))
-    gd.add_character("King", King(0, 6, ["assets/alien6.png"], 0, False, 0, "King", "character", "none"))
+    gd.add_character("Zirel", Zirel(4, 3, ["assets/alien2.png",
+                                           "assets/zirel/zirel_back.png",
+                                           "assets/zirel/zirel_left.png",
+                                           "assets/zirel/zirel_right.png"], 5, False, 0, "Zirel", "character", "none"))
+    gd.add_character("IShine", Ishine(5, 6, ["assets/alien3.png",
+                                             "assets/ishine/ishine_back.png",
+                                             "assets/ishine/ishine_left.png",
+                                             "assets/ishine/ishine_right.png"], 5, False, 0, "IShine", "character", "none"))
+    gd.add_character("Zoop", Zoop(3, 7, ["assets/alien4.png",
+                                         "assets/zoop/zoop_back.png",
+                                         "assets/zoop/zoop_left.png",
+                                         "assets/zoop/zoop_right.png"], 5, False, 0, "Zoop", "character", "none"))
+    gd.add_character("Anton", Anton(0, 1, ["assets/alien5.png",
+                                           "assets/anton/anton_back.png",
+                                           "assets/anton/anton_left.png",
+                                           "assets/anton/anton_right.png"], 5, False, 0, "Anton", "character", "none"))
+    gd.add_character("King", King(0, 6, ["assets/alien6.png",
+                                         "assets/king/king_back.png",
+                                         "assets/king/king_left.png",
+                                         "assets/king/king_right.png"], 5, False, 0, "King", "character", "none"))
     gd.add_character("Galaxar", Galaxar(3, 3, ["assets/alien7.png",
                                                "assets/galaxar/galaxar_back.png",
                                                "assets/galaxar/galaxar_left.png",
-                                               "assets/galaxar/galaxar_right.png"], 0, False, 0, "Galaxar", "character", "none"))
-    gd.add_character("Seeder", Seeder(7, 7, ["assets/alien8.png"], 0, False, 0, "Seeder", "character", "none"))
-    gd.add_character("Thickky", Thickkaelious(7, 2, ["assets/alien9.png"], 0, False, 0, "Thickky", "character", "none"))
-    gd.add_character("Seedro", Seedro(4, 1, ["assets/alien10.png"], 0, False, 0, "Seedro", "character", "none"))
-    gd.add_character("Merkle", Merkle(6, 4, ["assets/alien11.png"], 0, False, 0, "Merkle", "character", "none"))
-    gd.add_character("Eveirg", Eveirg(3, 5, ["assets/alien12.png"], 0, False, 0, "Eveirg", "character", "none"))
-    gd.add_character("Japeto", Japeto(1, 4, ["assets/alien14.png"], 0, False, 0, "Japeto", "character", "none"))
-    gd.add_character("Emilius", Emilius(2, 7, ["assets/alien13b.png"], 0, False, 0, "Emilius", "character", "none"))
+                                               "assets/galaxar/galaxar_right.png"], 5, False, 0, "Galaxar", "character", "none"))
+    gd.add_character("Seeder", Seeder(7, 7, ["assets/alien8.png",
+                                             "assets/seeder/seeder_back.png",
+                                             "assets/seeder/seeder_left.png",
+                                             "assets/seeder/seeder_right.png"], 5, False, 0, "Seeder", "character", "none"))
+    gd.add_character("Thickky", Thickkaelious(7, 2, ["assets/alien9.png",
+                                                     "assets/thickky/thickky_back.png",
+                                                     "assets/thickky/thickky_left.png",
+                                                     "assets/thickky/thickky_right.png"], 5, False, 0, "Thickky", "character", "none"))
+    gd.add_character("Seedro", Seedro(5, 1, ["assets/alien10.png",
+                                             "assets/seeder/seeder_back.png",
+                                             "assets/seeder/seeder_left.png",
+                                             "assets/seeder/seeder_right.png"], 5, False, 0, "Seedro", "character", "none"))
+    gd.add_character("Merkle", Merkle(6, 4, ["assets/alien11.png",
+                                             "assets/merkle/merkle_back.png",
+                                             "assets/merkle/merkle_left.png",
+                                             "assets/merkle/merkle_right.png"], 5, False, 0, "Merkle", "character", "none"))
+    gd.add_character("Eveirg", Eveirg(3, 5, ["assets/alien12.png",
+                                             "assets/eveirg/eveirg_back.png",
+                                             "assets/eveirg/eveirg_left.png",
+                                             "assets/eveirg/eveirg_right.png"
+                                             ], 5, False, 0, "Eveirg", "character", "none"))
+    gd.add_character("Japeto", Japeto(1, 4, ["assets/alien14.png",
+                                             "assets/japeto/japeto_back.png",
+                                             "assets/japeto/japeto_left.png",
+                                             "assets/japeto/japeto_right.png"], 5, False, 0, "Japeto", "character", "none"))
+    gd.add_character("Emilius", Emilius(2, 7, ["assets/alien13b.png",
+                                               "assets/emilius/emilius_back.png",
+                                               "assets/emilius/emilius_left.png",
+                                               "assets/emilius/emilius_right.png"], 5, False, 0, "Emilius", "character", "none"))
+    gd.add_character("Queen", Queen(3, 1, ["assets/queen/queen_front.png",
+                                           "assets/queen/queen_right.png"], 5, False, 0, "Queen", "character", "none"))
 
     gd.add_bg("bg1", BG(0, 0, ["assets/BG1.png", "assets/BG2.png"]))
 
@@ -125,6 +164,8 @@ def run_game_loop():
         if gc.tock == 21:
             gc.tock = 0
 
+        for character in gd.characters:
+            gd.characters[character].reset_phrase_counter()
 
     def big_draw():
         # fix drawing hierarchy
@@ -189,7 +230,6 @@ def run_game_loop():
         gd.cursor["item_cursor"].print_cursor()
 
     def gift_received_draw():
-
         if gd.characters[facing_tile.interact()].feeling == "good_gift":
             for name in gd.characters:
                 if gd.characters[name].emote == True:
@@ -197,6 +237,7 @@ def run_game_loop():
                     gd.characters[name].display(gc.screen, "thankful")
                     gd.characters[name].print_phrase(gc.screen, "good_gift")
                     print(gd.characters[name].emote)
+
         elif gd.characters[facing_tile.interact()].feeling == "bad_gift":
             for name in gd.characters:
                 if gd.characters[name].emote == True:
@@ -247,6 +288,7 @@ def run_game_loop():
         gd.characters["King"].dance(gc.tock)
         gd.characters["Merkle"].dance(gc.tock)
         gd.characters["Japeto"].dance(gc.tock)
+        gd.characters["Queen"].dance(gc.tock)
 
         if gc.tock == 10:
             gd.BG["bg1"].set_image(0)
@@ -344,6 +386,14 @@ def run_game_loop():
 
                         if facing_tile.full:
                             if facing_tile.filling_type == "character":
+                                if gd.player["alien1"].facing == "down":
+                                    gd.characters[facing_tile.interact()].set_image(1)
+                                elif gd.player["alien1"].facing == "up":
+                                    gd.characters[facing_tile.interact()].set_image(0)
+                                elif gd.player["alien1"].facing == "left":
+                                    gd.characters[facing_tile.interact()].set_image(3)
+                                elif gd.player["alien1"].facing == "right":
+                                    gd.characters[facing_tile.interact()].set_image(2)
                                 # gd.characters[facing_tile.interact()].set_image(2)
                                 if facing_tile.object_filling == gd.characters[facing_tile.interact()].name:
                                     gc.game_state = gc.IN_MENU
@@ -357,7 +407,7 @@ def run_game_loop():
                     if event.key == pygame.K_1:
                         gc.game_state = gc.START_MENU
                     if event.key == pygame.K_2:
-                        print(gd.characters["Zirel"].phrases["mad"])
+                        print(gd.characters["Galaxar"].img_file_name_list)
 
 
                 if event.type == pygame.KEYUP:
@@ -447,15 +497,11 @@ def run_game_loop():
                         # Make small talk with alien
                         if gd.cursor["cursor1"].get_cursor_position() == gd.menu["menu1"].y:
                             gd.characters[facing_tile.interact()].emote = True
+                            gd.characters[facing_tile.interact()].feeling = "small_talk" + \
+                                str(gd.characters[facing_tile.interact()].phrase_counter)
+                            gd.characters[facing_tile.interact()].phrase_counter += 1
 
-                            if gd.characters[facing_tile.interact()].points <= 9:
-                                gd.characters[facing_tile.interact()].feeling = "small_talk" + \
-                                    str(gd.characters[facing_tile.interact()].points)
-
-                            elif gd.characters[facing_tile.interact()].points <= 10:
-                                gd.characters[facing_tile.interact()].feeling = "small_talk10"
-
-                            gd.characters[facing_tile.interact()].points += 1
+                            # gd.characters[facing_tile.interact()].points += 1
                             gc.game_state = gc.TALKING
 
                         # Give a gift
@@ -479,6 +525,7 @@ def run_game_loop():
                             for name in gd.characters:
                                 gd.characters[name].emote = "none"
                             gc.game_state = gc.IN_GAME
+                            gd.characters[facing_tile.interact()].set_image(0)
 
                         # reset cursor
                         gd.cursor["cursor1"].cursor_reset()
@@ -509,7 +556,7 @@ def run_game_loop():
                         for name in gd.characters:
                             gd.characters[name].emote = "none"
                         gc.game_state = gc.IN_GAME
-
+                        gd.characters[facing_tile.interact()].set_image(0)
             update_files()
             dance()
             big_draw()
@@ -525,16 +572,22 @@ def run_game_loop():
                 if event.type == pygame.KEYDOWN:
 
                     if event.key == pygame.K_RETURN:
-                        gd.item[gd.cursor["item_cursor"].get_item()].quantity -= 1
-                        gd.characters[facing_tile.interact()].emote = True
-                        if gd.characters[facing_tile.interact()].likes.count(gd.cursor["item_cursor"].get_item()) > 0:
-                            gd.characters[facing_tile.interact()].points += 1
-                            gd.characters[facing_tile.interact()].feeling = "good_gift"
+                        if gd.cursor["item_cursor"].y == gd.cursor["item_cursor"].menu.y + (gd.cursor["item_cursor"].menu.total_items)* 25:
+                            for name in gd.characters:
+                                gd.characters[name].emote = "none"
+                            gc.game_state = gc.IN_GAME
+
                         else:
-                            gd.characters[facing_tile.interact()].points -= 1
-                            gd.characters[facing_tile.interact()].feeling = "bad_gift"
-                        gd.cursor["item_cursor"].cursor_reset()
-                        gc.game_state = gc.GIFT_RECEIVED
+                            gd.item[gd.cursor["item_cursor"].get_item()].quantity -= 1
+                            gd.characters[facing_tile.interact()].emote = True
+                            if gd.characters[facing_tile.interact()].likes.count(gd.cursor["item_cursor"].get_item()) > 0:
+                                gd.characters[facing_tile.interact()].add_point()
+                                gd.characters[facing_tile.interact()].feeling = "good_gift"
+                            else:
+                                gd.characters[facing_tile.interact()].points -= 1
+                                gd.characters[facing_tile.interact()].feeling = "bad_gift"
+                            gd.cursor["item_cursor"].cursor_reset()
+                            gc.game_state = gc.GIFT_RECEIVED
 
 
                     if event.key == pygame.K_DOWN:
@@ -561,6 +614,7 @@ def run_game_loop():
                         for name in gd.characters:
                             gd.characters[name].emote = "none"
                         gc.game_state = gc.IN_GAME
+                        gd.characters[facing_tile.interact()].set_image(0)
 
             update_files()
             dance()
@@ -580,6 +634,7 @@ def run_game_loop():
                         if gd.characters[facing_tile.interact()].feeling == ["mad"][0]:
                             for name in gd.characters:
                                 gd.characters[name].emote = "none"
+                            gd.characters[facing_tile.interact()].set_image(0)
                             gc.game_state = gc.IN_GAME
 
                         if gd.characters[facing_tile.interact()].feeling == ["dtf"][0]:
@@ -941,7 +996,7 @@ def run_game_loop():
                         for name in gd.characters:
                             gd.characters[name].emote = "none"
                         gc.game_state = gc.FOLLOW
-
+                        gd.characters[facing_tile.interact()].set_image(0)
             update_files()
             dance()
             big_draw()
