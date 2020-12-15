@@ -31,9 +31,18 @@ class GameData(object):
         self.item = {}
         self.item_list = {}
         self.audio = {}
+        self.bathroom_characters = {}
+        self.bathroom_props = {}
 
     def add_character(self, character_name, character_object):
         self.characters[character_name] = character_object
+
+    def add_bathroom_charatcers(self, character_name, character_object):
+        self.bathroom_characters[character_name] = character_object
+
+    def add_bathroom_prop(self, prop_name, prop_object):
+        self.bathroom_props[prop_name] = prop_object
+
 
     def add_player(self, player_name, player_object):
         self.player[player_name] = player_object
@@ -64,6 +73,9 @@ class GameData(object):
     def get_all_drawables(self):
         return list(self.characters.values()) + list(self.player.values()) + list(self.prop.values())
 
+    def get_all_drawables_bathroom(self):
+        return list(self.bathroom_characters.values()) + list(self.player.values()) + list(self.bathroom_props.values())
+
     def get_all_items(self):
         return list(self.item.keys())
 
@@ -89,12 +101,16 @@ class GameContoller(object):
     SASS = 16
     CUTSCENE1 = 17
 
+    DISCO = "a"
+    BATHROOM = "b"
+
     def __init__(self, game_data):
         self.screen = pygame.display.set_mode(game_data.settings["resolution"])
         self.clock = pygame.time.Clock()
         self._FPS = game_data.settings["FPS"]
         self.game_state = GameContoller.IN_GAME
         self.tock = 0
+        self.room = "a"
 
     def tick(self):
         self.clock.tick(self._FPS)
@@ -123,10 +139,11 @@ class Image(object):
 
 
 class Thing(Image):
-    def __init__(self, x, y, img_file_name_list, name, classification, width=32, height=40):
+    def __init__(self, x, y, img_file_name_list, name, classification, location, width=32, height=40):
         super().__init__(x, y, img_file_name_list)
         self.name = name
         self.classification = classification
+        self.location = location
 
     def set_image(self, img_number):
         self.cur_img = img_number
@@ -141,8 +158,8 @@ class Thing(Image):
 
 
 class Character(Thing):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, name, classification, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, name, classification, location, width=32, height=40)
         self.feeling = feeling
         self.offset = offset
         self.emote = emote
@@ -155,7 +172,6 @@ class Character(Thing):
         self.origin_x = origin_x
         self.origin_y = origin_y
         self.on_stage = on_stage
-        pass
 
     def draw(self, screen):
         screen.blit((Spritesheet(self.img).image_at((0, 0, 32, 40))), [self.x * 32 + self.offset, self.y * 32 - 16])
@@ -188,7 +204,7 @@ class Character(Thing):
 
 
 class Player(Image):
-    def __init__(self, x, y, img_file_name_list, offset, facing, follow, name, classification, on_stage, width=32, height=40):
+    def __init__(self, x, y, img_file_name_list, offset, facing, follow, name, classification, on_stage, location, width=32, height=40):
         super().__init__(x, y, img_file_name_list)
         self.classification = classification
         self.name = name
@@ -197,13 +213,14 @@ class Player(Image):
         self.printing_priority = 2
         self.follow = follow
         self.on_stage = on_stage
+        self.location = location
     def draw(self, screen):
         screen.blit((Spritesheet(self.img).image_at((0, 0, 32, 40))), [self.x * 32 + self.offset, self.y * 32 - 16])
 
 
 class Prop(Thing):
-    def __init__(self, x, y, img_file_name_list, name,  classification, on_stage, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, name,  classification, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, name,  classification, on_stage, location, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, name,  classification, location, width=32, height=40)
         self.printing_priority = 1
         self.on_stage = on_stage
 
@@ -211,8 +228,8 @@ class Prop(Thing):
         screen.blit((Spritesheet(self.img).image_at((0, 0, 32, 40))), [self.x * 32, self.y * 32-16])
 
 class StageProp(Prop):
-    def __init__(self, x, y, img_file_name_list, name,  classification, on_stage, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, name,  classification, on_stage, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, name,  classification, on_stage, location, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, name,  classification, on_stage, location, width=32, height=40)
 
     def draw(self, screen):
         screen.blit((Spritesheet(self.img).image_at((0, 0, 32, 40))), [self.x * 32, self.y * 32 - 8])

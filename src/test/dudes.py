@@ -8,8 +8,8 @@ gd = GameData()
 gc = GameContoller(gd)
 
 class Seeder(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling,  origin_x, origin_y, on_stage,width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling,  origin_x, origin_y, on_stage, location,width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrase_counter = 0
@@ -43,7 +43,8 @@ class Seeder(Character):
             "Merkle": ["", "", ""],
             "Eveirg": ["", "", ""],
             "Japeto": ["", "", ""],
-            "Emilius": ["", "", ""]}
+            "Emilius": ["", "", ""],
+            "follow": ["OooooOOooooOOoO, ", "you kids have fun!", ""]}
         self.emotions = {"happy": ["assets/seeder_happy.png"],
                          "mad": ["assets/mad/seedro_mad.png"],
                          "sad": ["assets/sad/" + "seedro" + "_sad.png"],
@@ -77,8 +78,8 @@ class Seeder(Character):
         #     self.offset -= 3.2
 
 class Anton(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40)
         self.offset = offset
         self.phrase_counter = 0
         self.name = name
@@ -101,8 +102,8 @@ class Anton(Character):
             "bad_gift": ["Look buddy,", "I don't want this.", ""],
             "follow:": ["Oooooooo,", "you two have fun!", ""],
             "request": ["What you feeling", "tonight? Daddy Anton's", "got a lil of everything."],
-
-            "result": ["This one's an Anton", "original! I've got demos", "for sale, spread the word!"]}
+            "result": ["This one's an Anton", "original! I've got demos", "for sale, spread the word!"],
+            "follow": ["OooooOOooooOOoO, ", "you kids have fun!", ""]}
         self.emotions = {"happy": ["assets/anton_happy.png"],
                          "mad": ["assets/mad/anton_mad.png"],
                          "sad": ["assets/sad/" + self.name + "_sad.png"],
@@ -136,8 +137,8 @@ class Anton(Character):
         #     self.offset -= 3.2
 
 class Galaxar(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40)
         self.offset = offset
         self.phrase_counter = 0
         self.name = name
@@ -157,7 +158,8 @@ class Galaxar(Character):
             "small_talk9": ["9", "", ""],
             "small_talk10": ["10", "", ""],
             "good_gift": ["I didn't expect this...", "you really are the nicest!", ""],
-            "bad_gift": ["Do I look like someone", "who'd want something like", "this!!??"]}
+            "bad_gift": ["Do I look like someone", "who'd want something like", "this!!??"],
+            "follow": ["OooooOOooooOOoO, ", "you kids have fun!", ""]}
         self.emotions = {"happy": ["assets/galaxar_happy.png"],
                          "mad": ["assets/mad/galaxar_mad.png"],
                          "sad": ["assets/sad/galaxar_sad.png"],
@@ -192,8 +194,8 @@ class Galaxar(Character):
 
 
 class Ishine(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrases = {
@@ -213,7 +215,8 @@ class Ishine(Character):
             "small_talk9": ["", "", ""],
             "small_talk10": ["", "", ""],
             "good_gift": ["Literally, at last,", "someone's' treating my fine", "ass the way i deserve"],
-            "bad_gift": ["This is gross, ew", "you're lucky i don't care", ""]}
+            "bad_gift": ["This is gross, ew", "you're lucky i don't care", ""],
+            "follow": ["OooooOOooooOOoO, ", "you kids have fun!", ""]}
         self.emotions = {"happy": ["assets/mad/ishine_mad.png"],
                          "mad": ["assets/mad/ishine_mad.png"],
                          "sad": ["assets/sad/ishine_sad.png"],
@@ -247,8 +250,8 @@ class Ishine(Character):
         #     self.offset += 3.2
 
 class Eveirg(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40)
         self.offset = offset
         self.phrase_counter = 0
         self.name = name
@@ -268,7 +271,8 @@ class Eveirg(Character):
             "small_talk9": ["", "", ""],
             "small_talk10": ["", "", ""],
             "good_gift": ["Sweet syrupy nectar", "of ambrosia!", "You're an angel!!!"],
-            "bad_gift": ["well, it's not butter", "", ""]}
+            "bad_gift": ["well, it's not butter", "", ""],
+            "follow": ["OooooOOooooOOoO, ", "you kids have fun!", ""]}
         self.emotions = {
             "happy": ["assets/eveirg_happy.png"],
             "mad": ["assets/mad/eveirg_mad.png"],
@@ -304,8 +308,8 @@ class Eveirg(Character):
 
 
 class Zoop(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrase_counter = 0
@@ -324,7 +328,7 @@ class Zoop(Character):
             "small_talk8": ["", "", ""],
             "small_talk9": ["", "", ""],
             "small_talk10": ["", "", ""],
-
+            "follow": ["OooooOOooooOOoO, ", "you kids have fun!", ""],
             "good_gift": ["This is such a", "wondeful gift to receive", "indubitably!"],
             "bad_gift": ["ew, um, like, well, uh,", "This really isn't my thing,", "but thanks any way"]}
         self.emotions = {"happy": ["assets/zoop_happy.png"],
@@ -361,8 +365,8 @@ class Zoop(Character):
         #     self.offset += 3.2
 
 class Zirel(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrase_counter = 0
@@ -382,7 +386,8 @@ class Zirel(Character):
             "small_talk9": ["", "", ""],
             "small_talk10": ["", "", ""],
             "good_gift": ["...", "...", "..!"],
-            "bad_gift": ["...", "", ""]}
+            "bad_gift": ["...", "", ""],
+            "follow": ["OooooOOooooOOoO, ", "you kids have fun!", ""]}
         self.emotions = {"happy": ["assets/zirel_happy.png"],
                          "mad": ["assets/mad/zirel_mad.png"],
                          "sad": ["assets/sad/" + self.name + "_sad.png"],
@@ -416,8 +421,8 @@ class Zirel(Character):
         #     self.offset += 3.2
 
 class Seedro(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrase_counter = 0
@@ -437,7 +442,8 @@ class Seedro(Character):
             "small_talk9": ["", "", ""],
             "small_talk10": ["", "", ""],
             "good_gift": ["", "", ""],
-            "bad_gift": ["", "", ""]}
+            "bad_gift": ["", "", ""],
+            "follow": ["OooooOOooooOOoO, ", "you kids have fun!", ""]}
         self.emotions = {"happy": ["assets/seedro_happy.png"],
                          "mad": ["assets/mad/seedro_mad.png"],
                          "sad": ["assets/sad/" + self.name + "_sad.png"],
@@ -471,8 +477,8 @@ class Seedro(Character):
         #     self.offset -= 3.2
 
 class Thickkaelious(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrase_counter = 0
@@ -492,7 +498,8 @@ class Thickkaelious(Character):
             "small_talk9": ["", "", ""],
             "small_talk10": ["", "", ""],
             "good_gift": ["", "", ""],
-            "bad_gift": ["", "", ""]}
+            "bad_gift": ["", "", ""],
+            "follow": ["OooooOOooooOOoO, ", "you kids have fun!", ""]}
         self.emotions = {"happy": ["assets/thickkaelious_happy.png"],
                          "mad": ["assets/mad/thickkaelious_mad.png"],
                          "sad": ["assets/sad/" + self.name + "_sad.png"],
@@ -526,8 +533,8 @@ class Thickkaelious(Character):
         #     self.offset -= 3.2
 
 class King(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrase_counter = 0
@@ -547,7 +554,8 @@ class King(Character):
             "small_talk9": ["", "", ""],
             "small_talk10": ["", "", ""],
             "good_gift": ["", "", ""],
-            "bad_gift": ["", "", ""]}
+            "bad_gift": ["", "", ""],
+            "follow": ["OooooOOooooOOoO, ", "you kids have fun!", ""]}
         self.emotions = {"happy": ["assets/king_happy.png"],
                          "mad": ["assets/mad/king_mad.png"],
                          "sad": ["assets/sad/" + self.name + "_sad.png"],
@@ -581,8 +589,8 @@ class King(Character):
         #     self.offset += 3.2
 
 class Japeto(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrase_counter = 0
@@ -602,7 +610,8 @@ class Japeto(Character):
             "small_talk9": ["", "", ""],
             "small_talk10": ["", "", ""],
             "good_gift": ["", "", ""],
-            "bad_gift": ["", "", ""]}
+            "bad_gift": ["", "", ""],
+            "follow": ["OooooOOooooOOoO, ", "you kids have fun!", ""]}
         self.emotions = {"happy": ["assets/japeto_happy.png"],
                          "mad": ["assets/mad/japeto_mad.png"],
                          "sad": ["assets/sad/" + self.name + "_sad.png"],
@@ -636,8 +645,8 @@ class Japeto(Character):
         #     self.offset += 3.2
 
 class Merkle(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrase_counter = 0
@@ -657,7 +666,8 @@ class Merkle(Character):
             "small_talk9": ["", "", ""],
             "small_talk10": ["", "", ""],
             "good_gift": ["", "", ""],
-            "bad_gift": ["", "", ""]}
+            "bad_gift": ["", "", ""],
+            "follow": ["OooooOOooooOOoO, ", "you kids have fun!", ""]}
         self.emotions = {"happy": ["assets/merkle_happy.png"],
                          "mad": ["assets/mad/merkle_mad.png"],
                          "sad": ["assets/sad/" + self.name + "_sad.png"],
@@ -691,8 +701,8 @@ class Merkle(Character):
         #     self.offset += 3.2
 
 class Emilius(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40)
         self.offset = offset
         self.name = name
         self.phrase_counter = 0
@@ -712,7 +722,8 @@ class Emilius(Character):
             "small_talk9": ["", "", ""],
             "small_talk10": ["", "", ""],
             "good_gift": ["", "", ""],
-            "bad_gift": ["", "", ""]}
+            "bad_gift": ["", "", ""],
+            "follow": ["OooooOOooooOOoO, ", "you kids have fun!", ""]}
         self.emotions = {"happy": ["assets/emilius_happy.png"],
                          "mad": ["assets/mad/emilius_mad.png"],
                          "sad": ["assets/sad/" + self.name + "_sad.png"],
@@ -746,8 +757,8 @@ class Emilius(Character):
         #     self.offset -= 3.2
 
 class Queen(Character):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40)
         self.offset = offset
         self.phrase_counter = 0
         self.name = name
@@ -767,7 +778,8 @@ class Queen(Character):
             "small_talk9": ["", "", ""],
             "small_talk10": ["", "", ""],
             "good_gift": ["", "", ""],
-            "bad_gift": ["", "", ""]}
+            "bad_gift": ["", "", ""],
+            "follow": ["OooooOOooooOOoO, ", "you kids have fun!", ""]}
         self.emotions = {}
         self.likes = ["Butter"]
         self.img_list = [file_name for file_name in
