@@ -33,6 +33,12 @@ class GameData(object):
         self.audio = {}
         self.bathroom_characters = {}
         self.bathroom_props = {}
+        self.tiles = []
+        self.tiles_array = []
+        self.game_width = 8
+        self.game_height = 8
+        self.rooms = {}
+        self.doors = {}
 
     def add_character(self, character_name, character_object):
         self.characters[character_name] = character_object
@@ -79,6 +85,15 @@ class GameData(object):
     def get_all_items(self):
         return list(self.item.keys())
 
+    def add_room(self, room_name, room_object):
+        self.rooms[room_name] = room_object
+
+    def add_door(self, door_name, door_object):
+        self.doors[door_name] = door_object
+
+    def add_tile(self, tile_object):
+        self.tiles.append(tile_object)
+
 
 class GameContoller(object):
 
@@ -101,8 +116,8 @@ class GameContoller(object):
     SASS = 16
     CUTSCENE1 = 17
 
-    DISCO = "a"
-    BATHROOM = "b"
+    DISCO = "disco"
+    BATHROOM = "bathroom"
 
     def __init__(self, game_data):
         self.screen = pygame.display.set_mode(game_data.settings["resolution"])
@@ -110,7 +125,7 @@ class GameContoller(object):
         self._FPS = game_data.settings["FPS"]
         self.game_state = GameContoller.IN_GAME
         self.tock = 0
-        self.room = "a"
+        self.room = "disco"
 
     def tick(self):
         self.clock.tick(self._FPS)
@@ -138,12 +153,17 @@ class Image(object):
         screen.blit(Spritesheet(self.img).image_at((0, 0, self.width, self.height)), [self.x, self.y])
 
 
-class Thing(Image):
-    def __init__(self, x, y, img_file_name_list, name, classification, location, width=32, height=40):
+class Feature(Image):
+    def __init__(self, x, y, img_file_name_list, name, classification, location, on_stage):
         super().__init__(x, y, img_file_name_list)
         self.name = name
         self.classification = classification
         self.location = location
+        self.on_stage = on_stage
+        self.img_list = [file_name for file_name in
+                         img_file_name_list]
+        self.cur_img = 0
+        self.img = self.img_list[self.cur_img]
 
     def set_image(self, img_number):
         self.cur_img = img_number
@@ -157,9 +177,9 @@ class Thing(Image):
     #     print("INTERACT!", self)
 
 
-class Character(Thing):
-    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, name, classification, location, width=32, height=40)
+class Character(Feature):
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location):
+        super().__init__(x, y, img_file_name_list, name, classification, location, on_stage)
         self.feeling = feeling
         self.offset = offset
         self.emote = emote
@@ -171,7 +191,10 @@ class Character(Thing):
         self.phrase_counter = 0
         self.origin_x = origin_x
         self.origin_y = origin_y
-        self.on_stage = on_stage
+        self.img_list = [file_name for file_name in
+                         img_file_name_list]
+        self.cur_img = 0
+        self.img = self.img_list[self.cur_img]
 
     def draw(self, screen):
         screen.blit((Spritesheet(self.img).image_at((0, 0, 32, 40))), [self.x * 32 + self.offset, self.y * 32 - 16])
@@ -203,41 +226,58 @@ class Character(Thing):
         self.phrase_counter = self.points
 
 
-class Player(Image):
-    def __init__(self, x, y, img_file_name_list, offset, facing, follow, name, classification, on_stage, location, width=32, height=40):
-        super().__init__(x, y, img_file_name_list)
+class Player(Feature):
+    def __init__(self, x, y, img_file_name_list, offset, facing, follow, name, classification, location, on_stage):
+        super().__init__(x, y, img_file_name_list, name, classification, location, on_stage)
         self.classification = classification
         self.name = name
         self.offset = offset
         self.facing = facing
         self.printing_priority = 2
         self.follow = follow
-        self.on_stage = on_stage
-        self.location = location
+        self.img_list = [file_name for file_name in
+                         img_file_name_list]
+        self.cur_img = 0
+        self.img = self.img_list[self.cur_img]
+
     def draw(self, screen):
         screen.blit((Spritesheet(self.img).image_at((0, 0, 32, 40))), [self.x * 32 + self.offset, self.y * 32 - 16])
 
 
-class Prop(Thing):
-    def __init__(self, x, y, img_file_name_list, name,  classification, on_stage, location, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, name,  classification, location, width=32, height=40)
+class Prop(Feature):
+    def __init__(self, x, y, img_file_name_list, name,  classification, on_stage, location):
+        super().__init__(x, y, img_file_name_list, name, classification, location, on_stage)
         self.printing_priority = 1
-        self.on_stage = on_stage
+        self.img_list = [file_name for file_name in
+                         img_file_name_list]
+        self.cur_img = 0
+        self.img = self.img_list[self.cur_img]
 
     def draw(self, screen):
         screen.blit((Spritesheet(self.img).image_at((0, 0, 32, 40))), [self.x * 32, self.y * 32-16])
 
+
 class StageProp(Prop):
-    def __init__(self, x, y, img_file_name_list, name,  classification, on_stage, location, width=32, height=40):
-        super().__init__(x, y, img_file_name_list, name,  classification, on_stage, location, width=32, height=40)
+    def __init__(self, x, y, img_file_name_list, name,  classification, location, on_stage):
+        super().__init__(x, y, img_file_name_list, name,  classification, on_stage, location)
+        self.img_list = [file_name for file_name in
+                         img_file_name_list]
+        self.cur_img = 0
+        self.img = self.img_list[self.cur_img]
 
     def draw(self, screen):
         screen.blit((Spritesheet(self.img).image_at((0, 0, 32, 40))), [self.x * 32, self.y * 32 - 8])
 
+
 class BG(Image):
     def __init__(self, x, y, img_file_name_list):
-        super().__init__(x, y, img_file_name_list, width=384, height=384)
+        super().__init__(x, y, img_file_name_list)
         self.dest = [0, 0]
+
+        self.img_list = [file_name for file_name in
+                         img_file_name_list]
+        self.cur_img = 0
+        self.img = self.img_list[self.cur_img]
 
     def draw(self, screen):
         screen.blit(pygame.image.load(self.img).convert_alpha(), self.dest)
@@ -405,3 +445,23 @@ class Audio(object):
         mixer.music.play(-1)
 
 
+class Room(object):
+    def __init__(self, name, edge_x, edge_y, width, height, door_x, door_y, doors_list):
+        self.name = name
+        self.edge_x = edge_x
+        self.edge_y = edge_y
+        self.width = width
+        self.height = height
+        self.door_x = door_x
+        self.door_y = door_y
+        self.doors_list = doors_list
+
+
+class Door(object):
+    def __init__(self, room_from, room_to, x, y, door_exit_x, door_exit_y):
+        self.room_from = room_from
+        self.room_to = room_to
+        self.x = x
+        self.y = y
+        self.door_exit_x = door_exit_x
+        self.door_exit_y = door_exit_y
