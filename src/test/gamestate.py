@@ -22,7 +22,7 @@ class GameData(object):
         self.characters = {}
         self.player = {}
         self.settings = {}
-        self.settings["resolution"] = (384, 384)
+        self.settings["resolution"] = (416, 416)
         self.settings["FPS"] = 30
         self.BG = {}
         self.prop = {}
@@ -115,9 +115,13 @@ class GameContoller(object):
     FOLLOW = 15
     SASS = 16
     CUTSCENE1 = 17
+    FOUND_ITEM = 18
 
     DISCO = "disco"
     BATHROOM = "bathroom"
+
+    NONE = "none"
+    MENU = "menu"
 
     def __init__(self, game_data):
         self.screen = pygame.display.set_mode(game_data.settings["resolution"])
@@ -126,6 +130,7 @@ class GameContoller(object):
         self.game_state = GameContoller.IN_GAME
         self.tock = 0
         self.room = "disco"
+        self.canvas = "none"
 
     def tick(self):
         self.clock.tick(self._FPS)
@@ -205,17 +210,17 @@ class Character(Feature):
         label1 = my_font.render(self.phrases[line][0], 1, (255, 255, 255))
         label2 = my_font.render(self.phrases[line][1], 1, (255, 255, 255))
         label3 = my_font.render(self.phrases[line][2], 1, (255, 255, 255))
-        screen.blit(label1, (110, 300))
-        screen.blit(label2, (110, 320))
-        screen.blit(label3, (110, 340))
+        screen.blit(label1, (142, 332))
+        screen.blit(label2, (142, 352))
+        screen.blit(label3, (142, 372))
 
     def print_name(self, screen):
         my_font = pygame.font.Font("assets/PressStart2P-Regular.ttf", 10)
         title = my_font.render(self.name + "[" + str(self.points) + "]", 1, (255, 255, 255))
-        screen.blit(title, (105, 275))
+        screen.blit(title, (137, 310))
 
     def display(self, screen, line):
-        screen.blit((Spritesheet(self.emotions[line][0]).image_at((0, 0, 96, 120))), [10, 256])
+        screen.blit((Spritesheet(self.emotions[line][0]).image_at((0, 0, 96, 120))), [42, 292])
 
     def reset_phrase_counter(self):
         if self.phrase_counter > self.points:
@@ -225,9 +230,12 @@ class Character(Feature):
         self.points += 1
         self.phrase_counter = self.points
 
+    def fill_points(self):
+        self.points += (10-self.points)
+        self.phrase_counter = self.points
 
 class Player(Feature):
-    def __init__(self, x, y, img_file_name_list, offset, facing, follow, name, classification, location, on_stage):
+    def __init__(self, x, y, img_file_name_list, offset, facing, follow, name, classification, location, on_stage, item_received):
         super().__init__(x, y, img_file_name_list, name, classification, location, on_stage)
         self.classification = classification
         self.name = name
@@ -235,6 +243,7 @@ class Player(Feature):
         self.facing = facing
         self.printing_priority = 2
         self.follow = follow
+        self.item_received = item_received
         self.img_list = [file_name for file_name in
                          img_file_name_list]
         self.cur_img = 0
@@ -374,6 +383,7 @@ class Cursor(object):
 class ItemCursor(Cursor):
     def __init__(self, screen, menu, cursor_go, option):
         super(). __init__(screen, menu, cursor_go, option)
+        self.y = menu.y
 
     def cursor_down(self):
         if self.y == self.menu.y + (self.menu.total_items)*25:
@@ -387,14 +397,14 @@ class ItemCursor(Cursor):
             self.y -= 25
 
     def get_item(self):
-        return self.menu.item_order[int(((self.y-100)/25))].name
+        return self.menu.item_order[int(((self.y-self.menu.y)/25))].name
 
 
 class ItemList(object):
     def __init__(self, screen, opt1, item_list_go, source, key):
         self.screen = screen
-        self.x = 280
-        self.y = 100
+        self.x = 312
+        self.y = 132
         self.size = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
         self.opt1 = opt1
         self.item_list_go = item_list_go
@@ -412,7 +422,7 @@ class ItemList(object):
                 item = my_font.render(self.source[self.key[v]].name, 1, (255, 255, 255))
                 item2 = my_font.render(str(self.source[self.key[v]].quantity), 1, (255, 255, 255))
                 self.screen.blit(item, (self.x, self.y + self.successes * 25))
-                self.screen.blit(item2, (self.x + 85, self.y + self.successes * 25))
+                self.screen.blit(item2, (self.x + 75, self.y + self.successes * 25))
                 self.successes += 1
                 self.item_order.append(self.source[self.key[v]])
         self.total_items = self.successes
@@ -431,6 +441,11 @@ class Item(object):
         self.name = name
         self.quantity = quantity
 
+    def item_got(self, screen):
+        my_font = pygame.font.Font("assets/PressStart2P-Regular.ttf", 10)
+        item = my_font.render("You got (1) " + self.name +"!", 1, (255, 255, 255))
+        screen.blit(item, (120, 340))
+    print("woot")
         # gd.menu["menu1"].menu_len():
 
 

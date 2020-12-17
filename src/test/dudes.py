@@ -30,11 +30,11 @@ class Seeder(Character):
             "good_gift": ["Oh my goodness!", "This is the best tip", "I've ever received!"],
             "bad_gift": ["Uh, I can't accept something", "like this from a customer.", "Thanks anyway."],
             "information": ["who would you", "like to hear", "about?"],
-            "Zirel": ["king", "", ""],
-            "IShine": ["king", "", ""],
+            "Zirel": ["", "", ""],
+            "IShine": ["", "", ""],
             "Zoop": ["", "", ""],
             "Anton": ["", "", ""],
-            "King": ["I speek a lil Fongalese,", " I think @$@) @)$  @)($@_@", " means muffin!"],
+            "Newman": ["I speek a lil Fongalese,", " I think @$@) @)$  @)($@_@", " means muffin!"],
             "Galaxar": ["", "", ""],
             "Seeder": ["", "", ""],
             "Thickky": ["", "", ""],
@@ -49,7 +49,8 @@ class Seeder(Character):
                          "sad": ["assets/sad/" + "seedro" + "_sad.png"],
                          "horny": ["assets/horny/" + "seedro" + "_horny.png"],
                          "thankful": ["assets/thankful/" + "seedro" + "_thankful.png"]}
-        self.likes = ["Muffin"]
+        self.current_likes = [["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"],
+                              ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"]]
         self.img_list = [file_name for file_name in
                          img_file_name_list]
         self.cur_img = 0
@@ -107,7 +108,8 @@ class Anton(Character):
                          "sad": ["assets/sad/" + self.name + "_sad.png"],
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
-        self.likes = ["Muffin"]
+        self.current_likes = [["Cookie", "Water"], ["Cookie"], ["Cookie", "Water"], ["Cookie"], ["Cookie", "Water"],
+                              ["Cookie"], ["Cookie", "Water"], ["Cookie"], ["Cookie", "Water"], ["Cookie"], ["Cookie", "Water"]]
         self.img_list = [file_name for file_name in
                          img_file_name_list]
         self.cur_img = 0
@@ -162,7 +164,8 @@ class Galaxar(Character):
                          "sad": ["assets/sad/galaxar_sad.png"],
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
-        self.likes = ["Muffin"]
+        self.current_likes = [["Muffin", "Cookie"], ["Muffin", "Cookie"], ["Muffin", "Cookie"], ["Muffin", "Cookie"], ["Muffin", "Cookie"],
+                              ["Muffin", "Cookie"], ["Muffin", "Cookie"], ["Muffin", "Cookie"], ["Muffin", "Cookie"], ["Muffin", "Cookie"], ["Muffin", "Cookie"]]
         self.img_list = [file_name for file_name in
                          img_file_name_list]
         self.cur_img = 0
@@ -218,7 +221,8 @@ class Ishine(Character):
                          "sad": ["assets/sad/ishine_sad.png"],
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
-        self.likes = ["Muffin"]
+        self.current_likes = [["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"],
+                              ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"]]
         self.img_list = [file_name for file_name in
                          img_file_name_list]
         self.cur_img = 0
@@ -274,7 +278,8 @@ class Eveirg(Character):
                     "sad": ["assets/sad/" + self.name + "_sad.png"],
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
-        self.likes = ["Butter"]
+        self.current_likes = [["Butter"], ["Butter"], ["Butter"], ["Butter"], ["Butter"],
+                              ["Butter"], ["Butter"], ["Butter"], ["Butter"], ["Butter"], ["Butter"]]
         self.img_list = [file_name for file_name in
                          img_file_name_list]
         self.cur_img = 0
@@ -330,7 +335,8 @@ class Zoop(Character):
                          "sad": ["assets/sad/" + self.name + "_sad.png"],
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
-        self.likes = ["Muffin"]
+        self.current_likes = [["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"],
+                              ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"]]
         self.img_list = [file_name for file_name in
                          img_file_name_list]
         self.cur_img = 0
@@ -386,7 +392,8 @@ class Zirel(Character):
                          "sad": ["assets/sad/" + self.name + "_sad.png"],
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
-        self.likes = ["Muffin"]
+        self.current_likes = [["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"],
+                              ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"]]
         self.img_list = [file_name for file_name in
                          img_file_name_list]
         self.cur_img = 0
@@ -441,7 +448,8 @@ class Seedro(Character):
                          "sad": ["assets/sad/" + self.name + "_sad.png"],
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
-        self.likes = ["Muffin"]
+        self.current_likes = [["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"],
+                              ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"]]
         self.img_list = [file_name for file_name in
                          img_file_name_list]
         self.cur_img = 0
@@ -496,7 +504,8 @@ class Thickkaelious(Character):
                          "sad": ["assets/sad/" + self.name + "_sad.png"],
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
-        self.likes = ["Muffin"]
+        self.current_likes = [["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"],
+                              ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"]]
         self.img_list = [file_name for file_name in
                          img_file_name_list]
         self.cur_img = 0
@@ -523,7 +532,7 @@ class Thickkaelious(Character):
         # if cue == 40:
         #     self.offset -= 3.2
 
-class King(Character):
+class Newman(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location):
         super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location)
         self.offset = offset
@@ -543,15 +552,16 @@ class King(Character):
             "small_talk8": ["", "", ""],
             "small_talk9": ["", "", ""],
             "small_talk10": ["", "", ""],
-            "good_gift": ["", "", ""],
-            "bad_gift": ["", "", ""],
+            "good_gift": ["$$$$$", "$$$$$$$$", "$$$$$$"],
+            "bad_gift": ["&&&&&&", "&&&&&&", "&&&&&&&&&"],
             "follow": ["OooooOOooooOOoO, ", "you kids have fun!", ""]}
         self.emotions = {"happy": ["assets/king_happy.png"],
                          "mad": ["assets/mad/king_mad.png"],
-                         "sad": ["assets/sad/" + self.name + "_sad.png"],
-                         "horny": ["assets/horny/" + self.name + "_horny.png"],
-                         "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
-        self.likes = ["Muffin"]
+                         "sad": ["assets/sad/" "king" "_sad.png"],
+                         "horny": ["assets/horny/" "king" "_horny.png"],
+                         "thankful": ["assets/thankful/" + "king" + "_thankful.png"]}
+        self.current_likes = [["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"],
+                              ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"]]
         self.img_list = [file_name for file_name in
                          img_file_name_list]
         self.cur_img = 0
@@ -606,7 +616,8 @@ class Japeto(Character):
                          "sad": ["assets/sad/" + self.name + "_sad.png"],
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
-        self.likes = ["Muffin"]
+        self.current_likes = [["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"],
+                              ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"]]
         self.img_list = [file_name for file_name in
                          img_file_name_list]
         self.cur_img = 0
@@ -661,7 +672,8 @@ class Merkle(Character):
                          "sad": ["assets/sad/" + self.name + "_sad.png"],
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
-        self.likes = ["Muffin"]
+        self.current_likes = [["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"],
+                              ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"]]
         self.img_list = [file_name for file_name in
                          img_file_name_list]
         self.cur_img = 0
@@ -716,7 +728,8 @@ class Emilius(Character):
                          "sad": ["assets/sad/" + self.name + "_sad.png"],
                          "horny": ["assets/horny/" + self.name + "_horny.png"],
                          "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
-        self.likes = ["Muffin"]
+        self.current_likes = [["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"],
+                              ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"]]
         self.img_list = [file_name for file_name in
                          img_file_name_list]
         self.cur_img = 0
@@ -767,7 +780,8 @@ class Queen(Character):
             "bad_gift": ["", "", ""],
             "follow": ["OooooOOooooOOoO, ", "you kids have fun!", ""]}
         self.emotions = {}
-        self.likes = ["Butter"]
+        self.current_likes = [["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"],
+                              ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"]]
         self.img_list = [file_name for file_name in
                          img_file_name_list]
         self.cur_img = 0
@@ -797,5 +811,62 @@ class Queen(Character):
     def draw(self, screen):
         screen.blit((Spritesheet(self.img).image_at((0, 0, 32, 40))), [self.x * 32 + self.offset, (self.y * 32 - 16) - 16])
 
+class Peach(Character):
+    def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location):
+        super().__init__(x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location)
+        self.offset = offset
+        self.phrase_counter = 0
+        self.phrases = {
+            "dtf": ["", "", ""],
+            "sad": ["", "", ""],
+            "mad": ["", "", ""],
+            "small_talk0": ["", "", ""],
+            "small_talk1": ["", "", ""],
+            "small_talk2": ["", "", ""],
+            "small_talk3": ["", "", ""],
+            "small_talk4": ["", "", ""],
+            "small_talk5": ["", "", ""],  # all about butter
+            "small_talk6": ["", "", ""],
+            "small_talk7": ["", "", ""],
+            "small_talk8": ["", "", ""],
+            "small_talk9": ["", "", ""],
+            "small_talk10": ["", "", ""],
+            "good_gift": ["", "", ""],
+            "bad_gift": ["", "", ""],
+            "follow": ["OooooOOooooOOoO, ", "you kids have fun!", ""]}
+        self.emotions = {"happy": ["assets/emilius_happy.png"],
+                         "mad": ["assets/mad/emilius_mad.png"],
+                         "sad": ["assets/sad/" + self.name + "_sad.png"],
+                         "horny": ["assets/horny/" + self.name + "_horny.png"],
+                         "thankful": ["assets/thankful/" + self.name + "_thankful.png"]}
+        self.current_likes = [["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"],
+                              ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"], ["Cookie"]]
+        self.img_list = [file_name for file_name in
+                         img_file_name_list]
+        self.cur_img = 0
+        self.img = self.img_list[self.cur_img]
 
+    def set_image(self, img_number):
+        self.cur_img = img_number
+        self.img = self.img_list[self.cur_img]
+
+    def goal_met(self):  # give them butter!!!
+        if self.points >= 1:
+            achieve = True
+        else:
+            achieve = False
+        return achieve
+
+    def dance(self, cue):
+        if cue == 10:
+            self.offset += 3.2
+        if cue == 20:
+            self.offset -= 3.2
+        # if cue == 30:
+        #     self.offset += 3.2
+        # if cue == 40:
+        #     self.offset -= 3.2
+
+    def draw(self, screen):
+        screen.blit((Spritesheet(self.img).image_at((0, 0, 32, 40))), [self.x * 32 + self.offset, (self.y * 32 - 16)])
 # print(self.name.__class__)

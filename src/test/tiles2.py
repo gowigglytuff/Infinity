@@ -19,12 +19,12 @@ class Tile(object):
     def interact(self):
         return self.object_filling
 
-    def get_object_filling(self, source):
-        for drawable in source:
-            if drawable.location == gc.room:
-                gd.tiles_array[drawable.x][drawable.y].full = True
-                gd.tiles_array[drawable.x][drawable.y].object_filling = drawable.name
-                gd.tiles_array[drawable.x][drawable.y].filling_type = drawable.classification
+    # def get_object_filling(self, source):
+    #     for drawable in source:
+    #         if drawable.location == gc.room:
+    #             gd.tiles[drawable.x][drawable.y].full = True
+    #             gd.tiles[drawable.x][drawable.y].object_filling = drawable.name
+    #             gd.tiles[drawable.x][drawable.y].filling_type = drawable.classification
 
     def reset_object_filling(self, source):
         self.full = False
