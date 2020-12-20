@@ -6,12 +6,15 @@ gc = GameContoller(gd)
 
 # Define tiles
 class Tile(object):
-    def __init__(self, x, y, full, object_filling, filling_type):
+    def __init__(self, x, y, full, object_filling, filling_type, has_item, item_name, room):
         self.x = x
         self.y = y
         self.full = full
         self.object_filling = object_filling
         self.filling_type = filling_type
+        self.has_item = has_item
+        self.item_name = item_name
+        self.room = room
 
     # def __str__(self):
     #     return str(self.X) + ", " + str(self.Y) + ", " + str(self.full) + ", " + str(self.object_filling)
@@ -38,6 +41,9 @@ class Tile(object):
         self.full = full
         self.object_filling = object_filling
         self.filling_type = filling_type
+
+
+
 
 
 tiles_list_2d = []

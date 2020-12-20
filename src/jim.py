@@ -13,6 +13,7 @@ import math
 
 gd = GameData()
 gc = GameContoller(gd)
+hr = Hour(gc.screen)
 
 current_tile = "Galaxar"
 
@@ -31,20 +32,19 @@ def init_game():
 
     pygame.display.set_caption('Infinity')
 
-    for section in range(gd.game_width + 2):
-        section_name = []
-        gd.tiles_array.append(section_name)
-
-    for letter in range(gd.game_height + 2):
-        for number in range(gd.game_width + 2):
-            spot_name = Tile(letter, number, False, "none", "none")
-            gd.tiles_array[letter].append(spot_name)
-            gd.tiles.append(spot_name)
 
     gd.add_player("alien1", Player(7, 2, ["assets/alien2_front.png",
                                           "assets/alien2_back.png",
                                           "assets/alien2_left.png",
-                                          "assets/alien2_right.png"], 0, "down", "None", "alien1", "player", True, "disco", "none"))
+                                          "assets/alien2_right.png",
+                                          "assets/alien2/alien2_back_b.png",
+                                          "assets/alien2/alien2_back_c.png",
+                                          "assets/alien2/alien2_right_b.png",
+                                          "assets/alien2/alien2_right_c.png",
+                                          "assets/alien2/alien2_left_b.png",
+                                          "assets/alien2/alien2_left_c.png",
+                                          "assets/alien2/alien2_front_b.png",
+                                          "assets/alien2/alien2_front_c.png"], 0, "down", "None", "alien1", "player", True, "disco", "none"))
 
     # add characters
     gd.add_character("Zirel", Zirel(5, 4, ["assets/alien2.png",
@@ -100,7 +100,7 @@ def init_game():
                                                "assets/emilius/emilius_back.png",
                                                "assets/emilius/emilius_left.png",
                                                "assets/emilius/emilius_right.png"], 0, False, 0, "Emilius", "character", "none", 2, 7, True, "disco"))
-    gd.add_character("Peach", Peach(7, 4, ["assets/alien1_front.png",
+    gd.add_character("Peach", Peach(8, 4, ["assets/alien1_front.png",
                                                "assets/alien1_back.png",
                                                "assets/alien1_left.png",
                                                "assets/alien1_right.png"], 0, False, 0, "Peach", "character", "none", 7, 4, True, "bathroom"))
@@ -129,6 +129,11 @@ def init_game():
 
     # Bathroom Props
     gd.add_prop("stall_door", Prop(3, 5, ["assets/bathroom/stall_door.png"], "stall_door", "prop", True, "bathroom"))
+    gd.add_prop("sink", Prop(7, 4, ["assets/bathroom/sink.png"], "sink", "prop", True, "bathroom"))
+    gd.add_prop("urinal", Prop(5, 4, ["assets/bathroom/urinal.png"], "urinal", "prop", True, "bathroom"))
+    gd.add_prop("urinal2", Prop(5, 5, ["assets/bathroom/urinal.png"], "urinal2", "prop", True, "bathroom"))
+    gd.add_prop("trashcan", Prop(8, 6, ["assets/bathroom/trashcan.png"], "trashcan", "prop", True, "bathroom"))
+    gd.add_prop("toilet", Prop(3, 4, ["assets/bathroom/toilet.png"], "toilet", "prop", True, "bathroom"))
 
     # add all items to the game
     gd.add_item("Hummus", Item("Hummus", 1))
@@ -185,12 +190,50 @@ def init_game():
     gd.add_door("door1", Door("disco", "bathroom", 0, 6, 8, 5))
     gd.add_door("door2", Door("bathroom", "disco", 9, 5, 1, 6))
 
+    for room in gd.rooms:
+        gd.rooms[room].generate_room_grid()
+
+    for section in range(gd.game_width + 2):
+        section_name = []
+        gd.tiles_array.append(section_name)
+
+    for room in gd.rooms:
+        for letter in range(gd.game_height + 2):
+            for number in range(gd.game_width + 2):
+                spot_name = Tile(letter, number, False, "none", "none", False, "none", gd.rooms[room].name)
+                gd.tiles_array[letter].append(spot_name)
+                gd.tiles.append(spot_name)
+
 def run_game_loop():
 
 
     animating = False
     stage_list = [gd.prop["stage1"], gd.prop["stage2"], gd.prop["stage3"], gd.prop["stage4"], gd.prop["stage5"],
                   gd.prop["stage6"]]
+
+    def fill_offstage_tiles():
+        for tile in gd.tiles:
+            if tile.y == 0:
+                tile.full = True
+            if tile.y == 9:
+                tile.full = True
+            if tile.x == 0:
+                tile.full = True
+            if tile.y == 1:
+                tile.full = True
+            if tile.x == 9:
+                tile.full = True
+
+    def populate_items():
+            possible_items = ["Soda", "Gum", "Muffin", "Cheese", "Donut"]
+            tile_chosen = random.choice(gd.empty_tiles)
+            item_chosen = random.choice(possible_items)
+            tile_chosen.has_item = True
+            tile_chosen.item_name = item_chosen
+            for tile in gd.empty_tiles:
+                if tile.has_item:
+                    print(tile.x, tile.y)
+            hr.item_counter = False
 
     def update_files():
         drawables_list = gd.get_all_drawables()
@@ -201,15 +244,20 @@ def run_game_loop():
         for tile in gd.tiles:
             tile.reset_object_filling(gd.tiles_array)
 
+        if hr.item_counter:
+            populate_items()
+
         for drawable in drawables_list:
             if drawable.location == gc.room:
                 if drawable.on_stage:
                     gd.tiles_array[int(drawable.x)][int(drawable.y)].fill_tile(True, drawable.name, drawable.classification)
 
+        gd.empty_tiles.clear()
+        fill_offstage_tiles()
+        for tile in gd.tiles:
+            if not tile.full:
+                gd.empty_tiles.append(tile)
 
-        gd.tiles_array[2][3].full = True
-        gd.tiles_array[2][3].object_filling = "Cookie"
-        gd.tiles_array[2][3].filling_type = "item"
         for door in gd.doors:
             if gc.room == gd.doors[door].room_from:
                 gd.tiles_array[gd.doors[door].x][gd.doors[door].y].fill_tile(True, gd.doors[door].room_to, "room")
@@ -249,17 +297,9 @@ def run_game_loop():
         return facing_tile
 
 
+
     def big_draw():
-        # fix drawing hierarchy
-
         BG.draw(gd.BG[gc.room], gc.screen)
-
-        my_font = pygame.font.Font("assets/PokemonGB-RAeo.ttf", 10)
-        label3 = my_font.render(str(math.trunc(time.perf_counter())), 1, (255, 255, 255))
-        gc.screen.blit(label3, (320, 64))
-
-        if str(math.trunc(time.perf_counter())) == "10":
-            print("sweet")
 
         player = gd.player["alien1"]
 
@@ -269,6 +309,8 @@ def run_game_loop():
             if drawable.location == gc.room:
                 if drawable.on_stage:
                     drawable.draw(gc.screen)
+
+        hr.print_clock()
 
         if gc.game_state == 0:
             for dude in gd.characters:
@@ -391,47 +433,93 @@ def run_game_loop():
     def animate_player():
         animating = True
         while animating:
+            stepsize = .25/2
             if playing.state == "left":
                 if playing.tick == 0:
-                    player.x -= .25
+                    player.x -= stepsize
+                    player.set_image(8)
                 if playing.tick == 1:
-                    player.x -= .25
+                    player.x -= stepsize
                 if playing.tick == 2:
-                    player.x -= .25
+                    player.x -= stepsize
                 if playing.tick == 3:
-                    player.x -= .25
+                    player.x -= stepsize
+                    player.set_image(9)
+                if playing.tick == 4:
+                    player.x -= stepsize
+                if playing.tick == 5:
+                    player.x -= stepsize
+                if playing.tick == 6:
+                    player.x -= stepsize
+                if playing.tick == 7:
+                    player.x -= stepsize
+                    player.set_image(2)
 
             if playing.state == "right":
                 if playing.tick == 0:
-                    player.x += .25
+                    player.x += stepsize
+                    player.set_image(6)
                 if playing.tick == 1:
-                    player.x += .25
+                    player.x += stepsize
                 if playing.tick == 2:
-                    player.x += .25
+                    player.x += stepsize
                 if playing.tick == 3:
-                    player.x += .25
+                    player.x += stepsize
+                    player.set_image(7)
+                if playing.tick == 4:
+                    player.x += stepsize
+                if playing.tick == 5:
+                    player.x += stepsize
+                if playing.tick == 6:
+                    player.x += stepsize
+                if playing.tick == 7:
+                    player.x += stepsize
+                    player.set_image(3)
 
             if playing.state == "down":
                 if playing.tick == 0:
-                    player.y += .25
+                    player.y += stepsize
+                    player.set_image(10)
                 if playing.tick == 1:
-                    player.y += .25
+                    player.y += stepsize
                 if playing.tick == 2:
-                    player.y += .25
+                    player.y += stepsize
                 if playing.tick == 3:
-                    player.y += .25
+                    player.y += stepsize
+                    player.set_image(11)
+                if playing.tick == 4:
+                    player.y += stepsize
+                if playing.tick == 5:
+                    player.y += stepsize
+                if playing.tick == 6:
+                    player.y += stepsize
+                if playing.tick == 7:
+                    player.y += stepsize
+                    player.set_image(0)
 
             if playing.state == "up":
                 if playing.tick == 0:
-                    player.y -= .25
+                    player.y -= stepsize
+                    player.set_image(4)
                 if playing.tick == 1:
-                    player.y -= .25
+                    player.y -= stepsize
                 if playing.tick == 2:
-                    player.y -= .25
+                    player.y -= stepsize
                 if playing.tick == 3:
-                    player.y -= .25
+                    player.y -= stepsize
+                    player.set_image(5)
+                if playing.tick == 4:
+                    player.y -= stepsize
+                if playing.tick == 5:
+                    player.y -= stepsize
+                if playing.tick == 6:
+                    player.y -= stepsize
+                if playing.tick == 7:
+                    player.y -= stepsize
+                    player.set_image(1)
 
-            if playing.tick == 4:
+
+            if playing.tick == 7:
                 playing.tick = 0
                 playing.state = "none"
                 animating = False
@@ -486,7 +574,7 @@ def run_game_loop():
                         gd.player["alien1"].facing = "left"
 
                     if event.key == pygame.K_LEFT:
-                        gd.player["alien1"].facing = "left"
+                        player.facing = "left"
                         facing_tile = get_facing_tile()
                         player.set_image(2)
                         if facing_tile.full:
@@ -583,10 +671,12 @@ def run_game_loop():
                                 elif facing_tile.object_filling == "bar_bottom":
                                     gc.game_state = gc.SEEDER
 
-                            elif facing_tile.filling_type == "item":
-                                player.item_received = facing_tile.object_filling
-                                gd.item[facing_tile.object_filling].quantity += 1
-                                gc.game_state = gc.FOUND_ITEM
+                        elif facing_tile.has_item:
+                            player.item_received = facing_tile.item_name
+                            gd.item[facing_tile.item_name].quantity += 1
+                            facing_tile.has_item = False
+                            facing_tile.item_name = "none"
+                            gc.game_state = gc.FOUND_ITEM
 
                     if event.key == pygame.K_1:
                         gc.game_state = gc.START_MENU
@@ -594,12 +684,18 @@ def run_game_loop():
                         print(time.perf_counter())
 
                     if event.key == pygame.K_3:
-                        gc.game_state = gc.CUTSCENE1
+                        for item in gd.item:
+                            gd.item[item].quantity = 10
+                        for character in gd.characters:
+                            gd.characters[character].points = 10
+
+
+
 
 
                 if event.type == pygame.KEYUP:
                     pass
-
+                pygame.event.clear()
 
             big_draw()
             dance()

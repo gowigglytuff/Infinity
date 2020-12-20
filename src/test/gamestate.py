@@ -1,6 +1,7 @@
 import pygame
 from pygame import mixer
-
+import math
+import time
 from test.spritesheet import Spritesheet
 
 from test.tiles import *
@@ -39,6 +40,7 @@ class GameData(object):
         self.game_height = 8
         self.rooms = {}
         self.doors = {}
+        self.empty_tiles = []
 
     def add_character(self, character_name, character_object):
         self.characters[character_name] = character_object
@@ -132,12 +134,37 @@ class GameContoller(object):
         self.room = "disco"
         self.canvas = "none"
 
+
     def tick(self):
         self.clock.tick(self._FPS)
 
     # decide what order to draw aliens based on y value
     # draw aliens
 
+class Hour(object):
+    def __init__(self, screen):
+        self.initiate_clock = 0
+        self.begin_hours = 10
+        self.begin_minutes = 0
+        self.minutes_add = 0
+        self.set_timer = int(math.trunc(time.perf_counter()))
+        self.screen = screen
+        self.item_counter = False
+
+    def print_clock(self):
+
+        if self.begin_minutes == 6:
+            self.begin_hours += 1
+            self.begin_minutes = 0
+
+        if self.set_timer + 10 == int(math.trunc(time.perf_counter())):
+            self.set_timer = int(math.trunc(time.perf_counter()))
+            self.item_counter = True
+            self.begin_minutes += 1
+
+        my_font = pygame.font.Font("assets/PokemonGB-RAeo.ttf", 10)
+        label3 = my_font.render(str(self.begin_hours) + ":" + str(self.begin_minutes) + str(self.minutes_add) + "pm", 1, (255, 255, 255))
+        self.screen.blit(label3, (320, 64))
 
 class Image(object):
     def __init__(self, x, y, img_file_name_list, width=32, height=40):
@@ -304,7 +331,8 @@ class Phrase(object):
     def write(self, screen):
         my_font = pygame.font.Font("assets/PressStart2P-Regular.ttf", self.size)
         label = my_font.render(self.text, 1, self.colour)
-        text = screen.blit(label, (self.X, self.Y))
+        text = screen.blit(label,
+                           (self.X, self.Y))
         return text
 
 
@@ -460,6 +488,42 @@ class Audio(object):
         mixer.music.play(-1)
 
 
+# Define tiles
+class Tile(object):
+    def __init__(self, x, y, full, object_filling, filling_type):
+        self.x = x
+        self.y = y
+        self.full = full
+        self.object_filling = object_filling
+        self.filling_type = filling_type
+
+    # def __str__(self):
+    #     return str(self.X) + ", " + str(self.Y) + ", " + str(self.full) + ", " + str(self.object_filling)
+
+    def interact(self):
+        return self.object_filling
+
+    def get_object_filling(self, source):
+        for drawable in source:
+            if drawable.location == gc.room:
+                gd.rooms[gc.room].tiles_array[drawable.x][drawable.y].full = True
+                gd.rooms[gc.room].tiles_array[drawable.x][drawable.y].object_filling = drawable.name
+                gd.rooms[gc.room].tiles_array[drawable.x][drawable.y].filling_type = drawable.classification
+
+    def reset_object_filling(self, source):
+        self.full = False
+        self.object_filling = "none"
+        self.filling_type = "none"
+
+    def get_fill(self):
+        print(self.full, self.object_filling)
+
+    def fill_tile(self, full, object_filling, filling_type):
+        self.full = full
+        self.object_filling = object_filling
+        self.filling_type = filling_type
+
+
 class Room(object):
     def __init__(self, name, edge_x, edge_y, width, height, door_x, door_y, doors_list):
         self.name = name
@@ -470,6 +534,24 @@ class Room(object):
         self.door_x = door_x
         self.door_y = door_y
         self.doors_list = doors_list
+        self.tiles_array = []
+
+        self.tiles_array = []
+        self.tiles_list = []
+
+
+
+    def generate_room_grid(self):
+        for section in range(self.width + 3):
+            section_name = []
+            self.tiles_array.append(section_name)
+
+
+        for letter in range(self.width + 2):
+            for number in range(self.height + 3):
+                spot_name = Tile(letter, number, False, "none", "none")
+                self.tiles_array[letter].append(spot_name)
+                self.tiles_list.append(spot_name)
 
 
 class Door(object):
