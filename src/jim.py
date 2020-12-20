@@ -33,7 +33,7 @@ def init_game():
     pygame.display.set_caption('Infinity')
 
 
-    gd.add_player("alien1", Player(7, 2, ["assets/alien2_front.png",
+    gd.add_player("alien1", Player(4, 4, ["assets/alien2_front.png",
                                           "assets/alien2_back.png",
                                           "assets/alien2_left.png",
                                           "assets/alien2_right.png",
@@ -100,7 +100,7 @@ def init_game():
                                                "assets/emilius/emilius_back.png",
                                                "assets/emilius/emilius_left.png",
                                                "assets/emilius/emilius_right.png"], 0, False, 0, "Emilius", "character", "none", 2, 7, True, "disco"))
-    gd.add_character("Peach", Peach(8, 4, ["assets/alien1_front.png",
+    gd.add_character("Peach", Peach(6, 2, ["assets/alien1_front.png",
                                                "assets/alien1_back.png",
                                                "assets/alien1_left.png",
                                                "assets/alien1_right.png"], 0, False, 0, "Peach", "character", "none", 7, 4, True, "bathroom"))
@@ -108,8 +108,10 @@ def init_game():
     #                                     "assets/queen/queen_right.png"], 5, False, 0, "Queen", "character", "none", 3, 1, False, "disco"))
 
     # load possible backgrounds
-    gd.add_bg("disco", BG(0, 0, ["assets/BG1.png", "assets/BG2.png"]))
-    gd.add_bg("bathroom", BG(0, 0, ["assets/backgrounds/BG_Bathroom.png"]))
+    gd.add_bg("black", BG(0, 0, "black", ["assets/BG3.png"]))
+    gd.add_bg("disco", BG(1, 1, "disco", ["assets/BG1.png", "assets/BG2.png"]))
+    gd.add_bg("bathroom", BG(1, 1, "bathroom", ["assets/backgrounds/BG_Bathroom.png"]))
+
 
     # add the desk prop that Anton sits at to the disco
     gd.add_prop("desk_left", Prop(1, 3, ["assets/desk_left.png"], "desk_left", "prop", True, "disco"))
@@ -128,12 +130,12 @@ def init_game():
     gd.add_prop("stage6", StageProp(6, 3, ["assets/props/stage.png"], "stage6", "prop", False, "disco"))
 
     # Bathroom Props
-    gd.add_prop("stall_door", Prop(3, 5, ["assets/bathroom/stall_door.png"], "stall_door", "prop", True, "bathroom"))
-    gd.add_prop("sink", Prop(7, 4, ["assets/bathroom/sink.png"], "sink", "prop", True, "bathroom"))
-    gd.add_prop("urinal", Prop(5, 4, ["assets/bathroom/urinal.png"], "urinal", "prop", True, "bathroom"))
-    gd.add_prop("urinal2", Prop(5, 5, ["assets/bathroom/urinal.png"], "urinal2", "prop", True, "bathroom"))
-    gd.add_prop("trashcan", Prop(8, 6, ["assets/bathroom/trashcan.png"], "trashcan", "prop", True, "bathroom"))
-    gd.add_prop("toilet", Prop(3, 4, ["assets/bathroom/toilet.png"], "toilet", "prop", True, "bathroom"))
+    gd.add_prop("stall_door", Prop(1, 3, ["assets/bathroom/stall_door.png"], "stall_door", "prop", True, "bathroom"))
+    gd.add_prop("sink", Prop(5, 2, ["assets/bathroom/sink.png"], "sink", "prop", True, "bathroom"))
+    gd.add_prop("urinal", Prop(3, 2, ["assets/bathroom/urinal.png"], "urinal", "prop", True, "bathroom"))
+    gd.add_prop("urinal2", Prop(3, 3, ["assets/bathroom/urinal.png"], "urinal2", "prop", True, "bathroom"))
+    gd.add_prop("trashcan", Prop(6, 4, ["assets/bathroom/trashcan.png"], "trashcan", "prop", True, "bathroom"))
+    gd.add_prop("toilet", Prop(1, 2, ["assets/bathroom/toilet.png"], "toilet", "prop", True, "bathroom"))
 
     # add all items to the game
     gd.add_item("Hummus", Item("Hummus", 1))
@@ -161,7 +163,7 @@ def init_game():
 
     # add menu and cursor for the start menu
     gd.add_menu("start_menu", Menu(gc.screen, [0, 1, 2, 3, 4, 5], 312, 132, ["Items", "Setings", "Records", "Phone",
-                                                                             "Save", "Exit"], False))
+                                                                             "Save", "Exit"], False, "start_cursor"))
     gd.add_cursor("start_cursor", Cursor(gc.screen, gd.menu["start_menu"], False, 1))
 
     # add menu and cursor for the inventory list from start menu and gifts
@@ -169,13 +171,13 @@ def init_game():
     gd.add_cursor("item_cursor", ItemCursor(gc.screen, gd.item_list["inventory"], False, 1))
 
     # add menu and cursor for when you get info from seeder
-    gd.add_menu("info_menu", Menu(gc.screen, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 312, 82, character_names, False))
+    gd.add_menu("info_menu", Menu(gc.screen, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 312, 82, character_names, False, "info_cursor"))
     gd.add_cursor("info_cursor", Cursor(gc.screen, gd.menu["info_menu"], False, 1))
 
     # add menu and cursor for when you request a song
     gd.add_menu("request_menu", Menu(gc.screen, [0, 1, 2, 3, 4], 297, 82, ["A.A. Bop", "A.A Jam",
                                                                            "A.A. Banger", "DJ A.A.",
-                                                                           "A.A. Ska"], False))
+                                                                           "A.A. Ska"], False, "request_cursor"))
     gd.add_cursor("request_cursor", Cursor(gc.screen, gd.menu["request_menu"], False, 1))
 
     # add audio and make it start
@@ -185,24 +187,15 @@ def init_game():
 
 
     # layout rooms and doors
-    gd.add_room("disco", Room("disco", 1, 1, 8, 8, 6, 1, ["door1"]))
-    gd.add_room("bathroom", Room("disco", 3, 3, 6, 4, 6, 1, ["door2"]))
-    gd.add_door("door1", Door("disco", "bathroom", 0, 6, 8, 5))
-    gd.add_door("door2", Door("bathroom", "disco", 9, 5, 1, 6))
+    gd.add_room("disco", Room("disco", 1, 1, 8, 7, 6, 1, ["door1"], ["black", "disco"]))
+    gd.add_room("bathroom", Room("bathroom", 1, 1, 6, 3, 6, 1, ["door2"], ["black", "bathroom"]))
+
+    gd.add_door("door1", Door("disco", "bathroom", 0, 6, 6, 3))
+    gd.add_door("door2", Door("bathroom", "disco", 7, 3, 1, 6))
 
     for room in gd.rooms:
         gd.rooms[room].generate_room_grid()
 
-    for section in range(gd.game_width + 2):
-        section_name = []
-        gd.tiles_array.append(section_name)
-
-    for room in gd.rooms:
-        for letter in range(gd.game_height + 2):
-            for number in range(gd.game_width + 2):
-                spot_name = Tile(letter, number, False, "none", "none", False, "none", gd.rooms[room].name)
-                gd.tiles_array[letter].append(spot_name)
-                gd.tiles.append(spot_name)
 
 def run_game_loop():
 
@@ -211,29 +204,29 @@ def run_game_loop():
     stage_list = [gd.prop["stage1"], gd.prop["stage2"], gd.prop["stage3"], gd.prop["stage4"], gd.prop["stage5"],
                   gd.prop["stage6"]]
 
-    def fill_offstage_tiles():
-        for tile in gd.tiles:
-            if tile.y == 0:
-                tile.full = True
-            if tile.y == 9:
-                tile.full = True
-            if tile.x == 0:
-                tile.full = True
-            if tile.y == 1:
-                tile.full = True
-            if tile.x == 9:
-                tile.full = True
+    # def fill_offstage_tiles():
+    #     for tile in gd.rooms[gc.room].tiles_list:
+    #         if tile.y == 0:
+    #             tile.full = True
+    #         if tile.y == 9:
+    #             tile.full = True
+    #         if tile.x == 0:
+    #             tile.full = True
+    #         if tile.y == 1:
+    #             tile.full = True
+    #         if tile.x == 9:
+    #             tile.full = True
 
-    def populate_items():
-            possible_items = ["Soda", "Gum", "Muffin", "Cheese", "Donut"]
-            tile_chosen = random.choice(gd.empty_tiles)
-            item_chosen = random.choice(possible_items)
-            tile_chosen.has_item = True
-            tile_chosen.item_name = item_chosen
-            for tile in gd.empty_tiles:
-                if tile.has_item:
-                    print(tile.x, tile.y)
-            hr.item_counter = False
+    # def populate_items():
+    #         possible_items = ["Soda", "Gum", "Muffin", "Cheese", "Donut"]
+    #         tile_chosen = random.choice(gd.empty_tiles)
+    #         item_chosen = random.choice(possible_items)
+    #         tile_chosen.has_item = True
+    #         tile_chosen.item_name = item_chosen
+    #         for tile in gd.empty_tiles:
+    #             if tile.has_item:
+    #                 print(tile.x, tile.y)
+    #         hr.item_counter = False
 
     def update_files():
         drawables_list = gd.get_all_drawables()
@@ -241,26 +234,27 @@ def run_game_loop():
         gd.player["alien1"].location = gc.room
 
         # figure out what is filling each tile
-        for tile in gd.tiles:
-            tile.reset_object_filling(gd.tiles_array)
+        for tile in gd.rooms[gc.room].tiles_list:
+            tile.reset_object_filling(gd.rooms[gc.room].tiles_array)
 
-        if hr.item_counter:
-            populate_items()
+        for door in gd.doors:
+            gd.rooms[gd.doors[door].room_from].tiles_array[gd.doors[door].x][gd.doors[door].y].fill_tile(True, gd.doors[
+                door].room_to, "room")
+
+        # if hr.item_counter:
+        #     populate_items()
 
         for drawable in drawables_list:
             if drawable.location == gc.room:
                 if drawable.on_stage:
-                    gd.tiles_array[int(drawable.x)][int(drawable.y)].fill_tile(True, drawable.name, drawable.classification)
+                    gd.rooms[gc.room].tiles_array[int(drawable.x)][int(drawable.y)].fill_tile(True, drawable.name, drawable.classification)
 
         gd.empty_tiles.clear()
-        fill_offstage_tiles()
-        for tile in gd.tiles:
-            if not tile.full:
-                gd.empty_tiles.append(tile)
+        # fill_offstage_tiles()
+        # for tile in gd.rooms[gc.room].tiles_list:
+        #     if not tile.full:
+        #         gd.empty_tiles.append(tile)
 
-        for door in gd.doors:
-            if gc.room == gd.doors[door].room_from:
-                gd.tiles_array[gd.doors[door].x][gd.doors[door].y].fill_tile(True, gd.doors[door].room_to, "room")
 
         for name in gd.characters:
             if gd.characters[name].points < 0:
@@ -292,14 +286,17 @@ def run_game_loop():
             facing_tile_y = int(player.y)
             facing_tile_x = int(player.x + 1)
 
-        facing_tile = gd.tiles_array[facing_tile_x][facing_tile_y]
+        facing_tile = gd.rooms[gc.room].tiles_array[facing_tile_x][facing_tile_y]
 
         return facing_tile
 
 
 
     def big_draw():
-        BG.draw(gd.BG[gc.room], gc.screen)
+        for bg in gd.BG:
+            for x in gd.rooms[gc.room].images_list:
+                if gd.BG[bg].name == x:
+                    BG.draw(gd.BG[bg], gc.screen)
 
         player = gd.player["alien1"]
 
@@ -577,6 +574,7 @@ def run_game_loop():
                         player.facing = "left"
                         facing_tile = get_facing_tile()
                         player.set_image(2)
+
                         if facing_tile.full:
                             if facing_tile.filling_type == "room":
                                 for d in gd.rooms[gc.room].doors_list:
@@ -586,7 +584,7 @@ def run_game_loop():
                                 gc.room = facing_tile.object_filling
                                 print("entered " + str(facing_tile.object_filling))
 
-                        elif not player.x <= gd.rooms[gc.room].edge_x:
+                        if not player.x <= gd.rooms[gc.room].edge_x:
                             if not facing_tile.full:
                                 playing.state = "left"
                                 animate_player()
@@ -597,16 +595,17 @@ def run_game_loop():
                         gd.player["alien1"].facing = "right"
                         player.set_image(3)
                         facing_tile = get_facing_tile()
+
                         if facing_tile.full:
                             if facing_tile.filling_type == "room":
-                                    for d in gd.rooms[gc.room].doors_list:
-                                        if gd.doors[d].x == facing_tile.x and gd.doors[d].y == facing_tile.y:
-                                            player.x = gd.doors[d].door_exit_x
-                                            player.y = gd.doors[d].door_exit_y
-                                    gc.room = facing_tile.object_filling
-                                    print("entered " + str(facing_tile.object_filling))
+                                for d in gd.rooms[gc.room].doors_list:
+                                    if gd.doors[d].x == facing_tile.x and gd.doors[d].y == facing_tile.y:
+                                        player.x = gd.doors[d].door_exit_x
+                                        player.y = gd.doors[d].door_exit_y
+                                gc.room = facing_tile.object_filling
+                                print("entered " + str(facing_tile.object_filling))
 
-                        elif not player.x >= gd.rooms[gc.room].edge_x + gd.rooms[gc.room].width - 1:
+                        if not player.x >= gd.rooms[gc.room].edge_x + gd.rooms[gc.room].width - 1:
                             if not facing_tile.full:
                                 playing.state = "right"
                                 animate_player()
@@ -614,7 +613,7 @@ def run_game_loop():
 
                     if event.key == pygame.K_UP:
                         player.set_image(1)
-                        gd.player["alien1"].facing = "up"
+                        player.facing = "up"
                         facing_tile = get_facing_tile()
                         if facing_tile.full:
                             if facing_tile.filling_type == "room":
@@ -624,8 +623,8 @@ def run_game_loop():
                                         player.y = gd.doors[d].door_exit_y
                                 gc.room = facing_tile.object_filling
                                 print("entered " + str(facing_tile.object_filling))
-                        elif not player.y <= gd.rooms[gc.room].edge_y + 1:
-                            if not gd.tiles_array[int(player.x)][int(player.y - 1)].full:
+                        if not player.y <= gd.rooms[gc.room].edge_y+1:
+                            if not gd.rooms[gc.room].tiles_array[int(player.x)][int(player.y - 1)].full:
                                 playing.state = "up"
                                 animate_player()
 
@@ -641,8 +640,8 @@ def run_game_loop():
                                         player.y = gd.doors[d].door_exit_y
                                 gc.room = facing_tile.object_filling
                                 print("entered " + str(facing_tile.object_filling))
-                        elif not player.y == gd.rooms[gc.room].edge_y + gd.rooms[gc.room].height - 1:
-                            if not gd.tiles_array[int(player.x)][int(player.y + 1)].full:
+                        if not player.y == gd.rooms[gc.room].edge_y + gd.rooms[gc.room].height:
+                            if not gd.rooms[gc.room].tiles_array[int(player.x)][int(player.y + 1)].full:
                                 playing.state = "down"
                                 animate_player()
 
@@ -681,13 +680,19 @@ def run_game_loop():
                     if event.key == pygame.K_1:
                         gc.game_state = gc.START_MENU
                     if event.key == pygame.K_2:
-                        print(time.perf_counter())
+                        print(player.x, player.y)
+                        print(gd.rooms[gc.room].height)
+                        print(gd.doors)
+                        for tiles in range(48):
+                            print(gd.rooms[gc.room].tiles_list[tiles].object_filling)
 
                     if event.key == pygame.K_3:
                         for item in gd.item:
                             gd.item[item].quantity = 10
                         for character in gd.characters:
                             gd.characters[character].points = 10
+                    if event.key == pygame.K_4:
+                        print(facing_tile.object_filling)
 
 
 
@@ -696,7 +701,6 @@ def run_game_loop():
                 if event.type == pygame.KEYUP:
                     pass
                 pygame.event.clear()
-
             big_draw()
             dance()
             update_files()

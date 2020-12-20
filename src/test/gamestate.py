@@ -306,17 +306,16 @@ class StageProp(Prop):
 
 
 class BG(Image):
-    def __init__(self, x, y, img_file_name_list):
-        super().__init__(x, y, img_file_name_list)
-        self.dest = [0, 0]
-
+    def __init__(self, x, y, name, img_file_name_list):
+        super().__init__(x, y, name, img_file_name_list)
+        self.name = name
         self.img_list = [file_name for file_name in
                          img_file_name_list]
         self.cur_img = 0
         self.img = self.img_list[self.cur_img]
 
     def draw(self, screen):
-        screen.blit(pygame.image.load(self.img).convert_alpha(), self.dest)
+        screen.blit(pygame.image.load(self.img).convert_alpha(), (self.x*32, self.y*32))
 
 
 class Phrase(object):
@@ -353,13 +352,14 @@ class Talk(Phrase):
 
 
 class Menu(object):
-    def __init__(self, screen, size, x, y, opt1, menu_go):
+    def __init__(self, screen, size, x, y, opt1, menu_go, cursor):
         self.screen = screen
         self.x = x
         self.y = y
         self.size = size
         self.opt1 = opt1
         self.menu_go = menu_go
+        self.cursor = cursor
 
     def print_menu(self):
         for x in self.size:
@@ -490,12 +490,14 @@ class Audio(object):
 
 # Define tiles
 class Tile(object):
-    def __init__(self, x, y, full, object_filling, filling_type):
+    def __init__(self, x, y, full, object_filling, filling_type, has_item, item_name):
         self.x = x
         self.y = y
         self.full = full
         self.object_filling = object_filling
         self.filling_type = filling_type
+        self.has_item = has_item
+        self.item_name = item_name
 
     # def __str__(self):
     #     return str(self.X) + ", " + str(self.Y) + ", " + str(self.full) + ", " + str(self.object_filling)
@@ -503,12 +505,12 @@ class Tile(object):
     def interact(self):
         return self.object_filling
 
-    def get_object_filling(self, source):
-        for drawable in source:
-            if drawable.location == gc.room:
-                gd.rooms[gc.room].tiles_array[drawable.x][drawable.y].full = True
-                gd.rooms[gc.room].tiles_array[drawable.x][drawable.y].object_filling = drawable.name
-                gd.rooms[gc.room].tiles_array[drawable.x][drawable.y].filling_type = drawable.classification
+    # def get_object_filling(self, source):
+    #     for drawable in source:
+    #         if drawable.location == gc.room:
+    #             gd.tiles[drawable.x][drawable.y].full = True
+    #             gd.tiles[drawable.x][drawable.y].object_filling = drawable.name
+    #             gd.tiles[drawable.x][drawable.y].filling_type = drawable.classification
 
     def reset_object_filling(self, source):
         self.full = False
@@ -525,16 +527,17 @@ class Tile(object):
 
 
 class Room(object):
-    def __init__(self, name, edge_x, edge_y, width, height, door_x, door_y, doors_list):
+    def __init__(self, name, edge_x, edge_y, width, height, offset_x, offset_y, doors_list, images_list):
         self.name = name
         self.edge_x = edge_x
         self.edge_y = edge_y
         self.width = width
         self.height = height
-        self.door_x = door_x
-        self.door_y = door_y
+        self.offset_x = offset_x
+        self.offset_y = offset_y
         self.doors_list = doors_list
         self.tiles_array = []
+        self.images_list = images_list
 
         self.tiles_array = []
         self.tiles_list = []
@@ -549,7 +552,7 @@ class Room(object):
 
         for letter in range(self.width + 2):
             for number in range(self.height + 3):
-                spot_name = Tile(letter, number, False, "none", "none")
+                spot_name = Tile(letter, number, False, "none", "none", False, "none")
                 self.tiles_array[letter].append(spot_name)
                 self.tiles_list.append(spot_name)
 
