@@ -55,6 +55,9 @@ class Seeder(Character):
                          img_file_name_list]
         self.cur_img = 0
         self.img = self.img_list[self.cur_img]
+        self.criteria1 = False
+        self.criteria2 = True
+        self.criteria2 = True
 
     def set_image(self, img_number):
         self.cur_img = img_number
@@ -72,10 +75,16 @@ class Seeder(Character):
             self.offset -= 3.2
         if cue == 20:
             self.offset += 3.2
-        # if cue == 30:
-        #     self.offset += 3.2
-        # if cue == 40:
-        #     self.offset -= 3.2
+
+    def check_criteria(self):
+        if self.points >= 5:
+            self.criteria1 = True
+        else:
+            self.criteria1 = False
+
+        self.criteria2 = True
+        self.criteria3 = True
+
 
 class Anton(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location):
@@ -114,6 +123,9 @@ class Anton(Character):
                          img_file_name_list]
         self.cur_img = 0
         self.img = self.img_list[self.cur_img]
+        self.criteria1 = False
+        self.criteria2 = True
+        self.criteria2 = True
 
     def set_image(self, img_number):
         self.cur_img = img_number
@@ -131,10 +143,16 @@ class Anton(Character):
             self.offset -= 3.2
         if cue == 20:
             self.offset += 3.2
-        # if cue == 30:
-        #     self.offset += 3.2
-        # if cue == 40:
-        #     self.offset -= 3.2
+
+    def check_criteria(self):
+        if self.points >= 5:
+            self.criteria1 = True
+        else:
+            self.criteria1 = False
+
+        self.criteria2 = True
+        self.criteria3 = True
+
 
 class Galaxar(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location):
@@ -170,6 +188,9 @@ class Galaxar(Character):
                          img_file_name_list]
         self.cur_img = 0
         self.img = self.img_list[self.cur_img]
+        self.criteria1 = False
+        self.criteria2 = True
+        self.criteria2 = True
 
     def set_image(self, img_number):
         self.cur_img = img_number
@@ -191,6 +212,16 @@ class Galaxar(Character):
         else:
             achieve = False
         return achieve
+
+    def check_criteria(self):
+        if self.points >= 5:
+            self.criteria1 = True
+        else:
+            self.criteria1 = False
+
+        self.criteria2 = True
+        self.criteria3 = True
+
 
 
 class Ishine(Character):
@@ -227,6 +258,9 @@ class Ishine(Character):
                          img_file_name_list]
         self.cur_img = 0
         self.img = self.img_list[self.cur_img]
+        self.criteria1 = False
+        self.criteria2 = True
+        self.criteria2 = True
 
     def set_image(self, img_number):
         self.cur_img = img_number
@@ -244,10 +278,16 @@ class Ishine(Character):
             self.offset += 3.2
         if cue == 20:
             self.offset -= 3.2
-        # if cue == 30:
-        #     self.offset -= 3.2
-        # if cue == 40:
-        #     self.offset += 3.2
+
+    def check_criteria(self):
+        if self.points >= 5:
+            self.criteria1 = True
+        else:
+            self.criteria1 = False
+
+        self.criteria2 = True
+        self.criteria3 = True
+
 
 class Eveirg(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location):
@@ -284,6 +324,9 @@ class Eveirg(Character):
                          img_file_name_list]
         self.cur_img = 0
         self.img = self.img_list[self.cur_img]
+        self.criteria1 = False
+        self.criteria2 = True
+        self.criteria2 = True
 
     def set_image(self, img_number):
         self.cur_img = img_number
@@ -306,6 +349,15 @@ class Eveirg(Character):
         # if cue == 40:
         #     self.offset -= 3.2
 
+    def check_criteria(self):
+        if self.points >= 1:
+            self.criteria1 = True
+        else:
+            self.criteria1 = False
+
+        self.criteria2 = True
+        self.criteria3 = True
+
 
 class Zoop(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location):
@@ -319,8 +371,8 @@ class Zoop(Character):
             "small_talk0": ["Is my eye twitching?", "always does when I'm horny,", "oop, there it goes !twitch!"],
             "small_talk1": ["Everyone here could", "be a top tier hottie, but", "I lost my glasses"],
             "small_talk2": ["I'm kinda thirsty", "I mean, for a drink that is,", "no wait, that's not it..."],
-            "small_talk3": ["", "", ""],
-            "small_talk4": ["", "", ""],
+            "small_talk3": ["I saw galaxar", "swallow an entire muffin", "without chewing... damn"],
+            "small_talk4": ["Thickky only cares", "about everyone liking", "you a little bit."],
             "small_talk5": ["", "", ""],
             "small_talk6": ["", "", ""],
             "small_talk7": ["", "", ""],
@@ -341,6 +393,9 @@ class Zoop(Character):
                          img_file_name_list]
         self.cur_img = 0
         self.img = self.img_list[self.cur_img]
+        self.criteria1 = False
+        self.criteria2 = False
+        self.criteria2 = False
 
     def set_image(self, img_number):
         self.cur_img = img_number
@@ -359,10 +414,16 @@ class Zoop(Character):
             self.offset += 3.2
         if cue == 20:
             self.offset -= 3.2
-        # if cue == 30:
-        #     self.offset -= 3.2
-        # if cue == 40:
-        #     self.offset += 3.2
+
+    def check_criteria(self):
+        if self.points >= 5:
+            self.criteria1 = True
+        else:
+            self.criteria1 = False
+
+        self.criteria2 = True
+        self.criteria3 = True
+
 
 class Zirel(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location):
@@ -398,6 +459,9 @@ class Zirel(Character):
                          img_file_name_list]
         self.cur_img = 0
         self.img = self.img_list[self.cur_img]
+        self.criteria1 = False
+        self.criteria2 = True
+        self.criteria2 = True
 
     def set_image(self, img_number):
         self.cur_img = img_number
@@ -415,10 +479,16 @@ class Zirel(Character):
             self.offset += 3.2
         if cue == 20:
             self.offset -= 3.2
-        # if cue == 30:
-        #     self.offset -= 3.2
-        # if cue == 40:
-        #     self.offset += 3.2
+
+    def check_criteria(self):
+        if self.points >= 5:
+            self.criteria1 = True
+        else:
+            self.criteria1 = False
+
+        self.criteria2 = True
+        self.criteria3 = True
+
 
 class Seedro(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location):
@@ -431,12 +501,12 @@ class Seedro(Character):
             "mad": ["Honestly buddy,", "maybe you're the joke...", ""],
             "small_talk0": ["What's worse than", "raining cats and dogs?", "Hailing taxis!"],
             "small_talk1": ["Why was the kingdom", "so wet? The queen had", "been reigning for 40 years!"],
-            "small_talk2": ["What did the tricycle", "say when it say it's rival?", "Wheel, wheel, wheel..."],
+            "small_talk2": ["What did the tricycle", "say when it saw it's rival?", "Wheel, wheel, wheel..."],
             "small_talk3": ["I've been in school for", "quite a while, but at least", "the end is insight!"],
-            "small_talk4": ["", "", ""],
-            "small_talk5": ["", "", ""],
+            "small_talk4": ["What do you call a reptile", "in a vest?", "An investigator!!!"],
+            "small_talk5": ["What did the cow say", "to her calf??? It's", "pasture bedtime!"],
             "small_talk6": ["", "", ""],
-            "small_talk7": ["", "", ""],
+            "small_talk7": ["What's the cutest farm", "animal?", "An adora-bull!"],
             "small_talk8": ["", "", ""],
             "small_talk9": ["", "", ""],
             "small_talk10": ["", "", ""],
@@ -454,6 +524,9 @@ class Seedro(Character):
                          img_file_name_list]
         self.cur_img = 0
         self.img = self.img_list[self.cur_img]
+        self.criteria1 = False
+        self.criteria2 = True
+        self.criteria2 = True
 
     def set_image(self, img_number):
         self.cur_img = img_number
@@ -471,10 +544,16 @@ class Seedro(Character):
             self.offset -= 3.2
         if cue == 20:
             self.offset += 3.2
-        # if cue == 30:
-        #     self.offset += 3.2
-        # if cue == 40:
-        #     self.offset -= 3.2
+
+    def check_criteria(self):
+        if self.points >= 5:
+            self.criteria1 = True
+        else:
+            self.criteria1 = False
+
+        self.criteria2 = True
+        self.criteria3 = True
+
 
 class Thickkaelious(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location):
@@ -486,7 +565,7 @@ class Thickkaelious(Character):
             "sad": ["", "", ""],
             "mad": ["", "", ""],
             "small_talk0": ["Hey faaaam, having a", "great time!! Follow me at", "@Thickkaelious, #werk"],
-            "small_talk1": ["", "", ""],
+            "small_talk1": ["So like", "who do you know?", ""],
             "small_talk2": ["", "", ""],
             "small_talk3": ["", "", ""],
             "small_talk4": ["", "", ""],
@@ -496,8 +575,8 @@ class Thickkaelious(Character):
             "small_talk8": ["", "", ""],
             "small_talk9": ["", "", ""],
             "small_talk10": ["", "", ""],
-            "good_gift": ["", "", ""],
-            "bad_gift": ["", "", ""],
+            "good_gift": ["Wow, that's...", "you're kinda cool, I guess.", ""],
+            "bad_gift": ["OMFG, this is so gross!", "Storytime guys, I got the", "worst give eveeeeerrrr."],
             "follow": ["OooooOOooooOOoO, ", "you kids have fun!", ""]}
         self.emotions = {"happy": ["assets/thickkaelious_happy.png"],
                          "mad": ["assets/mad/thickkaelious_mad.png"],
@@ -510,6 +589,9 @@ class Thickkaelious(Character):
                          img_file_name_list]
         self.cur_img = 0
         self.img = self.img_list[self.cur_img]
+        self.criteria1 = False
+        self.criteria2 = False
+        self.criteria2 = False
 
     def set_image(self, img_number):
         self.cur_img = img_number
@@ -531,6 +613,21 @@ class Thickkaelious(Character):
         #     self.offset += 3.2
         # if cue == 40:
         #     self.offset -= 3.2
+
+    def check_criteria(self):
+        if self.points >= 5:
+            self.criteria1 = True
+        else:
+            self.criteria1 = False
+
+        for x in gd.characters:
+            if gd.characters[x].points >= 2:
+                self.criteria2 = True
+            else:
+                self.criteria2 = False
+
+        self.criteria3 = True
+
 
 class Newman(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location):
@@ -566,6 +663,9 @@ class Newman(Character):
                          img_file_name_list]
         self.cur_img = 0
         self.img = self.img_list[self.cur_img]
+        self.criteria1 = False
+        self.criteria2 = True
+        self.criteria2 = True
 
     def set_image(self, img_number):
         self.cur_img = img_number
@@ -583,10 +683,16 @@ class Newman(Character):
             self.offset += 3.2
         if cue == 20:
             self.offset -= 3.2
-        # if cue == 30:
-        #     self.offset -= 3.2
-        # if cue == 40:
-        #     self.offset += 3.2
+
+    def check_criteria(self):
+        if self.points >= 5:
+            self.criteria1 = True
+        else:
+            self.criteria1 = False
+
+        self.criteria2 = True
+        self.criteria3 = True
+
 
 class Japeto(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location):
@@ -594,7 +700,7 @@ class Japeto(Character):
         self.offset = offset
         self.phrase_counter = 0
         self.phrases = {
-            "dtf": ["", "", ""],
+            "dtf": ["Took you long enough...", "", ""],
             "sad": ["", "", ""],
             "mad": ["", "", ""],
             "small_talk0": ["I can read your mind...", "...but I don't want to", "...bet it's filthy in there."],
@@ -622,6 +728,9 @@ class Japeto(Character):
                          img_file_name_list]
         self.cur_img = 0
         self.img = self.img_list[self.cur_img]
+        self.criteria1 = False
+        self.criteria2 = True
+        self.criteria2 = True
 
     def set_image(self, img_number):
         self.cur_img = img_number
@@ -639,10 +748,16 @@ class Japeto(Character):
             self.offset += 3.2
         if cue == 20:
             self.offset -= 3.2
-        # if cue == 30:
-        #     self.offset -= 3.2
-        # if cue == 40:
-        #     self.offset += 3.2
+
+    def check_criteria(self):
+        if self.points >= 5:
+            self.criteria1 = True
+        else:
+            self.criteria1 = False
+
+        self.criteria2 = True
+        self.criteria3 = True
+
 
 class Merkle(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location):
@@ -678,6 +793,9 @@ class Merkle(Character):
                          img_file_name_list]
         self.cur_img = 0
         self.img = self.img_list[self.cur_img]
+        self.criteria1 = False
+        self.criteria2 = True
+        self.criteria2 = True
 
     def set_image(self, img_number):
         self.cur_img = img_number
@@ -695,10 +813,12 @@ class Merkle(Character):
             self.offset += 3.2
         if cue == 20:
             self.offset -= 3.2
-        # if cue == 30:
-        #     self.offset -= 3.2
-        # if cue == 40:
-        #     self.offset += 3.2
+
+    def check_criteria(self):
+        self.criteria1 = False
+        self.criteria2 = True
+        self.criteria3 = True
+
 
 class Emilius(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location):
@@ -734,6 +854,9 @@ class Emilius(Character):
                          img_file_name_list]
         self.cur_img = 0
         self.img = self.img_list[self.cur_img]
+        self.criteria1 = False
+        self.criteria2 = True
+        self.criteria2 = True
 
     def set_image(self, img_number):
         self.cur_img = img_number
@@ -751,10 +874,16 @@ class Emilius(Character):
             self.offset -= 3.2
         if cue == 20:
             self.offset += 3.2
-        # if cue == 30:
-        #     self.offset += 3.2
-        # if cue == 40:
-        #     self.offset -= 3.2
+
+    def check_criteria(self):
+        if self.points >= 5:
+            self.criteria1 = True
+        else:
+            self.criteria1 = False
+
+        self.criteria2 = True
+        self.criteria3 = True
+
 
 class Queen(Character):
     def __init__(self, x, y, img_file_name_list, points, emote, offset, name, classification, feeling, origin_x, origin_y, on_stage, location):
@@ -786,6 +915,9 @@ class Queen(Character):
                          img_file_name_list]
         self.cur_img = 0
         self.img = self.img_list[self.cur_img]
+        self.criteria1 = False
+        self.criteria2 = True
+        self.criteria2 = True
 
     def set_image(self, img_number):
         self.cur_img = img_number
@@ -803,10 +935,15 @@ class Queen(Character):
             self.offset += 3.2
         if cue == 20:
             self.offset -= 3.2
-        # if cue == 30:
-        #     self.offset += 3.2
-        # if cue == 40:
-        #     self.offset -= 3.2
+
+    def check_criteria(self):
+        if self.points >= 5:
+            self.criteria1 = True
+        else:
+            self.criteria1 = False
+
+        self.criteria2 = True
+        self.criteria3 = True
 
     def draw(self, screen):
         screen.blit((Spritesheet(self.img).image_at((0, 0, 32, 40))), [self.x * 32 + self.offset, (self.y * 32 - 16) - 16])
@@ -845,6 +982,9 @@ class Peach(Character):
                          img_file_name_list]
         self.cur_img = 0
         self.img = self.img_list[self.cur_img]
+        self.criteria1 = False
+        self.criteria2 = True
+        self.criteria2 = True
 
     def set_image(self, img_number):
         self.cur_img = img_number
@@ -862,10 +1002,15 @@ class Peach(Character):
             self.offset += 3.2
         if cue == 20:
             self.offset -= 3.2
-        # if cue == 30:
-        #     self.offset += 3.2
-        # if cue == 40:
-        #     self.offset -= 3.2
+
+    def check_criteria(self):
+        if self.points >= 5:
+            self.criteria1 = True
+        else:
+            self.criteria1 = False
+
+        self.criteria2 = True
+        self.criteria3 = True
 
     def draw(self, screen):
         screen.blit((Spritesheet(self.img).image_at((0, 0, 32, 40))), [self.x * 32 + self.offset, (self.y * 32 - 16)])
